@@ -110,10 +110,39 @@ onUnmounted(() => {
       </p>
     </div>
 
-    <!-- Interactive selector -->
-    <div class="flex justify-center px-4">
+    <!-- Mobile: vertical stacked cards -->
+    <div class="md:hidden flex flex-col gap-3 w-full px-4">
       <div
-        class="selector flex w-full max-w-[900px] h-[400px] items-stretch overflow-x-auto"
+        v-for="(project, index) in projects"
+        :key="index"
+        class="relative rounded-xl overflow-hidden cursor-pointer border-2 transition-all duration-500"
+        :style="{
+          height: activeIndex === index ? '220px' : '72px',
+          borderColor: activeIndex === index
+            ? (isDark ? '#fff' : '#1e293b')
+            : (isDark ? '#292929' : '#e2e8f0'),
+          backgroundImage: `url('${project.image}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          opacity: animatedOptions.includes(index) ? 1 : 0,
+          transform: animatedOptions.includes(index) ? 'translateX(0)' : 'translateX(-40px)',
+        }"
+        @click="handleOptionClick(index)"
+      >
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10 pointer-events-none" />
+        <div class="absolute bottom-4 left-4 right-4 flex items-end gap-3">
+          <div class="text-white">
+            <div class="font-bold text-base leading-tight">{{ project.title }}</div>
+            <div v-if="activeIndex === index" class="text-sm text-gray-300 mt-1">{{ project.description }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop: horizontal accordion -->
+    <div class="hidden md:flex justify-center px-4">
+      <div
+        class="selector flex w-full max-w-[900px] h-[400px] items-stretch"
         style="min-width: min(600px, 100%)"
       >
         <div
@@ -177,9 +206,9 @@ onUnmounted(() => {
             </div>
 
             <!-- Text info -->
-            <div class="text-white whitespace-pre relative overflow-hidden">
+            <div class="text-white overflow-hidden">
               <div
-                class="font-bold text-lg transition-all duration-700 ease-in-out"
+                class="font-bold text-lg transition-all duration-700 ease-in-out whitespace-nowrap"
                 :style="{
                   opacity: activeIndex === index ? 1 : 0,
                   transform: activeIndex === index ? 'translateX(0)' : 'translateX(25px)',
@@ -188,7 +217,7 @@ onUnmounted(() => {
                 {{ project.title }}
               </div>
               <div
-                class="text-sm text-gray-300 transition-all duration-700 ease-in-out"
+                class="text-sm text-gray-300 transition-all duration-700 ease-in-out whitespace-nowrap"
                 :style="{
                   opacity: activeIndex === index ? 1 : 0,
                   transform: activeIndex === index ? 'translateX(0)' : 'translateX(25px)',

@@ -63,7 +63,7 @@ const gridOverlayStyle = computed(() => ({
     <div class="absolute inset-0 opacity-[0.04]" :style="gridOverlayStyle" />
 
     <!-- Content -->
-    <div class="relative z-10 flex flex-col items-center justify-center h-full px-6 py-24 text-center" style="min-height: 60vh;">
+    <div class="relative z-10 flex flex-col items-center justify-center h-full px-6 pt-24 text-center" style="min-height: 60vh; padding-bottom: max(96px, calc(96px + env(safe-area-inset-bottom)))">
       <!-- Cat lottie -->
       <DotLottieVue
         src="https://lottie.host/8cf4ba71-e5fb-44f3-8134-178c4d389417/0CCsdcgNIP.json"
@@ -104,7 +104,7 @@ const gridOverlayStyle = computed(() => ({
           :href="contact.github"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-white/30 dark:text-slate-900/60 hover:text-white/80 dark:hover:text-slate-900/90 transition-colors duration-300"
+          class="inline-flex items-center justify-center p-3 -m-3 text-white/30 dark:text-slate-900/60 hover:text-white/80 dark:hover:text-slate-900/90 transition-colors duration-300"
           aria-label="GitHub"
         >
           <Github :size="20" />
@@ -113,14 +113,14 @@ const gridOverlayStyle = computed(() => ({
           :href="contact.linkedin"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-white/30 dark:text-slate-900/60 hover:text-white/80 dark:hover:text-slate-900/90 transition-colors duration-300"
+          class="inline-flex items-center justify-center p-3 -m-3 text-white/30 dark:text-slate-900/60 hover:text-white/80 dark:hover:text-slate-900/90 transition-colors duration-300"
           aria-label="LinkedIn"
         >
           <Linkedin :size="20" />
         </a>
         <a
           :href="`mailto:${contact.email}`"
-          class="text-white/30 dark:text-slate-900/60 hover:text-white/80 dark:hover:text-slate-900/90 transition-colors duration-300"
+          class="inline-flex items-center justify-center p-3 -m-3 text-white/30 dark:text-slate-900/60 hover:text-white/80 dark:hover:text-slate-900/90 transition-colors duration-300"
           aria-label="Email"
         >
           <Mail :size="20" />

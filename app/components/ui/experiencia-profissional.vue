@@ -115,9 +115,9 @@ const subtitle = computed(() =>
 </script>
 
 <template>
-  <section class="relative bg-black dark:bg-white">
+  <section class="relative bg-black dark:bg-white flex flex-col lg:block">
     <!-- Section header -->
-    <div class="absolute top-10 left-1/2 -translate-x-1/2 z-10 text-center pointer-events-none px-4">
+    <div class="relative lg:absolute lg:top-10 lg:left-1/2 lg:-translate-x-1/2 z-10 text-center pt-10 pb-4 lg:py-0 px-4">
       <p :style="fontInter" class="text-xs uppercase tracking-[0.3em] text-white/40 dark:text-slate-900/60 mb-2">
         {{ lang === 'pt' ? 'trajetória' : 'career' }}
       </p>

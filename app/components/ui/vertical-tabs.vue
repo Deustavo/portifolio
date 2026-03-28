@@ -4,7 +4,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
         <!-- Left Column: Tabs -->
-        <div class="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-4 pl-6">
+        <div class="lg:col-span-5 flex flex-col justify-center order-2 lg:order-1 pt-4 lg:pl-6">
           <div class="space-y-1 mb-12">
             <h2
               :style="fontHeadline"
@@ -34,7 +34,7 @@
               ]"
             >
               <!-- Progress bar -->
-              <div class="absolute left-[-24px] top-0 bottom-0 w-[2px] bg-white/20 dark:bg-slate-900/20">
+              <div class="absolute left-0 lg:left-[-24px] top-0 bottom-0 w-[2px] bg-white/20 dark:bg-slate-900/20">
                 <div
                   v-if="activeIndex === index && !isPaused"
                   :key="`progress-${index}-${progressKey}`"
@@ -149,7 +149,7 @@ const services = [
       pt: 'Desenvolvimento de websites profissionais que comunicam a identidade da sua empresa com design moderno e alta performance.',
       en: "Professional websites that communicate your company's identity with modern design and outstanding performance.",
     },
-    image: 'https://images.pexels.com/photos/8524940/pexels-photo-8524940.jpeg?q=80&w=1200',
+    image: 'https://images.pexels.com/photos/8524940/pexels-photo-8524940.jpeg?q=80&w=800&auto=format',
   },
   {
     id: '02',
@@ -158,7 +158,7 @@ const services = [
       pt: 'Aplicações web sob medida para automatizar processos, gerenciar dados e otimizar a operação do seu negócio.',
       en: 'Custom web applications to automate processes, manage data, and streamline your business operations.',
     },
-    image: 'https://images.pexels.com/photos/12969403/pexels-photo-12969403.jpeg?q=80&w=1200',
+    image: 'https://images.pexels.com/photos/12969403/pexels-photo-12969403.jpeg?q=80&w=800&auto=format',
   },
   {
     id: '03',
@@ -167,7 +167,7 @@ const services = [
       pt: 'Consultoria técnica, arquitetura e desenvolvimento de soluções robustas e escaláveis para desafios complexos.',
       en: 'Technical consulting, architecture, and development of robust, scalable solutions for complex challenges.',
     },
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format',
   },
 ]
 

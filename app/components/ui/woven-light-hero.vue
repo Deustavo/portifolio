@@ -10,6 +10,7 @@
       :animate="{ opacity: 1 }"
       :transition="{ delay: 1, duration: 1 }"
       class="fixed top-0 left-0 right-0 z-50 p-6 bg-black/10 backdrop-blur-md border-b border-white/10 dark:bg-white/10 dark:border-slate-800/10"
+      style="padding-top: max(24px, env(safe-area-inset-top))"
     >
       <div class="max-w-7xl mx-auto flex justify-between items-center">
         <div class="flex items-center">
@@ -24,7 +25,7 @@
           <!-- Language toggle -->
           <button
             @click="toggleLang"
-            class="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20 dark:border-slate-800/30 dark:bg-slate-800/10 dark:text-slate-800 dark:hover:bg-slate-800/20"
+            class="rounded-full border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20 dark:border-slate-800/30 dark:bg-slate-800/10 dark:text-slate-800 dark:hover:bg-slate-800/20 min-h-[44px]"
             :style="fontInter"
           >
             {{ lang === 'pt' ? 'EN' : 'PT' }}
@@ -33,7 +34,7 @@
           <!-- Theme toggle -->
           <button
             @click="toggleDark()"
-            class="rounded-full border border-white/30 bg-white/10 p-2 text-white backdrop-blur-sm transition-all hover:bg-white/20 dark:border-slate-800/30 dark:bg-slate-800/10 dark:text-slate-800 dark:hover:bg-slate-800/20"
+            class="rounded-full border border-white/30 bg-white/10 p-3.5 text-white backdrop-blur-sm transition-all hover:bg-white/20 dark:border-slate-800/30 dark:bg-slate-800/10 dark:text-slate-800 dark:hover:bg-slate-800/20 min-h-[44px] min-w-[44px]"
             :title="isDark ? t.lightMode : t.darkMode"
           >
             <svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,7 +51,7 @@
     <!-- Hero content -->
     <div class="relative z-10 text-center px-4">
       <h1
-        class="text-6xl md:text-8xl text-white dark:text-slate-900"
+        class="text-4xl sm:text-6xl md:text-8xl text-white dark:text-slate-900"
         :style="fontHeadline"
       >
         <template v-for="(word, wi) in headlineWords" :key="wi">
@@ -150,13 +151,11 @@ let animationId = 0
 let disposeScene: (() => void) | null = null
 
 onMounted(() => {
-  // Load Google Fonts
-  const link = document.createElement('link')
-  link.href = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400&display=swap'
-  link.rel = 'stylesheet'
-  document.head.appendChild(link)
-
   if (!mountRef.value) return
+
+  const isMobile = window.innerWidth < 768
+  const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+  const isDarkMode = window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
 
   // Scene setup
   const scene = new THREE.Scene()
@@ -165,15 +164,15 @@ onMounted(() => {
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
   renderer.setSize(window.innerWidth, window.innerHeight)
-  renderer.setPixelRatio(window.devicePixelRatio)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   mountRef.value.appendChild(renderer.domElement)
 
   const mouse = new THREE.Vector2(0, 0)
   const clock = new THREE.Clock()
-  const isDarkMode = window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
 
-  // Particle system
-  const particleCount = 50000
+  // Reduce particle count on mobile and for users who prefer reduced motion
+  const particleCount = prefersReduced ? 5000 : isMobile ? 15000 : 50000
+
   const positions = new Float32Array(particleCount * 3)
   const originalPositions = new Float32Array(particleCount * 3)
   const colors = new Float32Array(particleCount * 3)
@@ -221,39 +220,54 @@ onMounted(() => {
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
   }
+  const handleTouchMove = (event: TouchEvent) => {
+    const touch = event.touches[0]
+    if (!touch) return
+    mouse.x = (touch.clientX / window.innerWidth) * 2 - 1
+    mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1
+  }
   window.addEventListener('mousemove', handleMouseMove)
+  window.addEventListener('touchmove', handleTouchMove, { passive: true })
+
+  // Pre-allocated vectors to avoid per-frame GC pressure
+  const _currentPos = new THREE.Vector3()
+  const _originalPos = new THREE.Vector3()
+  const _velocity = new THREE.Vector3()
+  const _direction = new THREE.Vector3()
+  const _returnForce = new THREE.Vector3()
+  const _mouseWorld = new THREE.Vector3()
 
   const animate = () => {
     animationId = requestAnimationFrame(animate)
     const elapsedTime = clock.getElapsedTime()
-    const mouseWorld = new THREE.Vector3(mouse.x * 3, mouse.y * 3, 0)
+    _mouseWorld.set(mouse.x * 3, mouse.y * 3, 0)
 
     for (let i = 0; i < particleCount; i++) {
       const ix = i * 3
       const iy = i * 3 + 1
       const iz = i * 3 + 2
 
-      const currentPos = new THREE.Vector3(positions[ix], positions[iy], positions[iz])
-      const originalPos = new THREE.Vector3(originalPositions[ix], originalPositions[iy], originalPositions[iz])
-      const velocity = new THREE.Vector3(velocities[ix], velocities[iy], velocities[iz])
+      _currentPos.set(positions[ix]!, positions[iy]!, positions[iz]!)
+      _originalPos.set(originalPositions[ix]!, originalPositions[iy]!, originalPositions[iz]!)
+      _velocity.set(velocities[ix]!, velocities[iy]!, velocities[iz]!)
 
-      const dist = currentPos.distanceTo(mouseWorld)
+      const dist = _currentPos.distanceTo(_mouseWorld)
       if (dist < 1.5) {
         const force = (1.5 - dist) * 0.01
-        const direction = new THREE.Vector3().subVectors(currentPos, mouseWorld).normalize()
-        velocity.add(direction.multiplyScalar(force))
+        _direction.subVectors(_currentPos, _mouseWorld).normalize().multiplyScalar(force)
+        _velocity.add(_direction)
       }
 
-      const returnForce = new THREE.Vector3().subVectors(originalPos, currentPos).multiplyScalar(0.001)
-      velocity.add(returnForce)
-      velocity.multiplyScalar(0.95)
+      _returnForce.subVectors(_originalPos, _currentPos).multiplyScalar(0.001)
+      _velocity.add(_returnForce)
+      _velocity.multiplyScalar(0.95)
 
-      positions[ix] = (positions[ix] ?? 0) + velocity.x
-      positions[iy] = (positions[iy] ?? 0) + velocity.y
-      positions[iz] = (positions[iz] ?? 0) + velocity.z
-      velocities[ix] = velocity.x
-      velocities[iy] = velocity.y
-      velocities[iz] = velocity.z
+      positions[ix] = positions[ix]! + _velocity.x
+      positions[iy] = positions[iy]! + _velocity.y
+      positions[iz] = positions[iz]! + _velocity.z
+      velocities[ix] = _velocity.x
+      velocities[iy] = _velocity.y
+      velocities[iz] = _velocity.z
     }
 
     const posAttr = geometry.attributes.position as THREE.BufferAttribute
@@ -274,6 +288,7 @@ onMounted(() => {
     cancelAnimationFrame(animationId)
     window.removeEventListener('resize', handleResize)
     window.removeEventListener('mousemove', handleMouseMove)
+    window.removeEventListener('touchmove', handleTouchMove)
     if (mountRef.value?.contains(renderer.domElement)) {
       mountRef.value.removeChild(renderer.domElement)
     }
@@ -281,7 +296,6 @@ onMounted(() => {
     geometry.dispose()
     material.dispose()
     torusKnot.dispose()
-    document.head.removeChild(link)
   }
 })
 

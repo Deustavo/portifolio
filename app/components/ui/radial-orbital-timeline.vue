@@ -35,8 +35,10 @@ const centerOffset = ref<{ x: number; y: number }>({ x: 0, y: 0 })
 const activeNodeId = ref<number | null>(null)
 const containerRef = ref<HTMLDivElement | null>(null)
 const orbitRef = ref<HTMLDivElement | null>(null)
+const containerWidth = ref<number>(400)
 
 let rotationTimer: ReturnType<typeof setInterval> | null = null
+let resizeObserver: ResizeObserver | null = null
 
 const startRotation = () => {
   if (rotationTimer) clearInterval(rotationTimer)
@@ -53,19 +55,37 @@ const stopRotation = () => {
 }
 
 onMounted(() => {
+  const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
+  if (prefersReduced) autoRotate.value = false
+
+  if (containerRef.value) {
+    containerWidth.value = containerRef.value.offsetWidth
+    resizeObserver = new ResizeObserver(entries => {
+      containerWidth.value = entries[0]?.contentRect.width ?? containerWidth.value
+    })
+    resizeObserver.observe(containerRef.value)
+  }
+
   watch(autoRotate, (val) => {
     if (val) startRotation()
     else stopRotation()
   }, { immediate: true })
 })
 
-onUnmounted(() => stopRotation())
+onUnmounted(() => {
+  stopRotation()
+  resizeObserver?.disconnect()
+})
+
+const orbitRadius = computed(() =>
+  Math.round(Math.min(200, Math.max(100, (containerWidth.value / 2) * 0.78)))
+)
 
 const nodePositions = computed(() => {
   const total = props.timelineData.length
   return props.timelineData.map((_, index) => {
     const angle = ((index / total) * 360 + rotationAngle.value) % 360
-    const radius = 200
+    const radius = orbitRadius.value
     const radian = (angle * Math.PI) / 180
     const x = radius * Math.cos(radian) + centerOffset.value.x
     const y = radius * Math.sin(radian) + centerOffset.value.y
@@ -172,7 +192,10 @@ const glowBackground = computed(() =>
         </div>
 
         <!-- Orbit ring -->
-        <div class="absolute w-96 h-96 rounded-full border border-white/10 dark:border-slate-900/20 pointer-events-none"></div>
+        <div
+          class="absolute rounded-full border border-white/10 dark:border-slate-900/20 pointer-events-none"
+          :style="{ width: `${orbitRadius * 2}px`, height: `${orbitRadius * 2}px` }"
+        ></div>
 
         <!-- Nodes -->
         <div
