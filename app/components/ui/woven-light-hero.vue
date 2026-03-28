@@ -9,12 +9,15 @@
       :initial="{ opacity: 0 }"
       :animate="{ opacity: 1 }"
       :transition="{ delay: 1, duration: 1 }"
-      class="absolute top-0 left-0 right-0 z-20 p-6"
+      class="fixed top-0 left-0 right-0 z-50 p-6 bg-black/10 backdrop-blur-md border-b border-white/10 dark:bg-white/10 dark:border-slate-800/10"
     >
       <div class="max-w-7xl mx-auto flex justify-between items-center">
-        <div class="flex items-center gap-2">
-          <span class="text-2xl font-bold text-white dark:text-slate-800">⎎</span>
-          <span class="text-xl font-bold text-white dark:text-slate-800" :style="fontInter">GA</span>
+        <div class="flex items-center">
+          <img
+            :src="isDark ? '/logo.svg' : '/logo_light.svg'"
+            alt="Gustavo Andrade"
+            class="h-6 w-6"
+          />
         </div>
 
         <div class="flex items-center gap-3">
@@ -97,6 +100,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useLang } from '~/composables/useLang'
 import { Motion } from 'motion-v'
 import * as THREE from 'three'
 
@@ -114,8 +118,7 @@ const toggleDark = () => {
 }
 
 // Language
-const lang = ref<'pt' | 'en'>('pt')
-const toggleLang = () => { lang.value = lang.value === 'pt' ? 'en' : 'pt' }
+const { lang, toggleLang } = useLang()
 
 const translations = {
   pt: {

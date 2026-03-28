@@ -7,4 +7,19 @@ export default defineNuxtConfig({
   },
   modules: ['@nuxtjs/tailwindcss'],
   css: ['~/assets/css/main.css'],
+  app: {
+    head: {
+      title: 'Gustavo Andrade — Software Engineer',
+      meta: [
+        { name: 'description', content: 'Portfolio of Gustavo Andrade, Software Engineer and Front-end Specialist' },
+        { property: 'og:title', content: 'Gustavo Andrade — Software Engineer' },
+        { property: 'og:description', content: 'Portfolio of Gustavo Andrade, Software Engineer and Front-end Specialist' },
+        { property: 'og:image', content: '/logo.svg' },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg', media: '(prefers-color-scheme: light)' },
+        { rel: 'icon', type: 'image/svg+xml', href: '/logo_light.svg', media: '(prefers-color-scheme: dark)' },
+      ],
+    },
+  },
 })
