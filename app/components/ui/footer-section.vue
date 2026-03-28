@@ -25,7 +25,7 @@ const copy = computed(() => ({
 
 const gradientColors = computed(() =>
   isDark.value
-    ? ['#ffffff', '#f5f5ff', '#f0f4ff', '#f5f0ff', '#f0f5ff', '#fafafa', '#ffffff']
+    ? ['#ddd6fe', '#bfdbfe', '#e9d5ff', '#c7d2fe', '#dde6ff', '#ede9fe', '#ddd6fe']
     : ['#000000', '#0d0d1a', '#111827', '#1a0a2e', '#0f172a', '#050510', '#000000']
 )
 
@@ -81,7 +81,7 @@ const gridOverlayStyle = computed(() => ({
       </h2>
 
       <!-- Sub -->
-      <p :style="fontInter" class="text-base text-white/40 dark:text-slate-900/40 mb-10">
+      <p :style="fontInter" class="text-base text-white/40 dark:text-slate-900/60 mb-10">
         {{ copy.sub }}
       </p>
 
@@ -89,14 +89,14 @@ const gridOverlayStyle = computed(() => ({
       <a
         :href="`mailto:${contact.email}`"
         :style="fontInter"
-        class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/20 dark:border-slate-900/20 text-white/80 dark:text-slate-900/80 text-sm font-medium hover:bg-white/10 dark:hover:bg-slate-900/10 hover:border-white/40 dark:hover:border-slate-900/40 hover:text-white dark:hover:text-slate-900 transition-all duration-300 backdrop-blur-sm"
+        class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/20 dark:border-slate-900/40 text-white/80 dark:text-slate-900/80 text-sm font-medium hover:bg-white/10 dark:hover:bg-slate-900/10 hover:border-white/40 dark:hover:border-slate-900/60 hover:text-white dark:hover:text-slate-900 transition-all duration-300 backdrop-blur-sm"
       >
         {{ copy.cta }}
         <ArrowUpRight :size="16" />
       </a>
 
       <!-- Divider -->
-      <div class="mt-16 mb-8 w-px h-12 bg-gradient-to-b from-transparent via-white/20 dark:via-slate-900/20 to-transparent" />
+      <div class="mt-16 mb-8 w-px h-12 bg-gradient-to-b from-transparent via-white/20 dark:via-slate-900/40 to-transparent" />
 
       <!-- Social links -->
       <div class="flex items-center gap-6 mb-12">
@@ -104,7 +104,7 @@ const gridOverlayStyle = computed(() => ({
           :href="contact.github"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-white/30 dark:text-slate-900/30 hover:text-white/80 dark:hover:text-slate-900/80 transition-colors duration-300"
+          class="text-white/30 dark:text-slate-900/60 hover:text-white/80 dark:hover:text-slate-900/90 transition-colors duration-300"
           aria-label="GitHub"
         >
           <Github :size="20" />
@@ -113,14 +113,14 @@ const gridOverlayStyle = computed(() => ({
           :href="contact.linkedin"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-white/30 dark:text-slate-900/30 hover:text-white/80 dark:hover:text-slate-900/80 transition-colors duration-300"
+          class="text-white/30 dark:text-slate-900/60 hover:text-white/80 dark:hover:text-slate-900/90 transition-colors duration-300"
           aria-label="LinkedIn"
         >
           <Linkedin :size="20" />
         </a>
         <a
           :href="`mailto:${contact.email}`"
-          class="text-white/30 dark:text-slate-900/30 hover:text-white/80 dark:hover:text-slate-900/80 transition-colors duration-300"
+          class="text-white/30 dark:text-slate-900/60 hover:text-white/80 dark:hover:text-slate-900/90 transition-colors duration-300"
           aria-label="Email"
         >
           <Mail :size="20" />
@@ -128,7 +128,7 @@ const gridOverlayStyle = computed(() => ({
       </div>
 
       <!-- Copyright -->
-      <p :style="fontInter" class="text-xs text-white/20 dark:text-slate-900/20 tracking-wide">
+      <p :style="fontInter" class="text-xs text-white/20 dark:text-slate-900/50 tracking-wide">
         © {{ new Date().getFullYear() }} Gustavo Andrade — {{ copy.rights }}
       </p>
     </div>

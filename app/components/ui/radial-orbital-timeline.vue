@@ -166,13 +166,13 @@ const glowBackground = computed(() =>
       >
         <!-- Center orb -->
         <div class="absolute w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 via-blue-500 to-teal-500 animate-pulse flex items-center justify-center z-10 pointer-events-none">
-          <div class="absolute w-20 h-20 rounded-full border border-white/20 dark:border-slate-900/20 animate-ping opacity-70"></div>
-          <div class="absolute w-24 h-24 rounded-full border border-white/10 dark:border-slate-900/10 animate-ping opacity-50" style="animation-delay: 0.5s"></div>
-          <div class="w-8 h-8 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md"></div>
+          <div class="absolute w-20 h-20 rounded-full border border-white/20 dark:border-slate-900/40 animate-ping opacity-70"></div>
+          <div class="absolute w-24 h-24 rounded-full border border-white/10 dark:border-slate-900/20 animate-ping opacity-50" style="animation-delay: 0.5s"></div>
+          <div class="w-8 h-8 rounded-full bg-white/80 dark:bg-slate-900/90 backdrop-blur-md"></div>
         </div>
 
         <!-- Orbit ring -->
-        <div class="absolute w-96 h-96 rounded-full border border-white/10 dark:border-slate-900/10 pointer-events-none"></div>
+        <div class="absolute w-96 h-96 rounded-full border border-white/10 dark:border-slate-900/20 pointer-events-none"></div>
 
         <!-- Nodes -->
         <div
@@ -207,7 +207,7 @@ const glowBackground = computed(() =>
                 ? 'bg-white text-black border-white shadow-lg scale-150 dark:bg-slate-900 dark:text-white dark:border-slate-900'
                 : isRelatedToActive(item.id)
                 ? 'bg-white/50 text-black border-white animate-pulse dark:bg-slate-900/50 dark:text-white dark:border-slate-900'
-                : 'bg-black text-white border-white/40 dark:bg-white dark:text-slate-900 dark:border-slate-900/40'
+                : 'bg-black text-white border-white/40 dark:bg-white dark:text-slate-900 dark:border-slate-900/60'
             ]"
           >
             <component :is="item.icon" :size="16" />
@@ -217,7 +217,7 @@ const glowBackground = computed(() =>
           <div
             :style="fontInter"
             class="absolute top-12 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold tracking-wider transition-all duration-300"
-            :class="expandedItems[item.id] ? 'text-white dark:text-slate-900' : 'text-white/70 dark:text-slate-900/70'"
+            :class="expandedItems[item.id] ? 'text-white dark:text-slate-900' : 'text-white/70 dark:text-slate-900/80'"
           >
             {{ item.title }}
           </div>
@@ -240,7 +240,7 @@ const glowBackground = computed(() =>
           <Transition name="fade-up">
             <div
               v-if="expandedItems[item.id]"
-              class="absolute top-20 left-1/2 -translate-x-1/2 w-72 bg-black/90 dark:bg-white/90 backdrop-blur-lg border border-white/30 dark:border-slate-900/30 shadow-xl shadow-white/10 dark:shadow-slate-900/10 rounded-lg overflow-visible"
+              class="absolute top-20 left-1/2 -translate-x-1/2 w-72 bg-black/90 dark:bg-white/90 backdrop-blur-lg border border-white/30 dark:border-slate-900/50 shadow-xl shadow-white/10 dark:shadow-slate-900/10 rounded-lg overflow-visible"
             >
               <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-white/50 dark:bg-slate-900/50"></div>
 
@@ -252,25 +252,25 @@ const glowBackground = computed(() =>
                   >
                     {{ getStatusLabel(item.status) }}
                   </span>
-                  <span class="text-xs font-mono text-white/50 dark:text-slate-900/50">{{ item.date }}</span>
+                  <span class="text-xs font-mono text-white/50 dark:text-slate-900/70">{{ item.date }}</span>
                 </div>
                 <h3 :style="fontHeadline" class="text-sm font-semibold text-white dark:text-slate-900 leading-snug">{{ item.title }}</h3>
-                <p :style="fontInter" class="text-xs text-white/60 dark:text-slate-900/60 font-medium">{{ item.category }}</p>
+                <p :style="fontInter" class="text-xs text-white/60 dark:text-slate-900/75 font-medium">{{ item.category }}</p>
               </div>
 
-              <div :style="fontInter" class="px-4 pb-4 text-xs text-white/80 dark:text-slate-900/80 space-y-3">
+              <div :style="fontInter" class="px-4 pb-4 text-xs text-white/80 dark:text-slate-900/90 space-y-3">
                 <p>{{ item.content }}</p>
 
                 <!-- Energy bar -->
-                <div class="pt-3 border-t border-white/10 dark:border-slate-900/10">
+                <div class="pt-3 border-t border-white/10 dark:border-slate-900/20">
                   <div class="flex justify-between items-center mb-1">
-                    <span class="flex items-center gap-1 text-white/60 dark:text-slate-900/60">
+                    <span class="flex items-center gap-1 text-white/60 dark:text-slate-900/70">
                       <Zap :size="10" />
                       {{ lang === 'pt' ? 'Nível de Experiência' : 'Experience Level' }}
                     </span>
-                    <span class="font-mono text-white/60 dark:text-slate-900/60">{{ item.energy }}%</span>
+                    <span class="font-mono text-white/60 dark:text-slate-900/70">{{ item.energy }}%</span>
                   </div>
-                  <div class="w-full h-1 bg-white/10 dark:bg-slate-900/10 rounded-full overflow-hidden">
+                  <div class="w-full h-1 bg-white/10 dark:bg-slate-900/20 rounded-full overflow-hidden">
                     <div
                       class="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-1000"
                       :style="{ width: `${item.energy}%` }"
@@ -279,20 +279,20 @@ const glowBackground = computed(() =>
                 </div>
 
                 <!-- Related nodes -->
-                <div v-if="item.relatedIds.length > 0" class="pt-3 border-t border-white/10 dark:border-slate-900/10">
+                <div v-if="item.relatedIds.length > 0" class="pt-3 border-t border-white/10 dark:border-slate-900/20">
                   <div class="flex items-center gap-1 mb-2">
-                    <LinkIcon :size="10" class="text-white/50 dark:text-slate-900/50" />
-                    <span class="text-xs uppercase tracking-wider text-white/50 dark:text-slate-900/50">{{ lang === 'pt' ? 'Próxima etapa' : 'Next step' }}</span>
+                    <LinkIcon :size="10" class="text-white/50 dark:text-slate-900/70" />
+                    <span class="text-xs uppercase tracking-wider text-white/50 dark:text-slate-900/70">{{ lang === 'pt' ? 'Próxima etapa' : 'Next step' }}</span>
                   </div>
                   <div class="flex flex-wrap gap-1">
                     <button
                       v-for="relatedId in item.relatedIds"
                       :key="relatedId"
-                      class="flex items-center gap-1 h-6 px-2 text-xs border border-white/20 dark:border-slate-900/20 bg-transparent hover:bg-white/10 dark:hover:bg-slate-900/10 text-white/70 dark:text-slate-900/70 hover:text-white dark:hover:text-slate-900 transition-all rounded"
+                      class="flex items-center gap-1 h-6 px-2 text-xs border border-white/20 dark:border-slate-900/40 bg-transparent hover:bg-white/10 dark:hover:bg-slate-900/10 text-white/70 dark:text-slate-900/80 hover:text-white dark:hover:text-slate-900 transition-all rounded"
                       @click.stop="toggleItem(relatedId)"
                     >
                       {{ timelineData.find(i => i.id === relatedId)?.title }}
-                      <ArrowRight :size="8" class="text-white/50 dark:text-slate-900/50" />
+                      <ArrowRight :size="8" class="text-white/50 dark:text-slate-900/60" />
                     </button>
                   </div>
                 </div>

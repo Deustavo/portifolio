@@ -118,13 +118,13 @@ const subtitle = computed(() =>
   <section class="relative bg-black dark:bg-white">
     <!-- Section header -->
     <div class="absolute top-10 left-1/2 -translate-x-1/2 z-10 text-center pointer-events-none px-4">
-      <p :style="fontInter" class="text-xs uppercase tracking-[0.3em] text-white/40 dark:text-slate-900/40 mb-2">
+      <p :style="fontInter" class="text-xs uppercase tracking-[0.3em] text-white/40 dark:text-slate-900/60 mb-2">
         {{ lang === 'pt' ? 'trajetória' : 'career' }}
       </p>
       <h2 :style="fontHeadline" class="text-2xl md:text-3xl font-semibold text-white dark:text-slate-900 tracking-tight">
         {{ title }}
       </h2>
-      <p :style="fontInter" class="mt-2 text-sm text-white/40 dark:text-slate-900/40">{{ subtitle }}</p>
+      <p :style="fontInter" class="mt-2 text-sm text-white/40 dark:text-slate-900/60">{{ subtitle }}</p>
     </div>
 
     <UiRadialOrbitalTimeline :timeline-data="timelineData" />
