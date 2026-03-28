@@ -108,7 +108,7 @@ import * as THREE from 'three'
 // Theme
 // isDark = true → classe 'dark' ativa → visual claro (branco) neste design
 // isDark = false → sem classe 'dark' → visual escuro (preto) — estado inicial desejado
-const isDark = ref(false)
+const { isDark, toggleDark } = useTheme()
 
 const scrollToServices = () => {
   document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })
@@ -117,10 +117,6 @@ const scrollToServices = () => {
 useHead({
   htmlAttrs: computed(() => ({ class: isDark.value ? 'dark' : '' }))
 })
-
-const toggleDark = () => {
-  isDark.value = !isDark.value
-}
 
 // Language
 const { lang, toggleLang } = useLang()

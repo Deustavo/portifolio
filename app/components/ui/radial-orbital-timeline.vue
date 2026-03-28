@@ -5,6 +5,7 @@ import { Zap, Link as LinkIcon, ArrowRight } from 'lucide-vue-next'
 import { useLang } from '@/composables/useLang'
 
 const { lang } = useLang()
+const { isDark } = useTheme()
 
 const fontInter = { fontFamily: "'Inter', sans-serif" }
 const fontHeadline = { fontFamily: "'Playfair Display', serif" }
@@ -127,9 +128,9 @@ const isRelatedToActive = (itemId: number): boolean => {
 
 const getStatusStyles = (status: TimelineItem['status']): string => {
   switch (status) {
-    case 'completed': return 'text-white bg-black border-white'
-    case 'in-progress': return 'text-black bg-white border-black'
-    default: return 'text-white bg-black/40 border-white/50'
+    case 'completed': return 'text-white bg-black border-white dark:text-slate-900 dark:bg-white dark:border-slate-900'
+    case 'in-progress': return 'text-black bg-white border-black dark:text-white dark:bg-slate-900 dark:border-slate-900'
+    default: return 'text-white bg-black/40 border-white/50 dark:text-slate-900 dark:bg-white/40 dark:border-slate-900/50'
   }
 }
 
@@ -140,12 +141,18 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
   }
   return labels[lang.value][status] ?? labels[lang.value].pending
 }
+
+const glowBackground = computed(() =>
+  isDark.value
+    ? 'radial-gradient(circle, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0) 70%)'
+    : 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)'
+)
 </script>
 
 <template>
   <div
     ref="containerRef"
-    class="w-full h-screen flex flex-col items-center justify-center bg-black overflow-hidden"
+    class="w-full h-screen flex flex-col items-center justify-center bg-black dark:bg-white overflow-hidden"
     @click="handleContainerClick"
   >
     <div class="relative w-full max-w-4xl h-full flex items-center justify-center">
@@ -159,13 +166,13 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
       >
         <!-- Center orb -->
         <div class="absolute w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 via-blue-500 to-teal-500 animate-pulse flex items-center justify-center z-10 pointer-events-none">
-          <div class="absolute w-20 h-20 rounded-full border border-white/20 animate-ping opacity-70"></div>
-          <div class="absolute w-24 h-24 rounded-full border border-white/10 animate-ping opacity-50" style="animation-delay: 0.5s"></div>
-          <div class="w-8 h-8 rounded-full bg-white/80 backdrop-blur-md"></div>
+          <div class="absolute w-20 h-20 rounded-full border border-white/20 dark:border-slate-900/20 animate-ping opacity-70"></div>
+          <div class="absolute w-24 h-24 rounded-full border border-white/10 dark:border-slate-900/10 animate-ping opacity-50" style="animation-delay: 0.5s"></div>
+          <div class="w-8 h-8 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md"></div>
         </div>
 
         <!-- Orbit ring -->
-        <div class="absolute w-96 h-96 rounded-full border border-white/10 pointer-events-none"></div>
+        <div class="absolute w-96 h-96 rounded-full border border-white/10 dark:border-slate-900/10 pointer-events-none"></div>
 
         <!-- Nodes -->
         <div
@@ -184,7 +191,7 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
             class="absolute rounded-full"
             :class="{ 'animate-pulse': pulseEffect[item.id] }"
             :style="{
-              background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)',
+              background: glowBackground,
               width: `${item.energy * 0.5 + 40}px`,
               height: `${item.energy * 0.5 + 40}px`,
               left: `-${(item.energy * 0.5 + 40 - 40) / 2}px`,
@@ -197,10 +204,10 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
             class="w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300"
             :class="[
               expandedItems[item.id]
-                ? 'bg-white text-black border-white shadow-lg scale-150'
+                ? 'bg-white text-black border-white shadow-lg scale-150 dark:bg-slate-900 dark:text-white dark:border-slate-900'
                 : isRelatedToActive(item.id)
-                ? 'bg-white/50 text-black border-white animate-pulse'
-                : 'bg-black text-white border-white/40'
+                ? 'bg-white/50 text-black border-white animate-pulse dark:bg-slate-900/50 dark:text-white dark:border-slate-900'
+                : 'bg-black text-white border-white/40 dark:bg-white dark:text-slate-900 dark:border-slate-900/40'
             ]"
           >
             <component :is="item.icon" :size="16" />
@@ -210,7 +217,7 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
           <div
             :style="fontInter"
             class="absolute top-12 left-1/2 -translate-x-1/2 whitespace-nowrap text-xs font-semibold tracking-wider transition-all duration-300"
-            :class="expandedItems[item.id] ? 'text-white' : 'text-white/70'"
+            :class="expandedItems[item.id] ? 'text-white dark:text-slate-900' : 'text-white/70 dark:text-slate-900/70'"
           >
             {{ item.title }}
           </div>
@@ -222,9 +229,9 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
               :style="fontInter"
               class="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none"
             >
-              <div class="relative bg-white text-black text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg shadow-white/20 animate-bounce">
+              <div class="relative bg-white text-black dark:bg-slate-900 dark:text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg shadow-white/20 dark:shadow-slate-900/20 animate-bounce">
                 {{ lang === 'pt' ? 'clique aqui' : 'click here' }}
-                <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-white"></div>
+                <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-white dark:border-t-slate-900"></div>
               </div>
             </div>
           </Transition>
@@ -233,9 +240,9 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
           <Transition name="fade-up">
             <div
               v-if="expandedItems[item.id]"
-              class="absolute top-20 left-1/2 -translate-x-1/2 w-72 bg-black/90 backdrop-blur-lg border border-white/30 shadow-xl shadow-white/10 rounded-lg overflow-visible"
+              class="absolute top-20 left-1/2 -translate-x-1/2 w-72 bg-black/90 dark:bg-white/90 backdrop-blur-lg border border-white/30 dark:border-slate-900/30 shadow-xl shadow-white/10 dark:shadow-slate-900/10 rounded-lg overflow-visible"
             >
-              <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-white/50"></div>
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-white/50 dark:bg-slate-900/50"></div>
 
               <div class="p-4 pb-2 space-y-2">
                 <div class="flex justify-between items-center">
@@ -245,25 +252,25 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
                   >
                     {{ getStatusLabel(item.status) }}
                   </span>
-                  <span class="text-xs font-mono text-white/50">{{ item.date }}</span>
+                  <span class="text-xs font-mono text-white/50 dark:text-slate-900/50">{{ item.date }}</span>
                 </div>
-                <h3 :style="fontHeadline" class="text-sm font-semibold text-white leading-snug">{{ item.title }}</h3>
-                <p :style="fontInter" class="text-xs text-white/60 font-medium">{{ item.category }}</p>
+                <h3 :style="fontHeadline" class="text-sm font-semibold text-white dark:text-slate-900 leading-snug">{{ item.title }}</h3>
+                <p :style="fontInter" class="text-xs text-white/60 dark:text-slate-900/60 font-medium">{{ item.category }}</p>
               </div>
 
-              <div :style="fontInter" class="px-4 pb-4 text-xs text-white/80 space-y-3">
+              <div :style="fontInter" class="px-4 pb-4 text-xs text-white/80 dark:text-slate-900/80 space-y-3">
                 <p>{{ item.content }}</p>
 
                 <!-- Energy bar -->
-                <div class="pt-3 border-t border-white/10">
+                <div class="pt-3 border-t border-white/10 dark:border-slate-900/10">
                   <div class="flex justify-between items-center mb-1">
-                    <span class="flex items-center gap-1 text-white/60">
+                    <span class="flex items-center gap-1 text-white/60 dark:text-slate-900/60">
                       <Zap :size="10" />
                       {{ lang === 'pt' ? 'Nível de Experiência' : 'Experience Level' }}
                     </span>
-                    <span class="font-mono text-white/60">{{ item.energy }}%</span>
+                    <span class="font-mono text-white/60 dark:text-slate-900/60">{{ item.energy }}%</span>
                   </div>
-                  <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+                  <div class="w-full h-1 bg-white/10 dark:bg-slate-900/10 rounded-full overflow-hidden">
                     <div
                       class="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-1000"
                       :style="{ width: `${item.energy}%` }"
@@ -272,20 +279,20 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
                 </div>
 
                 <!-- Related nodes -->
-                <div v-if="item.relatedIds.length > 0" class="pt-3 border-t border-white/10">
+                <div v-if="item.relatedIds.length > 0" class="pt-3 border-t border-white/10 dark:border-slate-900/10">
                   <div class="flex items-center gap-1 mb-2">
-                    <LinkIcon :size="10" class="text-white/50" />
-                    <span class="text-xs uppercase tracking-wider text-white/50">{{ lang === 'pt' ? 'Próxima etapa' : 'Next step' }}</span>
+                    <LinkIcon :size="10" class="text-white/50 dark:text-slate-900/50" />
+                    <span class="text-xs uppercase tracking-wider text-white/50 dark:text-slate-900/50">{{ lang === 'pt' ? 'Próxima etapa' : 'Next step' }}</span>
                   </div>
                   <div class="flex flex-wrap gap-1">
                     <button
                       v-for="relatedId in item.relatedIds"
                       :key="relatedId"
-                      class="flex items-center gap-1 h-6 px-2 text-xs border border-white/20 bg-transparent hover:bg-white/10 text-white/70 hover:text-white transition-all rounded"
+                      class="flex items-center gap-1 h-6 px-2 text-xs border border-white/20 dark:border-slate-900/20 bg-transparent hover:bg-white/10 dark:hover:bg-slate-900/10 text-white/70 dark:text-slate-900/70 hover:text-white dark:hover:text-slate-900 transition-all rounded"
                       @click.stop="toggleItem(relatedId)"
                     >
                       {{ timelineData.find(i => i.id === relatedId)?.title }}
-                      <ArrowRight :size="8" class="text-white/50" />
+                      <ArrowRight :size="8" class="text-white/50 dark:text-slate-900/50" />
                     </button>
                   </div>
                 </div>

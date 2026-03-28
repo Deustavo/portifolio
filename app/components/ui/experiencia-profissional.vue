@@ -10,9 +10,13 @@ import {
 import type { TimelineItem } from './radial-orbital-timeline.vue'
 
 const { lang } = useLang()
+const { isDark } = useTheme()
 
 const fontInter = { fontFamily: "'Inter', sans-serif" }
-const fontHeadline = { fontFamily: "'Playfair Display', serif", textShadow: '0 0 50px rgba(255, 255, 255, 0.3)' }
+const fontHeadline = computed(() => ({
+  fontFamily: "'Playfair Display', serif",
+  textShadow: isDark.value ? '0 0 50px rgba(0, 0, 0, 0.3)' : '0 0 50px rgba(255, 255, 255, 0.3)',
+}))
 
 const timelineData = computed<TimelineItem[]>(() => {
   const pt = lang.value === 'pt'
@@ -111,16 +115,16 @@ const subtitle = computed(() =>
 </script>
 
 <template>
-  <section class="relative bg-black">
+  <section class="relative bg-black dark:bg-white">
     <!-- Section header -->
     <div class="absolute top-10 left-1/2 -translate-x-1/2 z-10 text-center pointer-events-none px-4">
-      <p :style="fontInter" class="text-xs uppercase tracking-[0.3em] text-white/40 mb-2">
+      <p :style="fontInter" class="text-xs uppercase tracking-[0.3em] text-white/40 dark:text-slate-900/40 mb-2">
         {{ lang === 'pt' ? 'trajetória' : 'career' }}
       </p>
-      <h2 :style="fontHeadline" class="text-2xl md:text-3xl font-semibold text-white tracking-tight">
+      <h2 :style="fontHeadline" class="text-2xl md:text-3xl font-semibold text-white dark:text-slate-900 tracking-tight">
         {{ title }}
       </h2>
-      <p :style="fontInter" class="mt-2 text-sm text-white/40">{{ subtitle }}</p>
+      <p :style="fontInter" class="mt-2 text-sm text-white/40 dark:text-slate-900/40">{{ subtitle }}</p>
     </div>
 
     <UiRadialOrbitalTimeline :timeline-data="timelineData" />
