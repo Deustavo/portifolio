@@ -1,6 +1,6 @@
 <template>
-  <section class="w-full bg-black dark:bg-white py-8 md:py-16 lg:py-24">
-    <div class="w-full px-4 md:px-8 lg:px-12 xl:px-20 mx-auto">
+  <section id="services" class="w-full bg-black dark:bg-white py-8 md:py-16 lg:py-24">
+    <div class="w-full max-w-7xl px-4 md:px-8 mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
         <!-- Left Column: Tabs -->
@@ -70,7 +70,7 @@
         </div>
 
         <!-- Right Column: Image -->
-        <div class="lg:col-span-7 order-1 lg:order-2">
+        <div class="lg:col-span-7 order-1 lg:order-2 py-28">
           <div
             class="relative"
             @mouseenter="isPaused = true"
@@ -149,7 +149,7 @@ const services = [
       pt: 'Desenvolvimento de websites profissionais que comunicam a identidade da sua empresa com design moderno e alta performance.',
       en: "Professional websites that communicate your company's identity with modern design and outstanding performance.",
     },
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1200',
+    image: 'https://images.pexels.com/photos/8524940/pexels-photo-8524940.jpeg?q=80&w=1200',
   },
   {
     id: '02',
@@ -158,7 +158,7 @@ const services = [
       pt: 'Aplicações web sob medida para automatizar processos, gerenciar dados e otimizar a operação do seu negócio.',
       en: 'Custom web applications to automate processes, manage data, and streamline your business operations.',
     },
-    image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=1200',
+    image: 'https://images.pexels.com/photos/12969403/pexels-photo-12969403.jpeg?q=80&w=1200',
   },
   {
     id: '03',

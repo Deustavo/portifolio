@@ -90,6 +90,7 @@
         <button
           class="rounded-full border-2 border-white/20 bg-white/10 px-8 py-3 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20 dark:border-slate-800/20 dark:bg-slate-800/5 dark:text-slate-800 dark:hover:bg-slate-800/10"
           :style="fontInter"
+          @click="scrollToServices"
         >
           {{ t.cta }}
         </button>
@@ -108,6 +109,10 @@ import * as THREE from 'three'
 // isDark = true → classe 'dark' ativa → visual claro (branco) neste design
 // isDark = false → sem classe 'dark' → visual escuro (preto) — estado inicial desejado
 const isDark = ref(false)
+
+const scrollToServices = () => {
+  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })
+}
 
 useHead({
   htmlAttrs: computed(() => ({ class: isDark.value ? 'dark' : '' }))
