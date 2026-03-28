@@ -1,0 +1,3 @@
+<template>
+  <UiWovenLightHero />
+</template>
