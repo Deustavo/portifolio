@@ -37,7 +37,7 @@ const copy = computed(() => ({
     />
 
     <!-- Top fade gradient -->
-    <div class="absolute inset-x-0 top-0 h-32 z-10 pointer-events-none" style="background: linear-gradient(to bottom, var(--color-background, #0a0a0f), transparent);" />
+    <div class="absolute inset-x-0 top-0 h-48 z-10 pointer-events-none" style="background: linear-gradient(to bottom, #000000 0%, #000000 20%, transparent 100%);" />
 
     <!-- Subtle grid overlay -->
     <div

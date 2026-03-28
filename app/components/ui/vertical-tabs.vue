@@ -136,7 +136,7 @@ const i18n = {
     tag: '(SERVIÇOS)',
   },
   en: {
-    heading: 'How can I help you',
+    heading: 'Ways I can help you',
     tag: '(SERVICES)',
   },
 }
