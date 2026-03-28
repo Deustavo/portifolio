@@ -97,7 +97,7 @@
                 <button
                   @click.stop="handlePrev"
                   class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 dark:bg-white/50 backdrop-blur-md border border-white/30 dark:border-slate-900/30 flex items-center justify-center text-white dark:text-slate-900 hover:bg-black/70 dark:hover:bg-white/70 transition-all active:scale-90"
-                  aria-label="Anterior"
+                  :aria-label="lang === 'pt' ? 'Anterior' : 'Previous'"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M15 18l-6-6 6-6"/>
@@ -106,7 +106,7 @@
                 <button
                   @click.stop="handleNext"
                   class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 dark:bg-white/50 backdrop-blur-md border border-white/30 dark:border-slate-900/30 flex items-center justify-center text-white dark:text-slate-900 hover:bg-black/70 dark:hover:bg-white/70 transition-all active:scale-90"
-                  aria-label="Próximo"
+                  :aria-label="lang === 'pt' ? 'Próximo' : 'Next'"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9 18l6-6-6-6"/>

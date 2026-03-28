@@ -2,6 +2,9 @@
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import type { Component } from 'vue'
 import { Zap, Link as LinkIcon, ArrowRight } from 'lucide-vue-next'
+import { useLang } from '@/composables/useLang'
+
+const { lang } = useLang()
 
 const fontInter = { fontFamily: "'Inter', sans-serif" }
 const fontHeadline = { fontFamily: "'Playfair Display', serif" }
@@ -129,11 +132,11 @@ const getStatusStyles = (status: TimelineItem['status']): string => {
 }
 
 const getStatusLabel = (status: TimelineItem['status']): string => {
-  switch (status) {
-    case 'completed': return 'CONCLUÍDO'
-    case 'in-progress': return 'ATUAL'
-    default: return 'PENDENTE'
+  const labels = {
+    pt: { completed: 'CONCLUÍDO', 'in-progress': 'ATUAL', pending: 'PENDENTE' },
+    en: { completed: 'COMPLETED', 'in-progress': 'CURRENT', pending: 'PENDING' }
   }
+  return labels[lang.value][status] ?? labels[lang.value].pending
 }
 </script>
 
@@ -240,7 +243,7 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
                   <div class="flex justify-between items-center mb-1">
                     <span class="flex items-center gap-1 text-white/60">
                       <Zap :size="10" />
-                      Nível de Experiência
+                      {{ lang === 'pt' ? 'Nível de Experiência' : 'Experience Level' }}
                     </span>
                     <span class="font-mono text-white/60">{{ item.energy }}%</span>
                   </div>
@@ -256,7 +259,7 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
                 <div v-if="item.relatedIds.length > 0" class="pt-3 border-t border-white/10">
                   <div class="flex items-center gap-1 mb-2">
                     <LinkIcon :size="10" class="text-white/50" />
-                    <span class="text-xs uppercase tracking-wider text-white/50">Proxima etapa</span>
+                    <span class="text-xs uppercase tracking-wider text-white/50">{{ lang === 'pt' ? 'Próxima etapa' : 'Next step' }}</span>
                   </div>
                   <div class="flex flex-wrap gap-1">
                     <button
