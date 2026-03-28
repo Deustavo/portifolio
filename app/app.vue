@@ -2,4 +2,5 @@
   <UiWovenLightHero />
   <UiVerticalTabs />
   <UiExperienciaProfissional />
+  <UiFooterSection />
 </template>

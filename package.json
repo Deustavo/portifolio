@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-vue": "^0.11.7",
     "@vueuse/core": "^14.2.1",
     "lucide-vue-next": "^1.0.0",
     "motion-v": "^2.2.0",
