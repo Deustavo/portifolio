@@ -28,6 +28,7 @@ const props = defineProps<{
 const expandedItems = ref<Record<number, boolean>>({})
 const rotationAngle = ref<number>(0)
 const autoRotate = ref<boolean>(true)
+const showClickHint = ref<boolean>(true)
 const pulseEffect = ref<Record<number, boolean>>({})
 const centerOffset = ref<{ x: number; y: number }>({ x: 0, y: 0 })
 const activeNodeId = ref<number | null>(null)
@@ -95,6 +96,7 @@ const centerViewOnNode = (nodeId: number) => {
 }
 
 const toggleItem = (id: number) => {
+  showClickHint.value = false
   const newState = { ...expandedItems.value }
   Object.keys(newState).forEach(key => {
     if (parseInt(key) !== id) newState[parseInt(key)] = false
@@ -212,6 +214,20 @@ const getStatusLabel = (status: TimelineItem['status']): string => {
           >
             {{ item.title }}
           </div>
+
+          <!-- Click hint tooltip (first item only) -->
+          <Transition name="fade-up">
+            <div
+              v-if="showClickHint && index === 0"
+              :style="fontInter"
+              class="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none"
+            >
+              <div class="relative bg-white text-black text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg shadow-white/20 animate-bounce">
+                {{ lang === 'pt' ? 'clique aqui' : 'click here' }}
+                <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-white"></div>
+              </div>
+            </div>
+          </Transition>
 
           <!-- Expanded card -->
           <Transition name="fade-up">
