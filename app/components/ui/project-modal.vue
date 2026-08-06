@@ -63,7 +63,7 @@ onUnmounted(() => {
 
           <div class="relative w-full aspect-[16/9] md:aspect-[21/9] bg-black">
             <img
-              :src="props.project.image"
+              :src="props.project.modalImage"
               :alt="props.project.title"
               class="absolute inset-0 h-full w-full object-cover"
             >

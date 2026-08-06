@@ -1,11 +1,11 @@
-import lifeguardImg from '~/assets/img/ligefuard.png'
-import liriosImg from '~/assets/img/liriosodonto.png'
-import lojaImg from '~/assets/img/lojadeaplicativos.png'
-import pilatesImg from '~/assets/img/sistemapilates.png'
-import solidtyImg from '~/assets/img/legacy/solidty-bank.png'
-import skillusImg from '~/assets/img/legacy/skillus.png'
-import lifeGuardFigmaImg from '~/assets/img/legacy/life-guard.png'
-import danielAraujoImg from '~/assets/img/legacy/daniel-araujo-advocacia.png'
+import lifeguardImg from '~/assets/img/lifeguard/ligefuard.png'
+import liriosImg from '~/assets/img/lirios-odonto/liriosodonto.png'
+import lojaImg from '~/assets/img/loja-de-aplicativos/lojadeaplicativos.png'
+import pilatesImg from '~/assets/img/sistema-pilates/sistemapilates.png'
+import solidtyImg from '~/assets/img/solidty-bank/solidty-bank.png'
+import skillusImg from '~/assets/img/skillus/skillus.png'
+import lifeGuardFigmaImg from '~/assets/img/lifeguard/life-guard.png'
+import danielAraujoImg from '~/assets/img/daniel-araujo-advocacia/daniel-araujo-advocacia.png'
 
 export interface Project {
   slug: string
@@ -13,6 +13,7 @@ export interface Project {
   description: { pt: string; en: string }
   summary: { pt: string; en: string }
   image: string
+  modalImage: string
   tech: string
   company: string
   link?: string
@@ -30,7 +31,8 @@ const projects: Project[] = [
       pt: 'Aplicação para monitoramento remoto de câmeras de segurança, com foco em fluxo de vídeo em tempo real e alertas.',
       en: 'Application for remote monitoring of security cameras, focused on real-time video streaming and alerts.',
     },
-    image: lifeguardImg,
+    image: lifeGuardFigmaImg,
+    modalImage: lifeguardImg,
     tech: 'React Native · Node.js',
     company: 'Life Tecnologia',
   },
@@ -46,6 +48,7 @@ const projects: Project[] = [
       en: 'Institutional website built for a dental clinic, focused on presenting services and attracting patients.',
     },
     image: liriosImg,
+    modalImage: liriosImg,
     tech: 'Nuxt 3 · Vue 3',
     company: 'Freelance',
   },
@@ -61,6 +64,7 @@ const projects: Project[] = [
       en: 'Marketplace of apps that integrate with e-commerce stores, allowing installation and management of extensions.',
     },
     image: lojaImg,
+    modalImage: lojaImg,
     tech: 'Vue 2 · PHP · REST',
     company: 'Tray / Locaweb',
   },
@@ -76,6 +80,7 @@ const projects: Project[] = [
       en: 'Complete management system for pilates studios: students, classes, packages and finances.',
     },
     image: pilatesImg,
+    modalImage: pilatesImg,
     tech: 'Nuxt 3 · Vue 3 · SQLite',
     company: 'Freelance',
   },
@@ -91,6 +96,7 @@ const projects: Project[] = [
       en: 'Digital bank built as a case study during a React JS and React Native course by Gama Academy in partnership with Accenture, focused on an intuitive dashboard and a fluid page flow.',
     },
     image: solidtyImg,
+    modalImage: solidtyImg,
     tech: 'React · React Native',
     company: 'Gama Academy · Accenture',
     link: 'https://solidtybank.vercel.app/',
@@ -107,6 +113,7 @@ const projects: Project[] = [
       en: 'Capstone project: a platform connecting people who want to teach and learn new skills from each other.',
     },
     image: skillusImg,
+    modalImage: skillusImg,
     tech: 'Figma · UX/UI',
     company: 'Projeto acadêmico',
     link: 'https://www.figma.com/file/t9y57BfK9urOXT4fbqLoWv/Skill.Us-PI-Final?node-id=0%3A1',
@@ -123,6 +130,7 @@ const projects: Project[] = [
       en: 'Institutional website built for a law firm, focused on presenting practice areas and attracting clients.',
     },
     image: danielAraujoImg,
+    modalImage: danielAraujoImg,
     tech: 'React · Next.js',
     company: 'Freelance',
     link: 'https://danielaraujoadvocacia.com/',
