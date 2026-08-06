@@ -75,7 +75,7 @@
         :initial="{ opacity: 0, y: 30 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ delay: 2.2, duration: 1.2 }"
-        class="mx-auto mt-6 max-w-xl text-lg text-slate-300 dark:text-slate-600"
+        class="mx-auto mt-6 inline-block max-w-xl rounded-full border border-white/10 bg-black/40 px-6 py-2.5 text-lg font-medium text-white backdrop-blur-md dark:border-slate-900/10 dark:bg-white/50 dark:text-slate-900"
         :style="fontInter"
       >
         {{ t.subtitle }}
@@ -112,7 +112,7 @@ import * as THREE from 'three'
 const { isDark, toggleDark } = useTheme()
 
 const scrollToServices = () => {
-  document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })
+  document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })
 }
 
 useHead({

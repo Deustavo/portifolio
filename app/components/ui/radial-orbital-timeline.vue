@@ -180,6 +180,7 @@ const glowBackground = computed(() =>
         ref="orbitRef"
         class="absolute w-full h-full flex items-center justify-center"
         :style="{
+          paddingTop: '100px',
           perspective: '1000px',
           transform: `translate(${centerOffset.x}px, ${centerOffset.y}px)`
         }"
