@@ -5,8 +5,8 @@
    ========================================================= */
 const DICT = {
   pt: {
-    "doc.title":      "Gustavo Andrade — UI & UX Designer",
-    "doc.desc":       "Gustavo Andrade, UI & UX Designer em São Paulo. Interfaces claras, produtos com intenção.",
+    "doc.title":      "Gustavo Andrade — Product Design e Engenharia de Software",
+    "doc.desc":       "Gustavo Andrade: UI & UX, front-end e engenharia de software em São Paulo. Interfaces claras, produtos com intenção.",
     "nav.work":       "Projetos",
     "nav.contact":    "Contato",
 
@@ -14,11 +14,11 @@ const DICT = {
     "hero.statusShort":"● Disponível · São Paulo, BR",
     "hero.role":      "UI &amp; UX<br>Designer",
     "hero.roleInline":"UI &amp; UX Designer",
-    "hero.roleLabel": "Função",
-    "hero.roles":     "UI &amp; UX Designer|Product Designer|Design Systems|Front-end amigável|Pesquisa e protótipo",
+    "hero.roleLabel": "Atuação",
+    "hero.roles":     "UI &amp; UX|Front-end Dev|Engenheiro de Software|Product Design",
     "hero.cue":       "Ver os projetos",
-    "hero.bio":       "Designer de produto desde 2019. Gosto de problema mal definido: pesquiso, prototipo e corto até a interface ficar óbvia.",
-    "hero.bioShort":  "UI &amp; UX Designer. Desenho interfaces e entendo o código que as sustenta.",
+    "hero.bio":       "Design de produto e engenharia de software desde 2019. Gosto de problema mal definido: pesquiso, prototipo, corto até a interface ficar óbvia e depois construo.",
+    "hero.bioShort":  "UI &amp; UX, front-end e engenharia de software. Desenho a interface e construo o código que a sustenta.",
 
     "stat.since":     "Desde 2019",
     "stat.sinceLbl":  "de prática",
@@ -99,8 +99,8 @@ const DICT = {
     "lg.work": "Trabalhar juntos →"
   },
   en: {
-    "doc.title":      "Gustavo Andrade — UI & UX Designer",
-    "doc.desc":       "Gustavo Andrade, UI & UX Designer based in São Paulo. Clear interfaces, products with intent.",
+    "doc.title":      "Gustavo Andrade — Product Design & Software Engineering",
+    "doc.desc":       "Gustavo Andrade: UI & UX, front-end and software engineering, based in São Paulo. Clear interfaces, products with intent.",
     "nav.work":       "Work",
     "nav.contact":    "Contact",
 
@@ -108,11 +108,11 @@ const DICT = {
     "hero.statusShort":"● Available · São Paulo, BR",
     "hero.role":      "UI &amp; UX<br>Designer",
     "hero.roleInline":"UI &amp; UX Designer",
-    "hero.roleLabel": "Role",
-    "hero.roles":     "UI &amp; UX Designer|Product Designer|Design Systems|Front-end friendly|Research and prototyping",
+    "hero.roleLabel": "Focus",
+    "hero.roles":     "UI &amp; UX|Front-end Dev|Software Engineer|Product Design",
     "hero.cue":       "See the projects",
-    "hero.bio":       "Product designer since 2019. I like badly defined problems: I research, prototype and cut until the interface becomes obvious.",
-    "hero.bioShort":  "UI &amp; UX Designer. I design interfaces and understand the code behind them.",
+    "hero.bio":       "Product design and software engineering since 2019. I like badly defined problems: I research, prototype, cut until the interface becomes obvious, then build it.",
+    "hero.bioShort":  "UI &amp; UX, front-end and software engineering. I design the interface and build the code behind it.",
 
     "stat.since":     "Since 2019",
     "stat.sinceLbl":  "in practice",
