@@ -1,0 +1,11 @@
+/* ===== Entrada e saída de página: os blocos caem e ficam translúcidos ===== */
+/* Os estados são aplicados por transition.js em estilo inline, para funcionar
+   igual em todas as páginas. Aqui ficam só o véu e o respeito ao reduced-motion. */
+
+.fade-veil{position:fixed;inset:0;z-index:90;background:var(--bg,#faf7f0);opacity:0;pointer-events:none;
+  transition:opacity .45s ease-in}
+html.is-leaving .fade-veil{opacity:.55;pointer-events:auto}
+
+@media(prefers-reduced-motion:reduce){
+  .fade-veil{display:none}
+}
