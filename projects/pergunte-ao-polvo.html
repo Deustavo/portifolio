@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pergunte ao Polvo — Gustavo Andrade</title>
+<meta name="description" content="Recriação de um site que saiu do ar: uma página só, duas opções, e um polvo que decide por você. HTML, CSS e JS puro, com temas que trocam sozinhos pela data do calendário.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/case-bento.css">
+<link rel="stylesheet" href="../assets/transition.css">
+<link rel="stylesheet" href="../assets/interactions.css">
+<script>(function(){try{var t=localStorage.getItem("ga-theme");if(t!=="dark"&&t!=="light")t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
+</head><body>
+<div class="bar">
+  <strong><a href="../index.html">Gustavo Andrade</a></strong>
+  <nav>
+    <a href="../index.html#projetos" data-i18n="nav.work">Projetos</a>
+    <a href="../index.html#contato" data-i18n="nav.contact">Contato</a>
+    <button class="themebtn" data-theme-toggle aria-label="Alternar tema"><span class="ico-moon" aria-hidden="true">☾</span><span class="ico-sun" aria-hidden="true">☀</span></button><button class="langbtn" data-lang-toggle>EN</button>
+  </nav>
+</div>
+
+<div class="wrap">
+  <header class="box head">
+    <span class="tag" data-i18n="polvo.kicker">Case 16 · 2024</span>
+    <h1>Pergunte ao Polvo</h1>
+    <p class="head__sub" data-i18n="polvo.sub">—</p>
+  </header>
+
+  <div class="facts">
+    <div class="fact"><span data-i18n="polvo.f1">Cliente</span><strong data-i18n="polvo.v1">—</strong></div>
+    <div class="fact"><span data-i18n="polvo.f2">Papel</span><strong data-i18n="polvo.v2">—</strong></div>
+    <div class="fact"><span data-i18n="polvo.f3">Escopo</span><strong data-i18n="polvo.v3">—</strong></div>
+    <div class="fact"><span data-i18n="polvo.f4">Ano</span><strong>2024</strong></div>
+  </div>
+
+  <img class="cover" src="../assets/img/pergunte-ao-polvo/hero.png" alt=""
+       data-i18n-attr="alt:polvo.heroAlt" width="1920" height="1080">
+
+  <section class="box block">
+    <h2 data-i18n="polvo.h1">O contexto</h2>
+    <div data-i18n="polvo.c1">—</div>
+  </section>
+
+  <section class="box block">
+    <h2 data-i18n="polvo.h2">O processo</h2>
+    <div data-i18n="polvo.c2">—</div>
+  </section>
+
+  <section class="box">
+    <span class="strip__lbl" data-i18n="polvo.ga">—</span>
+    <div class="shots shots--2">
+      <figure class="shot"><img loading="lazy" src="../assets/img/pergunte-ao-polvo/resultado.png" alt="" data-i18n-attr="alt:polvo.g1"><figcaption data-i18n="polvo.g1">—</figcaption></figure>
+      <figure class="shot"><img loading="lazy" src="../assets/img/pergunte-ao-polvo/polvo-real.png" alt="" data-i18n-attr="alt:polvo.g2"><figcaption data-i18n="polvo.g2">—</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="box">
+    <span class="strip__lbl" data-i18n="polvo.gb">—</span>
+    <div class="shots shots--4">
+      <figure class="shot"><img loading="lazy" src="../assets/img/pergunte-ao-polvo/evento-halloween.png" alt="" data-i18n-attr="alt:polvo.g3"><figcaption data-i18n="polvo.g3">—</figcaption></figure>
+      <figure class="shot"><img loading="lazy" src="../assets/img/pergunte-ao-polvo/evento-natal.png" alt="" data-i18n-attr="alt:polvo.g4"><figcaption data-i18n="polvo.g4">—</figcaption></figure>
+      <figure class="shot"><img loading="lazy" src="../assets/img/pergunte-ao-polvo/evento-carnaval.png" alt="" data-i18n-attr="alt:polvo.g5"><figcaption data-i18n="polvo.g5">—</figcaption></figure>
+      <figure class="shot"><img loading="lazy" src="../assets/img/pergunte-ao-polvo/evento-primeiro-de-abril.png" alt="" data-i18n-attr="alt:polvo.g6"><figcaption data-i18n="polvo.g6">—</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="box block">
+    <h2 data-i18n="polvo.h3">O resultado</h2>
+    <div data-i18n="polvo.c3">—</div>
+    <div class="kpis" style="--fill:var(--c16)">
+      <a class="kpi" href="https://pergunteaopolvo.com/" target="_blank" rel="noopener"><span data-i18n="polvo.l1">Abrir o site ↗</span></a>
+    </div>
+  </section>
+
+  <a class="box next" href="sistema-pilates.html" style="--fill:var(--c9)">
+    <span class="tag" data-i18n="case.next">Próximo projeto</span>
+    <strong data-i18n="mcb.title">MC Blessed Pilates</strong>
+    <span>↗</span>
+  </a>
+</div>
+<div class="foot">
+  <span data-i18n="foot.rights">© 2026 Gustavo Andrade</span>
+  <a href="../index.html#contato" data-i18n="case.cta">Trabalhar juntos →</a>
+</div>
+<script src="../assets/i18n.js"></script>
+<script src="../assets/theme.js"></script>
+<script src="../assets/transition.js"></script>
+<script src="../assets/interactions.js"></script>
+</body></html>

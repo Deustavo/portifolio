@@ -4,7 +4,7 @@
   --line:#17150f;                 /* traço dos contornos */
   --on-fill:#faf7f0;              /* texto sobre um preenchimento sólido */
   --bar-bg:rgba(250,247,240,.85); /* barra fixa com blur */
-  --c1:#ff5c39; --c2:#2f8f6b; --c3:#3b5bdb; --c4:#e8a33d; --c5:#9b5de5; --c6:#0e7c86; --c7:#c2255c; --c8:#6f8c1e; --c9:#96603a; --c10:#6d3bd4; --c11:#1a8f4c; --c12:#14559e; --c13:#0f9b8e; --c14:#d98207; --c15:#b3202c;
+  --c1:#ff5c39; --c2:#2f8f6b; --c3:#3b5bdb; --c4:#e8a33d; --c5:#9b5de5; --c6:#0e7c86; --c7:#c2255c; --c8:#6f8c1e; --c9:#96603a; --c10:#6d3bd4; --c11:#1a8f4c; --c12:#14559e; --c13:#0f9b8e; --c14:#d98207; --c15:#b3202c; --c16:#a61e6e;
   color-scheme:light;
 }
 
@@ -15,7 +15,7 @@
     --line:#3a3529;
     --on-fill:#100e0a;
     --bar-bg:rgba(16,14,10,.85);
-    --c1:#ff7a5c; --c2:#43c093; --c3:#7b93ff; --c4:#f0b959; --c5:#b98cff; --c6:#3fc2cf; --c7:#ff86ae; --c8:#b6cc4a; --c9:#d59a6a; --c10:#a78bfa; --c11:#4ade80; --c12:#62a8f5; --c13:#3fd6c4; --c14:#ffb02e; --c15:#f2596a;
+    --c1:#ff7a5c; --c2:#43c093; --c3:#7b93ff; --c4:#f0b959; --c5:#b98cff; --c6:#3fc2cf; --c7:#ff86ae; --c8:#b6cc4a; --c9:#d59a6a; --c10:#a78bfa; --c11:#4ade80; --c12:#62a8f5; --c13:#3fd6c4; --c14:#ffb02e; --c15:#f2596a; --c16:#f472b6;
     color-scheme:dark;
   }
 }
@@ -26,7 +26,7 @@
   --line:#3a3529;
   --on-fill:#100e0a;
   --bar-bg:rgba(16,14,10,.85);
-  --c1:#ff7a5c; --c2:#43c093; --c3:#7b93ff; --c4:#f0b959; --c5:#b98cff; --c6:#3fc2cf; --c7:#ff86ae; --c8:#b6cc4a; --c9:#d59a6a; --c10:#a78bfa; --c11:#4ade80; --c12:#62a8f5; --c13:#3fd6c4; --c14:#ffb02e; --c15:#f2596a;
+  --c1:#ff7a5c; --c2:#43c093; --c3:#7b93ff; --c4:#f0b959; --c5:#b98cff; --c6:#3fc2cf; --c7:#ff86ae; --c8:#b6cc4a; --c9:#d59a6a; --c10:#a78bfa; --c11:#4ade80; --c12:#62a8f5; --c13:#3fd6c4; --c14:#ffb02e; --c15:#f2596a; --c16:#f472b6;
   color-scheme:dark;
 }
 

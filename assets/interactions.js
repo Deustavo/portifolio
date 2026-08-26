@@ -319,25 +319,13 @@
     if (!chips.length || !groups.length) return;
 
     var total = document.querySelector('[data-work-count]');
-    var totalKey = total && total.dataset.i18n;
     var active = 'all';
 
-    function cases(name) {
-      /* conta os cards do grupo para a etiqueta ao lado do título */
-      return groups.filter(function (g) {
-        return g.dataset.group === name && g.classList.contains('bento');
-      }).reduce(function (n, g) { return n + g.children.length; }, 0);
-    }
-
-    function label(n) {
-      var one = t('work.caseOne', 'case'), many = t('work.caseMany', 'cases');
-      return (n < 10 ? '0' + n : n) + ' ' + (n === 1 ? one : many);
-    }
-
     function paintCount() {
-      if (!total) return;
-      if (active === 'all') total.textContent = t(totalKey, total.textContent);
-      else total.textContent = label(cases(active));
+      /* o counts.js é a fonte única dos números; aqui só se escolhe o recorte */
+      var C = window.GACounts;
+      if (!total || !C) return;
+      total.textContent = active === 'all' ? C.label(C.total()) : C.label(C.group(active));
     }
 
     function run(name) {

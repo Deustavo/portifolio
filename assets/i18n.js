@@ -22,7 +22,6 @@ const DICT = {
 
     "stat.since":     "Desde 2019",
     "stat.sinceLbl":  "de prática",
-    "stat.products":  "20+",
     "stat.productsLbl":"produtos entregues",
     "stat.awards":    "2×",
     "stat.awardsLbl": "vitórias em hackathon",
@@ -30,7 +29,7 @@ const DICT = {
     "stat.eduLbl":    "pós em Eng. de Software",
     "stat.city":      "SP",
     "stat.cityLbl":   "São Paulo, BR",
-    "stat.inline":    "Desde 2019 · 20+ produtos<br>2× hackathon · Pós USP/Esalq",
+    "stat.inline":    "Desde 2019 · {n} produtos<br>2× hackathon · Pós USP/Esalq",
 
     "filter.label":   "Filtrar",
     "filter.all":     "Tudo",
@@ -47,15 +46,10 @@ const DICT = {
     "cat.dismiss":    "Dispensar a Chinela",
 
     "work.title":     "Projetos selecionados",
-    "work.count":     "15 cases",
     "work.games":     "Jogos",
-    "work.gamesN":    "02 cases",
     "work.systems":   "Sistemas",
-    "work.systemsN":  "06 cases",
     "work.sites":     "Sites",
-    "work.sitesN":    "03 cases",
     "work.protos":    "Protótipos",
-    "work.protosN":   "04 cases",
 
     "contact.title":  "Contato",
     "contact.kicker": "Contato · resposta em 24h",
@@ -101,6 +95,8 @@ const DICT = {
     "p15.metric": "Área verde por habitante em mapa de calor, campeão do Space Apps em Marília",
     "p16.sub": "Relações governamentais · Painel web · 2021", "p16.tag": "Sistema interno",
     "p16.metric": "Painel de operação do maior monitoramento de relações governamentais do país",
+    "p20.sub": "Projeto pessoal · Site de uma página · 2024", "p20.tag": "Projeto pessoal",
+    "p20.metric": "Duas opções, um polvo que decide, e temas que entram sozinhos pela data",
     "p17.sub": "Hackathon · Saúde · 2022", "p17.tag": "Hackathon",
     "p17.metric": "Localizar o paciente dentro do hospital por pulseira RFID, campeão do hackathon da Unimar",
     "p18.sub": "Bar · App iOS/Android · 2021", "p18.tag": "Protótipo",
@@ -467,7 +463,32 @@ const DICT = {
     "demon.g3": "Fim de partida, com corações tirados, corações perdidos, vidas restantes e tempo de partida lado a lado",
     "demon.g4": "Defesa da base na onda 3, com a vida da base no topo, os inimigos nomeados e o minimapa no canto",
     "demon.g5": "Árvore de talentos, com os tiers abrindo por pontos investidos e o aviso de que os efeitos só valem na defesa da base",
-    "demon.g6": "Relicário com as três famílias de item: normal, quebra-jogo a partir da onda 12 e maldito a partir da onda 10"
+    "demon.g6": "Relicário com as três famílias de item: normal, quebra-jogo a partir da onda 12 e maldito a partir da onda 10",
+
+    /* ---- case Pergunte ao Polvo ---- */
+    "polvo.title": "Pergunte ao Polvo",
+    "polvo.kicker": "Case 16 · 2024",
+    "polvo.sub":    "Um site que eu usava saiu do ar e ninguém arquivou. Refiz de memória, no meu domínio, e coloquei temas que entram sozinhos quando chega a data.",
+    "polvo.f1": "Cliente",  "polvo.v1": "Projeto pessoal",
+    "polvo.f2": "Papel",    "polvo.v2": "Design, front-end e publicação",
+    "polvo.f3": "Escopo",   "polvo.v3": "Página única em HTML, CSS e JS puro, com temas por data",
+    "polvo.f4": "Ano",
+    "polvo.h1": "O contexto",
+    "polvo.c1": "<p>Tinha um site que eu abria sempre que empacava entre duas coisas. Você escrevia as duas opções, ele sorteava uma, e a discussão acabava ali. Não era meu, era de outra pessoa. Um dia parou de responder. Domínio vencido, servidor desligado, não sei dizer. Sumiu e ninguém tinha guardado cópia.</p><p>O que ele fazia cabe em três linhas de JavaScript, então não era o sorteio que fazia falta. O que fazia falta era ter um terceiro para culpar pela escolha, e isso o site fazia bem porque era um bicho decidindo, não um botão. Achei que valia existir de novo.</p><p>A pergunta do projeto era como reconstruir de memória uma coisa que eu não podia mais consultar, e o que fazer com o espaço que a memória deixa em branco.</p>",
+    "polvo.h2": "O processo",
+    "polvo.c2": "<p>A primeira decisão foi não usar framework nenhum. Um index.html, uma folha de estilo e um arquivo de JavaScript, sem etapa de build e sem dependência. Fiz assim porque o site já tinha morrido uma vez, e o que mata site pequeno é manutenção que ele não recebe. Sem build, ele continua abrindo daqui a dez anos com o arquivo que está lá.</p><p>A tela é uma só, e resolvi manter assim. Dois campos, um botão e nada em volta: sem menu, sem página de sobre, sem histórico de perguntas. Quem chega quer ver um nome aparecer. Qualquer coisa a mais fica entre a pessoa e a resposta.</p><p>Depois do resultado aparecem dois caminhos, perguntar de novo com a mesma dupla e fazer outra pergunta do zero. Coloquei o primeiro porque é o que a pessoa faz de qualquer jeito, ela não aceita a primeira resposta e vai querer a melhor de três. Fingir que o sorteio é sagrado só faria ela recarregar a página na mão.</p><p>A parte que é minha, e não do original, são os eventos. Site de sortear duas palavras não tem motivo nenhum para alguém voltar, ele é sempre igual. Então o polvo troca de roupa conforme a data: chapéu de bruxa sobre lua cheia e casarão no halloween, máscara veneziana com confete caindo no carnaval, neve no natal. No natal ele nem é mais polvo, vira o Grinch, e o texto da tela muda junto para acompanhar. No primeiro de abril o polvo some por completo e no lugar dele aparece o Nicolas Cage, sem nenhuma explicação na tela, que é a graça.</p><p>A troca é decidida no navegador, pela data da máquina de quem abriu. Não tem servidor no meio. É a escolha coerente com um site estático, e o preço é que quem mexe no relógio vê o tema fora de época. Achei um preço barato para não precisar cuidar de servidor por causa de quatro datas no ano.</p>",
+    "polvo.h3": "O resultado",
+    "polvo.c3": "<p>Está no ar, em domínio próprio, desde 2024.</p><ul><li>Página única em HTML, CSS e JavaScript puro, sem build e sem dependência</li><li>Sorteio entre duas opções, com repetir a mesma pergunta ou começar outra</li><li>Quatro temas que entram sozinhos pela data: halloween, natal, carnaval e primeiro de abril</li><li>No natal o polvo vira o Grinch e o texto da tela muda junto</li></ul><p>Não tenho número de acesso, nunca liguei medição nenhuma e não vou ligar. Uso quando preciso decidir alguma coisa, e sei de gente que também usa. O site original continua fora do ar.</p>",
+    "polvo.l1": "Abrir o site ↗",
+    "polvo.heroAlt": "Telas do Pergunte ao Polvo repetidas em um mosaico inclinado",
+    "polvo.ga": "A pergunta e a resposta",
+    "polvo.gb": "Os temas que entram pela data",
+    "polvo.g1": "Resultado de uma pergunta entre banana e maçã, com a opção sorteada em destaque e os dois caminhos abaixo, perguntar de novo ou fazer outra pergunta",
+    "polvo.g2": "Variação do bicho, com uma foto de polvo de verdade no lugar do desenho",
+    "polvo.g3": "Tema de halloween, com o polvo de chapéu de bruxa sobre lua cheia, casarão, morcegos e coruja",
+    "polvo.g4": "Tema de natal, com neve caindo e o Grinch no lugar do polvo, e a tela trocada para Pergunte ao Grinch",
+    "polvo.g5": "Tema de carnaval, com máscara veneziana no polvo e confete caindo pela tela",
+    "polvo.g6": "Primeiro de abril, com o polvo trocado pelo Nicolas Cage e nenhuma explicação na tela"
   
   },
   en: {
@@ -488,7 +509,6 @@ const DICT = {
 
     "stat.since":     "Since 2019",
     "stat.sinceLbl":  "in practice",
-    "stat.products":  "20+",
     "stat.productsLbl":"products shipped",
     "stat.awards":    "2×",
     "stat.awardsLbl": "hackathon wins",
@@ -496,7 +516,7 @@ const DICT = {
     "stat.eduLbl":    "postgrad, Software Eng.",
     "stat.city":      "SP",
     "stat.cityLbl":   "São Paulo, Brazil",
-    "stat.inline":    "Since 2019 · 20+ products<br>2× hackathon · USP/Esalq postgrad",
+    "stat.inline":    "Since 2019 · {n} products<br>2× hackathon · USP/Esalq postgrad",
 
     "filter.label":   "Filter",
     "filter.all":     "All",
@@ -513,15 +533,10 @@ const DICT = {
     "cat.dismiss":    "Dismiss Chinela",
 
     "work.title":     "Selected work",
-    "work.count":     "15 cases",
     "work.games":     "Games",
-    "work.gamesN":    "02 cases",
     "work.systems":   "Systems",
-    "work.systemsN":  "06 cases",
     "work.sites":     "Websites",
-    "work.sitesN":    "03 cases",
     "work.protos":    "Prototypes",
-    "work.protosN":   "04 cases",
 
     "contact.title":  "Contact",
     "contact.kicker": "Contact · reply within 24h",
@@ -578,6 +593,8 @@ const DICT = {
     "p15.metric": "Green area per inhabitant on a heat map, winner of Space Apps in Marília",
     "p16.sub": "Government relations · Web panel · 2021", "p16.tag": "Internal system",
     "p16.metric": "Operations panel for the country's largest government-relations monitoring firm",
+    "p20.sub": "Personal project · One-page site · 2024", "p20.tag": "Personal project",
+    "p20.metric": "Two options, an octopus that decides, and themes that come in by date",
     "p17.sub": "Hackathon · Health · 2022", "p17.tag": "Hackathon",
     "p17.metric": "Locating a patient inside the hospital by RFID wristband, winner of the Unimar hackathon",
     "p18.sub": "Bar · iOS/Android app · 2021", "p18.tag": "Prototype",
@@ -944,7 +961,32 @@ const DICT = {
     "demon.g3": "End of match, with hearts taken, hearts lost, lives left and match time side by side",
     "demon.g4": "Base defence on wave 3, base health up top, enemies labelled by name and the minimap in the corner",
     "demon.g5": "Talent tree, tiers unlocking by points invested and the warning that the effects only apply in base defence",
-    "demon.g6": "Reliquary with the three item families: normal, game breaker from wave 12 and cursed from wave 10"
+    "demon.g6": "Reliquary with the three item families: normal, game breaker from wave 12 and cursed from wave 10",
+
+    /* ---- case Pergunte ao Polvo ---- */
+    "polvo.title": "Pergunte ao Polvo",
+    "polvo.kicker": "Case 16 · 2024",
+    "polvo.sub":    "A site I used went off the air and nobody had archived it. I rebuilt it from memory, on my own domain, and added themes that come in by themselves when the date arrives.",
+    "polvo.f1": "Client",  "polvo.v1": "Personal project",
+    "polvo.f2": "Role",    "polvo.v2": "Design, front end and publishing",
+    "polvo.f3": "Scope",   "polvo.v3": "Single page in plain HTML, CSS and JS, with themes by date",
+    "polvo.f4": "Year",
+    "polvo.h1": "The context",
+    "polvo.c1": "<p>There was a site I opened whenever I got stuck between two things. You typed in the two options, it drew one, and the argument ended right there. It was not mine, it belonged to someone else. One day it stopped answering. Expired domain, server switched off, I cannot say. It vanished and nobody had kept a copy.</p><p>What it did fits in three lines of JavaScript, so it was not the draw that was missing. What was missing was having a third party to blame for the choice, and the site did that well because it was a creature deciding, not a button. I thought it was worth existing again.</p><p>The question in the project was how to rebuild from memory something I could no longer look up, and what to do with the gaps memory leaves blank.</p>",
+    "polvo.h2": "The process",
+    "polvo.c2": "<p>The first decision was to use no framework at all. One index.html, one stylesheet and one JavaScript file, no build step and no dependency. I did it that way because the site had already died once, and what kills a small site is maintenance it never gets. With no build, it still opens ten years from now with the file that is sitting there.</p><p>There is a single screen, and I chose to keep it that way. Two fields, one button and nothing around them: no menu, no about page, no history of questions. Whoever arrives wants to watch a name show up. Anything more sits between the person and the answer.</p><p>After the result two paths appear, ask again with the same pair and ask a different question from scratch. I put the first one there because it is what people do anyway, they do not accept the first answer and will want best of three. Pretending the draw is sacred would only make them reload the page by hand.</p><p>The part that is mine, and not the original\'s, are the events. A site that draws between two words gives nobody a reason to come back, it is always the same. So the octopus changes clothes according to the date: a witch hat over a full moon and a haunted house at halloween, a Venetian mask with confetti falling at carnival, snow at Christmas. At Christmas it is not even an octopus any more, it becomes the Grinch, and the text on the screen changes along with it. On April first the octopus disappears completely and Nicolas Cage shows up in its place, with no explanation on the screen, which is the whole joke.</p><p>The switch is decided in the browser, from the date on the machine that opened it. There is no server in the middle. That is the choice consistent with a static site, and the price is that anyone who moves their clock sees a theme out of season. That seemed a cheap price for not having to look after a server because of four dates a year.</p>",
+    "polvo.h3": "The outcome",
+    "polvo.c3": "<p>It is live, on its own domain, since 2024.</p><ul><li>Single page in plain HTML, CSS and JavaScript, no build and no dependency</li><li>A draw between two options, with repeat the same question or start another</li><li>Four themes that come in by themselves from the date: halloween, Christmas, carnival and April first</li><li>At Christmas the octopus becomes the Grinch and the screen text changes with it</li></ul><p>I have no traffic numbers, I never turned on any measurement and I am not going to. I use it when I need to decide something, and I know people who use it too. The original site is still off the air.</p>",
+    "polvo.l1": "Open the site ↗",
+    "polvo.heroAlt": "Pergunte ao Polvo screens repeated in a tilted mosaic",
+    "polvo.ga": "The question and the answer",
+    "polvo.gb": "The themes that come in by date",
+    "polvo.g1": "Result of a question between banana and apple, the drawn option highlighted and the two paths below, ask again or ask a different question",
+    "polvo.g2": "A variation of the creature, with a photo of a real octopus in place of the drawing",
+    "polvo.g3": "Halloween theme, the octopus in a witch hat over a full moon, haunted house, bats and an owl",
+    "polvo.g4": "Christmas theme, snow falling and the Grinch in place of the octopus, the screen switched to Pergunte ao Grinch",
+    "polvo.g5": "Carnival theme, a Venetian mask on the octopus and confetti falling across the screen",
+    "polvo.g6": "April first, the octopus swapped for Nicolas Cage and no explanation on the screen"
   
   }
 };
