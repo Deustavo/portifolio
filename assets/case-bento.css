@@ -3,6 +3,7 @@
   --bg:#faf7f0; --fg:#17150f; --dim:#6e6a5e; --ink:#17150f;
   --c1:#ff5c39; --c2:#2f8f6b; --c3:#3b5bdb; --c4:#e8a33d; --c5:#9b5de5;
   --display:"Bricolage Grotesque",system-ui,sans-serif; --sans:"Inter",system-ui,sans-serif;
+  --maxw:1600px; --gut:max(var(--pad), calc((100% - var(--maxw))/2));
   --pad:clamp(1rem,3vw,2rem); --r:18px; --bw:2px; --ease:cubic-bezier(.34,1.56,.64,1);
 }
 *{box-sizing:border-box}
@@ -13,17 +14,17 @@ img{max-width:100%;display:block}
 .tag{display:inline-block;max-width:max-content;font-size:.68rem;font-weight:500;
   border:var(--bw) solid currentColor;padding:.2rem .6rem;border-radius:100px}
 
-.bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem var(--pad);
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem 1rem;padding:1rem var(--gut);
   position:sticky;top:0;z-index:30;background:rgba(250,247,240,.85);backdrop-filter:blur(10px)}
 .bar strong{font-family:var(--display);font-weight:800;font-size:1.05rem}
-.bar nav{display:flex;align-items:center;gap:.4rem}
+.bar nav{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;justify-content:flex-end}
 .bar nav a{font-size:.8rem;padding:.35rem .8rem;border-radius:100px;border:var(--bw) solid transparent;transition:border-color .2s}
 .bar nav a:hover{border-color:var(--ink)}
 .langbtn{font-size:.8rem;font-weight:500;background:none;border:var(--bw) solid var(--ink);color:inherit;
   cursor:pointer;padding:.35rem .8rem;border-radius:100px;transition:background .2s,color .2s}
 .langbtn:hover{background:var(--c1);border-color:var(--c1);color:var(--bg)}
 
-.wrap{display:grid;gap:var(--pad);padding:0 var(--pad) var(--pad)}
+.wrap{display:grid;gap:var(--pad);padding:0 var(--gut) var(--pad)}
 .box{border:var(--bw) solid var(--ink);border-radius:var(--r);padding:clamp(1.3rem,3vw,2.4rem);
   position:relative;overflow:hidden}
 
@@ -72,7 +73,7 @@ img{max-width:100%;display:block}
 .next strong{font-family:var(--display);font-weight:800;letter-spacing:-.03em;
   font-size:clamp(1.6rem,6vw,4rem);line-height:1}
 .foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-  padding:1rem var(--pad) 2rem;font-size:.78rem;color:var(--dim)}
+  padding:1rem var(--gut) 2rem;font-size:.78rem;color:var(--dim)}
 .foot a:hover{color:var(--c1)}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
