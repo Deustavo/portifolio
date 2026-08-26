@@ -32,6 +32,20 @@ const DICT = {
     "stat.cityLbl":   "São Paulo, BR",
     "stat.inline":    "Desde 2019 · 20+ produtos<br>2× hackathon · Pós USP/Esalq",
 
+    "filter.label":   "Filtrar",
+    "filter.all":     "Tudo",
+    "work.caseOne":   "case",
+    "work.caseMany":  "cases",
+    "lb.title":       "Galeria de telas",
+    "lb.open":        "Ampliar",
+    "lb.close":       "Fechar",
+    "lb.prev":        "Tela anterior",
+    "lb.next":        "Próxima tela",
+    "lb.hint":        "<kbd>←</kbd> <kbd>→</kbd> para navegar · <kbd>Esc</kbd> para fechar",
+    "lb.hintTouch":   "Deslize para navegar · toque fora para fechar",
+    "cat.meow":       "Ouvir a Chinela miar",
+    "cat.dismiss":    "Dispensar a Chinela",
+
     "work.title":     "Projetos selecionados",
     "work.count":     "10 cases",
     "work.games":     "Jogos",
@@ -60,7 +74,6 @@ const DICT = {
     "case.cta":       "Trabalhar juntos →",
 
     "foot.rights":    "© 2026 Gustavo Andrade",
-    "foot.b":         "Outline 2px · preenche no hover",
 
     /* projetos — 01 e 06 reais, 02–05 ainda placeholder */
     "p1.sub": "Segurança · App iOS/Android · 2021", "p1.tag": "Segurança",
@@ -342,6 +355,20 @@ const DICT = {
     "stat.cityLbl":   "São Paulo, Brazil",
     "stat.inline":    "Since 2019 · 20+ products<br>2× hackathon · USP/Esalq postgrad",
 
+    "filter.label":   "Filter",
+    "filter.all":     "All",
+    "work.caseOne":   "case",
+    "work.caseMany":  "cases",
+    "lb.title":       "Screen gallery",
+    "lb.open":        "Zoom in",
+    "lb.close":       "Close",
+    "lb.prev":        "Previous screen",
+    "lb.next":        "Next screen",
+    "lb.hint":        "<kbd>←</kbd> <kbd>→</kbd> to browse · <kbd>Esc</kbd> to close",
+    "lb.hintTouch":   "Swipe to browse · tap outside to close",
+    "cat.meow":       "Hear Chinela meow",
+    "cat.dismiss":    "Dismiss Chinela",
+
     "work.title":     "Selected work",
     "work.count":     "10 cases",
     "work.games":     "Games",
@@ -382,7 +409,6 @@ const DICT = {
     "case.cta":       "Let's work together →",
 
     "foot.rights":    "© 2026 Gustavo Andrade",
-    "foot.b":         "2px outline · fills on hover",
 
     "p1.sub": "Security · iOS/Android app · 2021", "p1.tag": "Security",
     "p1.metric": "14-screen prototype for Life Tecnologia",
@@ -639,6 +665,9 @@ const DICT = {
 
 const STORE = "ga-lang";
 
+/* quem quiser reagir à troca de idioma se inscreve aqui */
+const subs = [];
+
 function detect() {
   try {
     const saved = localStorage.getItem(STORE);
@@ -673,10 +702,22 @@ function apply(lang) {
     btn.textContent = lang === "pt" ? "EN" : "PT";
     btn.setAttribute("aria-label", lang === "pt" ? "Switch to English" : "Mudar para português");
   });
+
+  subs.forEach(fn => { try { fn(lang); } catch (e) { /* um ouvinte não derruba os outros */ } });
 }
 
 let current = detect();
 apply(current);
+
+/* API mínima para scripts que criam texto depois do carregamento */
+window.GAI18N = {
+  t(key) {
+    const d = DICT[current] || DICT.en;
+    return d[key] != null ? d[key] : "";
+  },
+  get lang() { return current; },
+  on(fn) { if (typeof fn === "function") subs.push(fn); }
+};
 
 document.addEventListener("click", e => {
   const btn = e.target.closest("[data-lang-toggle]");

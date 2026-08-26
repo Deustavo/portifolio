@@ -3,7 +3,7 @@
   var root = document.documentElement;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  var SEL = '.bar, .bento > *, .head, .wrap > *, .foot';
+  var SEL = '.bar, .bento > *, .head, .filters, .wrap > *, .foot';
 
   var IN_STEP = 55;              // atraso entre um bloco e o seguinte, na entrada
   var IN_FROM = 'translateY(28px) scale(.985)';
