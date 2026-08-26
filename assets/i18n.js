@@ -9,7 +9,6 @@ const DICT = {
     "doc.desc":       "Gustavo Andrade, UI & UX Designer em São Paulo. Interfaces claras, produtos com intenção.",
     "nav.work":       "Projetos",
     "nav.contact":    "Contato",
-    "nav.back":       "↩ Direções",
 
     "hero.status":    "Disponível para projetos · São Paulo, BR",
     "hero.statusShort":"● Disponível · São Paulo, BR",
@@ -51,7 +50,6 @@ const DICT = {
     "case.cta":       "Trabalhar juntos →",
 
     "foot.rights":    "© 2026 Gustavo Andrade",
-    "foot.a":         "Bloco amarelo · barras pretas",
     "foot.b":         "Outline 2px · preenche no hover",
 
     /* projetos — 01 real, 02–05 ainda placeholder */
@@ -103,7 +101,6 @@ const DICT = {
     "doc.desc":       "Gustavo Andrade, UI & UX Designer based in São Paulo. Clear interfaces, products with intent.",
     "nav.work":       "Work",
     "nav.contact":    "Contact",
-    "nav.back":       "↩ Directions",
 
     "hero.status":    "Available for projects · São Paulo, BR",
     "hero.statusShort":"● Available · São Paulo, BR",
@@ -157,7 +154,6 @@ const DICT = {
     "case.cta":       "Let's work together →",
 
     "foot.rights":    "© 2026 Gustavo Andrade",
-    "foot.a":         "Yellow slab · black bars",
     "foot.b":         "2px outline · fills on hover",
 
     "p1.sub": "Security · iOS/Android app · 2021", "p1.tag": "Security",
