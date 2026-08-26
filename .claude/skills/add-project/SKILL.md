@@ -47,8 +47,12 @@ Colete do usuário (pergunte o que faltar, não invente):
    mosaico inclinado, igual ao `assets/img/life-guard/hero.png`: telas em
    colunas contínuas sobre fundo creme `#f9e8d8`, cantos arredondados em 20px,
    sombra preta a 85 de alfa com desfoque gaussiano de 26, canvas grande girado
-   `-12°` e recorte central de 1920×1080. Encha as colunas sem intervalo
-   vertical, senão sobra um buraco creme no meio da capa.
+   `-12°` e recorte central de 1920×1080. Tela de celular é estreita, então
+   encha as colunas sem intervalo vertical, senão sobra um buraco creme no meio
+   da capa. Tela de sistema, larga, é o contrário: sem respiro as telas colam
+   uma na outra e a capa vira um borrão. Aí use coluna de cerca de 900px de
+   largura e 90px de intervalo nos dois eixos, com as colunas deslocadas
+   verticalmente entre si para o creme aparecer entre as telas.
 5. Se o usuário colou as imagens no chat em vez de dar arquivos, elas **não**
    chegam ao disco. Gere placeholders com os nomes finais (PIL, fundo escuro,
    borda laranja, texto `PLACEHOLDER` + rótulo + dimensão) e avise que ele

@@ -33,7 +33,15 @@ const DICT = {
     "stat.inline":    "Desde 2019 · 20+ produtos<br>2× hackathon · Pós USP/Esalq",
 
     "work.title":     "Projetos selecionados",
-    "work.count":     "09 cases",
+    "work.count":     "10 cases",
+    "work.games":     "Jogos",
+    "work.gamesN":    "01 case",
+    "work.systems":   "Sistemas",
+    "work.systemsN":  "05 cases",
+    "work.sites":     "Sites",
+    "work.sitesN":    "03 cases",
+    "work.protos":    "Protótipos",
+    "work.protosN":   "01 case",
 
     "contact.kicker": "Contato · resposta em 24h",
     "contact.cta":    "Vamos<br>conversar",
@@ -73,6 +81,8 @@ const DICT = {
     "p12.metric": "Meu primeiro jogo, feito sozinho do sprite ao c\u00f3digo",
     "p13.sub": "Sistema de gestão · Nuxt 3 · 2026", "p13.tag": "Produto",
     "p13.metric": "Alunos, agenda e financeiro de um estúdio de pilates em uma tela",
+    "p14.sub": "Streaming · App web · 2026", "p14.tag": "Projeto pessoal",
+    "p14.metric": "YouTube, Twitch e Kick somados em tempo real, com relatório no fim",
     "p.more": "Ver case",
 
     /* ---- case Life Guard ---- */
@@ -278,7 +288,31 @@ const DICT = {
     "mcb.gb": "A semana e o cadastro",
     "mcb.g1": "Painel, com os três números do estúdio, os próximos vencimentos, os aniversariantes do mês e as aulas de hoje",
     "mcb.g2": "Agenda semanal em grade, com o horário na vertical, o dia na horizontal e o tipo de cada aula na etiqueta",
-    "mcb.g3": "Lista de alunos, com busca, filtro por situação do aluno e por situação do pagamento, e o status de cada linha"
+    "mcb.g3": "Lista de alunos, com busca, filtro por situação do aluno e por situação do pagamento, e o status de cada linha",
+    /* ---- case Metrics ---- */
+    "vsm.title": "Metrics",
+    "vsm.kicker": "Case 10 · 2026",
+    "vsm.sub":    "Projeto pessoal para acompanhar streams do YouTube, da Twitch e da Kick ao mesmo tempo, com coleta em tempo real e relatório de audiência no fim.",
+    "vsm.f1": "Cliente",  "vsm.v1": "Projeto pessoal",
+    "vsm.f2": "Papel",    "vsm.v2": "Produto, design e desenvolvimento",
+    "vsm.f3": "Escopo",   "vsm.v3": "App web, três plataformas",
+    "vsm.f4": "Ano",
+    "vsm.h1": "O contexto",
+    "vsm.c1": "<p>Um campeonato grande não acontece em um canal só. A mesma partida sai ao mesmo tempo no YouTube, na Twitch e na Kick, e ainda se espalha por vários streamers que assistem junto e transmitem por conta própria. Para saber o tamanho real da audiência não adianta olhar um número, tem que somar dezenas deles.</p><p>Cada plataforma mostra o contador dela e só o dela, em uma página diferente, com um formato diferente e sem histórico. Enquanto a transmissão está no ar dá para abrir várias abas e anotar na mão. Depois que acaba, o número foi embora.</p><p>O Metrics nasceu dessa lacuna. É projeto pessoal, e eu fiz o produto, o desenho e o código.</p>",
+    "vsm.h2": "O processo",
+    "vsm.c2": "<p>A primeira decisão foi qual é a unidade de trabalho. O objeto do sistema não é a stream, é o grupo: uma competição, uma etapa, um dia de transmissão. Dentro do grupo entram quantas streams forem necessárias, de plataformas misturadas. Quem acompanha pensa em evento e não em canal, então a tela de entrada lista grupos, e cada cartão mostra quantas streams tem de cada plataforma, com o ícone e a contagem, mais quantos relatórios aquele grupo já rendeu.</p><p>Cadastrar uma stream pede três coisas e nada além: nome, plataforma e usuário do canal. O intervalo de coleta é do grupo inteiro e fica no cabeçalho, porque é uma decisão que se toma uma vez por evento e não uma vez por canal. Quanto menor o formulário, mais provável é que o grupo esteja completo quando a transmissão começar, que é o único momento em que dá para coletar.</p><p>Monitorar virou um estado com começo e fim, não um botão que fica ligado para sempre. Iniciar monitoramento abre a coleta, e o período coletado vira um relatório datado que fica guardado na lista do grupo. Assim o número sobrevive ao evento, que era o problema original.</p><p>O relatório foi desenhado de cima para baixo, do mais grosso ao mais fino. Primeiro quatro números que respondem a pergunta em cinco segundos: pontos coletados, média de espectadores, pico e a plataforma que foi melhor. Depois o gráfico de espectadores no tempo, com uma linha por canal e uma linha branca de total por cima, porque a soma é o que quase sempre se quer ler primeiro. Depois a distribuição em rosca, que mostra quem ficou com qual fatia da audiência. E no fim os insights: duração, consistência da audiência, horário de pico e horário de vale, cada um com o número e o canal responsável.</p><p>Cor aqui não é enfeite. Vermelho é YouTube, roxo é Twitch, verde é Kick, do ícone no cartão até a linha do gráfico e a fatia da rosca. Numa legenda com doze canais de plataformas misturadas, a origem precisa ser legível sem ler. A interface é escura pelo motivo prático: ela costuma ficar aberta numa segunda tela durante horas.</p>",
+    "vsm.h3": "O resultado",
+    "vsm.c3": "<p>O Metrics está no ar.</p><ul><li>Grupos que juntam streams de YouTube, Twitch e Kick no mesmo lugar</li><li>Coleta em intervalo fixo enquanto o monitoramento está ativo</li><li>Relatório datado por período monitorado, com exportação</li><li>Espectadores no tempo com linha de total, distribuição em rosca e insights de pico e de vale</li></ul><p>É projeto pessoal e continua em evolução. Os números das imagens vêm de monitoramentos reais que rodei durante transmissões de campeonato, e os nomes dos canais são públicos.</p>",
+    "vsm.l1": "Abrir o Metrics ↗",
+    "vsm.heroAlt": "Telas do Metrics repetidas em um mosaico inclinado",
+    "vsm.ga": "Do evento até a stream",
+    "vsm.gb": "O relatório",
+    "vsm.g1": "Página de entrada, com a proposta e as três plataformas que o sistema monitora",
+    "vsm.g2": "Lista de grupos de monitoramento, com a contagem de streams por plataforma em cada cartão",
+    "vsm.g3": "Dentro do grupo: as streams cadastradas, o formulário de nova stream e a lista de relatórios",
+    "vsm.g4": "Topo do relatório, com pontos coletados, média, pico, melhor plataforma e o gráfico de espectadores no tempo",
+    "vsm.g5": "Distribuição de espectadores e de picos em rosca, uma fatia por canal",
+    "vsm.g6": "Gráfico completo do período e os insights de duração, consistência, horário de pico e horário de vale"
   },
   en: {
     "doc.title":      "Gustavo Andrade — Product Design & Software Engineering",
@@ -309,7 +343,15 @@ const DICT = {
     "stat.inline":    "Since 2019 · 20+ products<br>2× hackathon · USP/Esalq postgrad",
 
     "work.title":     "Selected work",
-    "work.count":     "09 cases",
+    "work.count":     "10 cases",
+    "work.games":     "Games",
+    "work.gamesN":    "01 case",
+    "work.systems":   "Systems",
+    "work.systemsN":  "05 cases",
+    "work.sites":     "Websites",
+    "work.sitesN":    "03 cases",
+    "work.protos":    "Prototypes",
+    "work.protosN":   "01 case",
 
     "contact.kicker": "Contact · reply within 24h",
     "contact.cta":    "Let's<br>talk",
@@ -360,6 +402,8 @@ const DICT = {
     "p12.metric": "My first game, built alone from sprite to code",
     "p13.sub": "Management system · Nuxt 3 · 2026", "p13.tag": "Product",
     "p13.metric": "Students, schedule and books for a pilates studio on one screen",
+    "p14.sub": "Streaming · Web app · 2026", "p14.tag": "Personal project",
+    "p14.metric": "YouTube, Twitch and Kick added up live, with a report at the end",
     "p.more": "View case",
 
     /* ---- Life Guard case ---- */
@@ -565,7 +609,31 @@ const DICT = {
     "mcb.gb": "The week and the records",
     "mcb.g1": "Dashboard, with the three studio numbers, the upcoming payments, this month birthdays and today classes",
     "mcb.g2": "Weekly schedule as a grid, hours down the side, days across the top and each class type on its tag",
-    "mcb.g3": "Student list, with search, filters for student status and payment status, and the status on every row"
+    "mcb.g3": "Student list, with search, filters for student status and payment status, and the status on every row",
+    /* ---- case Metrics ---- */
+    "vsm.title": "Metrics",
+    "vsm.kicker": "Case 10 · 2026",
+    "vsm.sub":    "A personal project for following YouTube, Twitch and Kick streams at the same time, collecting live and leaving an audience report behind.",
+    "vsm.f1": "Client",  "vsm.v1": "Personal project",
+    "vsm.f2": "Role",    "vsm.v2": "Product, design and development",
+    "vsm.f3": "Scope",   "vsm.v3": "Web app, three platforms",
+    "vsm.f4": "Year",
+    "vsm.h1": "The context",
+    "vsm.c1": "<p>A big tournament does not happen on one channel. The same match goes out at once on YouTube, on Twitch and on Kick, and it spreads further across the streamers who watch along and broadcast on their own. To know the real size of the audience you cannot look at one number, you have to add up dozens of them.</p><p>Each platform shows its own counter and only its own, on a different page, in a different shape, with no history. While the broadcast is live you can open a pile of tabs and write things down by hand. Once it ends, the number is gone.</p><p>Metrics came out of that gap. It is a personal project, and I did the product, the design and the code.</p>",
+    "vsm.h2": "The process",
+    "vsm.c2": "<p>The first decision was what the unit of work is. The object of the system is not the stream, it is the group: a competition, a stage, a broadcast day. As many streams as needed go inside a group, from mixed platforms. Whoever follows an event thinks in events, not in channels, so the entry screen lists groups, and each card shows how many streams it holds per platform, with the icon and the count, plus how many reports that group has produced.</p><p>Adding a stream asks for three things and nothing else: name, platform and channel handle. The collection interval belongs to the whole group and sits in the header, because it is a decision you make once per event and not once per channel. The shorter the form, the likelier the group is complete when the broadcast starts, which is the only moment collection is possible.</p><p>Monitoring became a state with a start and an end, not a switch left on forever. Start monitoring opens collection, and the collected period turns into a dated report kept in the group list. That way the number outlives the event, which was the original problem.</p><p>The report was designed top down, from the coarsest to the finest. First four numbers that answer the question in five seconds: data points collected, average viewers, peak, and the platform that did best. Then viewers over time, one line per channel and a white total line on top, because the sum is almost always what you want to read first. Then the donut distribution, which shows who took which share of the audience. And at the end the insights: duration, audience consistency, peak time and low time, each with its number and the channel behind it.</p><p>Colour is not decoration here. Red is YouTube, purple is Twitch, green is Kick, from the icon on the card to the line on the chart and the slice in the donut. In a legend holding twelve channels from mixed platforms, the origin has to be readable without reading. The interface is dark for the practical reason: it tends to sit open on a second screen for hours.</p>",
+    "vsm.h3": "The outcome",
+    "vsm.c3": "<p>Metrics is live.</p><ul><li>Groups that hold YouTube, Twitch and Kick streams in one place</li><li>Collection on a fixed interval while monitoring is active</li><li>A dated report per monitored period, with export</li><li>Viewers over time with a total line, donut distribution, and peak and low insights</li></ul><p>It is a personal project and it keeps moving. The numbers in the images come from real monitoring runs during tournament broadcasts, and the channel names are public.</p>",
+    "vsm.l1": "Open Metrics ↗",
+    "vsm.heroAlt": "Metrics screens repeated in a tilted mosaic",
+    "vsm.ga": "From the event to the stream",
+    "vsm.gb": "The report",
+    "vsm.g1": "Landing page, with the pitch and the three platforms the system watches",
+    "vsm.g2": "List of monitoring groups, with the stream count per platform on each card",
+    "vsm.g3": "Inside a group: the registered streams, the new stream form and the report list",
+    "vsm.g4": "Top of the report, with data points, average, peak, best platform and viewers over time",
+    "vsm.g5": "Viewer and peak distribution as donuts, one slice per channel",
+    "vsm.g6": "The full chart for the period and the duration, consistency, peak time and low time insights"
   }
 };
 
