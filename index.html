@@ -62,7 +62,7 @@ a.box > *{position:relative;z-index:1}
  -webkit-mask-image:radial-gradient(340px 340px at var(--mx,50%) var(--my,115%),#000 0%,rgba(0,0,0,.72) 48%,transparent 82%);
  mask-image:radial-gradient(340px 340px at var(--mx,50%) var(--my,115%),#000 0%,rgba(0,0,0,.72) 48%,transparent 82%);
  transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform .5s cubic-bezier(.22,.61,.36,1)}
-.b-hero > *:not(.hero-dots){position:relative;z-index:1}
+.b-hero > *:not(.hero-dots),.b-contact > *:not(.hero-dots){position:relative;z-index:1}
 .b-stat{display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
 .b-stat b{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4.5vw,3rem);line-height:1;letter-spacing:-.03em}
 .b-stat.long b{font-size:clamp(1.3rem,3.1vw,2.1rem)}
@@ -178,7 +178,9 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
 </div>
 <div class="head" id="contato"><h2><a class="anchor" href="#contato" data-i18n="contact.title">Contato</a></h2></div>
 <div class="bento">
-  <div class="box b-contact"><span class="tag" style="color:var(--c2)" data-i18n="contact.kicker">Contato · resposta em 24h</span>
+  <div class="box b-contact">
+    <div class="hero-dots" aria-hidden="true"></div>
+    <span class="tag" style="color:var(--c2)" data-i18n="contact.kicker">Contato · resposta em 24h</span>
     <a class="big" href="https://wa.me/5511977416788" target="_blank" rel="noopener" data-i18n="contact.ctaB">Bora<br><span>construir?</span></a>
     <div class="chips"><a href="mailto:gustavorodriguesandrade00@gmail.com" target="_blank" rel="noopener">gustavorodriguesandrade00@gmail.com</a>
       <a href="https://wa.me/5511977416788" target="_blank" rel="noopener">WhatsApp</a><a href="https://www.linkedin.com/in/gustavoandrade00" target="_blank" rel="noopener">LinkedIn</a></div></div>

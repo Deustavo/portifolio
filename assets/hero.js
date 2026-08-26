@@ -156,11 +156,14 @@
 
   /* ---------- 4. malha de pontos com parallax ---------- */
   function dots() {
-    var hero = document.querySelector('[data-hero]');
-    var mesh = hero && hero.querySelector('.hero-dots');
-    if (!mesh || reduce) return;
+    if (reduce) return;
     if (window.matchMedia('(hover: none)').matches) return;
+    Array.prototype.forEach.call(document.querySelectorAll('.hero-dots'), function (mesh) {
+      bindDots(mesh.parentNode, mesh);
+    });
+  }
 
+  function bindDots(hero, mesh) {
     var raf = null, mx = 50, my = 115, px = 0, py = 0;
     function paint() {
       raf = null;

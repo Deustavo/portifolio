@@ -3,6 +3,7 @@
    2. tilt e brilho seguindo o cursor nos cards
    3. barra de progresso de leitura nos cases
    4. filtro dos projetos na home
+   5. blob maleável que segue o cursor
    Tudo é progressivo: sem JS, a página segue funcionando como antes. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -368,7 +369,101 @@
     onLang(paintCount);
   }
 
-  function ready() { lightbox(); tilt(); progress(); filters(); }
+
+  /* =====================================================================
+     5. BLOB QUE SEGUE O CURSOR
+     Um contorno mole que corre atrás do ponteiro: ele se alonga na direção
+     do movimento, engorda sobre o que é clicável e afina sobre texto.
+     ===================================================================== */
+  function blob() {
+    if (reduce || coarse) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    var ring = document.createElement('div');
+    ring.className = 'blobcur';
+    ring.setAttribute('aria-hidden', 'true');
+    var dot = document.createElement('div');
+    dot.className = 'blobdot';
+    dot.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(ring);
+    document.body.appendChild(dot);
+
+    /* alvo é onde o cursor está; x,y é onde a massa está agora */
+    var tx = -100, ty = -100, x = tx, y = ty;
+    var rot = 0, sx = 1, sy = 1;
+    var awake = false, raf = 0, still = 0;
+
+    var CLICKY = 'a,button,summary,[role="button"],input,select,textarea,label,.chip,.shot img,img.cover';
+    var TEXTY = 'p,li,h1,h2,h3,h4,blockquote,figcaption,td,th,dd,dt,span';
+
+    function frame() {
+      raf = 0;
+      var dx = tx - x, dy = ty - y;
+      /* mola simples: 18% do caminho por quadro dá o atraso macio */
+      x += dx * 0.18;
+      y += dy * 0.18;
+
+      var speed = Math.sqrt(dx * dx + dy * dy);
+      /* quanto mais rápido, mais a massa se estica no eixo do movimento */
+      var pull = Math.min(speed / 150, 0.42);
+      if (speed > 0.6) rot = Math.atan2(dy, dx) * 180 / Math.PI;
+      sx += ((1 + pull) - sx) * 0.2;
+      sy += ((1 - pull * 0.72) - sy) * 0.2;
+
+      ring.style.setProperty('--x', x.toFixed(2) + 'px');
+      ring.style.setProperty('--y', y.toFixed(2) + 'px');
+      ring.style.setProperty('--rot', rot.toFixed(1) + 'deg');
+      ring.style.setProperty('--sx', sx.toFixed(3));
+      ring.style.setProperty('--sy', sy.toFixed(3));
+      dot.style.setProperty('--x', tx.toFixed(2) + 'px');
+      dot.style.setProperty('--y', ty.toFixed(2) + 'px');
+
+      /* parada: quando a massa chega e volta ao redondo, o loop descansa */
+      if (speed < 0.4 && Math.abs(1 - sx) < 0.004 && Math.abs(1 - sy) < 0.004) {
+        if (++still > 4) { still = 0; return; }
+      } else {
+        still = 0;
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    function run() { if (!raf) raf = requestAnimationFrame(frame); }
+
+    document.addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      tx = e.clientX; ty = e.clientY;
+      if (!awake) {
+        awake = true;
+        x = tx; y = ty;
+        ring.classList.add('is-awake');
+        dot.classList.add('is-awake');
+      }
+      var el = e.target;
+      var clicky = el && el.closest && el.closest(CLICKY);
+      ring.classList.toggle('is-near', !!clicky);
+      ring.classList.toggle('is-text', !clicky && !!(el && el.closest && el.closest(TEXTY)));
+      run();
+    }, { passive: true });
+
+    document.addEventListener('pointerdown', function () {
+      ring.classList.add('is-down'); dot.classList.add('is-down');
+    }, { passive: true });
+    document.addEventListener('pointerup', function () {
+      ring.classList.remove('is-down'); dot.classList.remove('is-down');
+    }, { passive: true });
+
+    /* saiu da janela: a massa se recolhe */
+    function sleep() {
+      awake = false;
+      ring.classList.remove('is-awake', 'is-near', 'is-text', 'is-down');
+      dot.classList.remove('is-awake', 'is-down');
+    }
+    document.addEventListener('mouseleave', function (e) {
+      if (!e.relatedTarget && !e.toElement) sleep();
+    });
+    window.addEventListener('blur', sleep);
+  }
+
+  function ready() { lightbox(); tilt(); progress(); filters(); blob(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
   else ready();
 })();

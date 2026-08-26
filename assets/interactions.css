@@ -115,3 +115,36 @@ img.cover{cursor:zoom-in}
   .lb,.lb__img{transition:none}
   .mascote.is-meowing .mascote__cat img{animation:none}
 }
+
+/* ---------- 6. blob que segue o cursor ---------- */
+/* o contorno vem atrás do dedo com atraso e se deforma na direção do movimento;
+   o pontinho fica no lugar exato do cursor, sem atraso, para não confundir a mira */
+.blobcur,.blobdot{position:fixed;left:0;top:0;z-index:200;pointer-events:none;
+  will-change:transform;opacity:0;transition:opacity .35s ease}
+.blobcur.is-awake,.blobdot.is-awake{opacity:1}
+.blobcur{width:var(--d,42px);height:var(--d,42px);margin:calc(var(--d,42px) / -2) 0 0 calc(var(--d,42px) / -2);
+  /* cor própria, e não --line: no escuro o traço dos contornos ficaria invisível */
+  border:var(--bw) solid color-mix(in srgb,var(--fg) 48%,transparent);
+  background:transparent;
+  border-radius:44% 56% 52% 48% / 50% 46% 54% 50%;
+  transform:translate3d(var(--x,-100px),var(--y,-100px),0) rotate(var(--rot,0deg)) scale(var(--sx,1),var(--sy,1));
+  transition:opacity .35s ease,width .4s var(--ease),height .4s var(--ease),
+             margin .4s var(--ease),border-radius .4s var(--ease),
+             background .3s ease,border-color .3s ease;
+  animation:blobMorph 7s ease-in-out infinite}
+.blobdot{width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:100px;background:var(--c1);
+  transform:translate3d(var(--x,-100px),var(--y,-100px),0) scale(var(--ds,1))}
+/* a massa muda de forma sozinha, devagar, mesmo com o cursor parado */
+@keyframes blobMorph{
+  0%,100%{border-radius:44% 56% 52% 48% / 50% 46% 54% 50%}
+  33%{border-radius:58% 42% 45% 55% / 42% 58% 42% 58%}
+  66%{border-radius:48% 52% 60% 40% / 56% 44% 56% 44%}
+}
+/* sobre algo clicável a massa engorda e se pinta com o acento */
+.blobcur.is-near{--d:74px;background:color-mix(in srgb,var(--c1) 16%,transparent);border-color:var(--c1)}
+.blobcur.is-down{--d:30px}
+.blobdot.is-down{--ds:1.8}
+/* sobre texto ela vira um traço fino, como um cursor de leitura */
+.blobcur.is-text{--d:26px;border-radius:100px;animation:none}
+@media(hover:none),(pointer:coarse){.blobcur,.blobdot{display:none}}
+@media(prefers-reduced-motion:reduce){.blobcur,.blobdot{display:none}}
