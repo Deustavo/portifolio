@@ -25,7 +25,7 @@ a{color:inherit;text-decoration:none}
 .bar nav a{font-size:.8rem;padding:.35rem .8rem;border-radius:100px;border:var(--bw) solid transparent;transition:border-color .2s}
 .bar nav a:hover{border-color:var(--line)}
 .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--pad);padding:0 var(--gut) var(--pad)}
-.box{background:transparent;border:var(--bw) solid var(--line);border-radius:var(--r);
+.box{background:transparent;border:var(--bw) solid var(--line);border-radius:var(--r);isolation:isolate;
  padding:clamp(1.1rem,2.4vw,1.8rem);position:relative;overflow:hidden;
  transition:transform .45s var(--ease),background .35s,color .35s}
 /* o preenchimento sobe do rodapé no hover */
@@ -85,6 +85,21 @@ a.box > *{position:relative;z-index:1}
 .head .anchor:hover::after,.head .anchor:focus-visible::after{opacity:1;transform:none}
 .head .anchor:focus-visible{outline:var(--bw) solid var(--c1);outline-offset:.25em;border-radius:4px}
 .p-card{display:flex;flex-direction:column;justify-content:space-between;min-height:220px}
+/* imagem do projeto ao fundo do card */
+a.p-card::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background-image:var(--shot);background-repeat:no-repeat;background-position:center top;background-size:cover;
+ opacity:var(--shot-op,.26);transition:opacity .45s ease,transform .6s var(--ease);
+ -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.4) 62%,transparent 100%);
+ mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.4) 62%,transparent 100%)}
+a.p-card:hover::after{opacity:var(--shot-op-h,.3);transform:scale(1.04)}
+[data-theme=light] .p-card{--shot-op:.13;--shot-op-h:.17}
+[data-theme=light] a.p-card::after{filter:saturate(.95) contrast(1.04)}
+/* arte solta em vez de screenshot: alpha da propria imagem faz o recorte */
+a.p-card.shot-art::after{background-position:right bottom;background-size:auto 100%;
+ -webkit-mask-image:none;mask-image:none}
+.p-card.shot-art{--shot-op:.4;--shot-op-h:.52}
+[data-theme=light] .p-card.shot-art{--shot-op:.38;--shot-op-h:.5}
+[data-theme=light] a.p-card.shot-art::after{filter:brightness(.72) contrast(1.15) saturate(1.1)}
 .p-card.wide{grid-column:span 2}
 .p-card.xwide{grid-column:span 3}
 .p-card h3{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,3vw,2.1rem);margin:.9rem 0 .2rem;letter-spacing:-.025em}
@@ -150,46 +165,46 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
 </div>
 <div class="head sub" id="jogos" data-group="games"><h3><a class="anchor" href="#jogos" data-i18n="work.games">Jogos</a></h3><span class="tag" data-case-count="games">02 cases</span></div>
 <div class="bento" data-group="games">
-  <a class="box p-card xwide" href="projects/jogo-chinela-destroyer.html" style="--fill:var(--c2)"><span class="tag" data-i18n="p12.tag">Jogo</span>
+  <a class="box p-card xwide shot-art" href="projects/jogo-chinela-destroyer.html" style="--shot:url(assets/img/jogo-chinela-destroyer/card.webp);--fill:var(--c2)"><span class="tag" data-i18n="p12.tag">Jogo</span>
     <span><h3>Chinela Destroyer</h3><p data-i18n="p12.metric">Jogo de plataforma vertical, do sprite ao código</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card" href="projects/demon-arena.html" style="--fill:var(--c15)"><span class="tag" data-i18n="p19.tag">Jogo</span>
+  <a class="box p-card" href="projects/demon-arena.html" style="--shot:url(assets/img/demon-arena/card.webp);--fill:var(--c15)"><span class="tag" data-i18n="p19.tag">Jogo</span>
     <span><h3>Demon Arena</h3><p data-i18n="p19.metric">Duelo 1x1 e defesa de base cooperativa, em servidor autoritativo próprio</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
 </div>
 <div class="head sub" id="sistemas" data-group="systems"><h3><a class="anchor" href="#sistemas" data-i18n="work.systems">Sistemas</a></h3><span class="tag" data-case-count="systems">06 cases</span></div>
 <div class="bento" data-group="systems">
-  <a class="box p-card wide" href="projects/metrics.html" style="--fill:var(--c10)"><span class="tag" data-i18n="p14.tag">Projeto pessoal</span>
+  <a class="box p-card wide" href="projects/metrics.html" style="--shot:url(assets/img/metrics/card.webp);--fill:var(--c10)"><span class="tag" data-i18n="p14.tag">Projeto pessoal</span>
     <span><h3>Metrics</h3><p data-i18n="p14.metric">YouTube, Twitch e Kick somados em tempo real, com relatório no fim</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card" href="projects/ricochet-360.html" style="--fill:var(--c5)"><span class="tag" data-i18n="p10.tag">Engenharia</span>
+  <a class="box p-card" href="projects/ricochet-360.html" style="--shot:url(assets/img/ricochet-360/card.webp);--fill:var(--c5)"><span class="tag" data-i18n="p10.tag">Engenharia</span>
     <span><h3>Ricochet360</h3><p data-i18n="p10.metric">Reescrita do CRM e do discador que o agente usa o dia inteiro</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card" href="projects/tray-central-do-cliente.html" style="--fill:var(--c7)"><span class="tag" data-i18n="p8.tag">Front-end</span>
+  <a class="box p-card" href="projects/tray-central-do-cliente.html" style="--shot:url(assets/img/tray-central-do-cliente/card.webp);--fill:var(--c7)"><span class="tag" data-i18n="p8.tag">Front-end</span>
     <span><h3>Central do cliente</h3><p data-i18n="p8.metric">Consulta de pedidos das lojas Tray, pixel perfect e mobile first</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card" href="projects/sistema-pilates.html" style="--fill:var(--c9)"><span class="tag" data-i18n="p13.tag">Produto</span>
+  <a class="box p-card" href="projects/sistema-pilates.html" style="--shot:url(assets/img/sistema-pilates/card.webp);--fill:var(--c9)"><span class="tag" data-i18n="p13.tag">Produto</span>
     <span><h3>MC Blessed Pilates</h3><p data-i18n="p13.metric">Alunos, agenda e financeiro de um estúdio de pilates em uma tela</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card" href="projects/owna.html" style="--fill:var(--c6)"><span class="tag" data-i18n="p7.tag">Front-end</span>
+  <a class="box p-card" href="projects/owna.html" style="--shot:url(assets/img/owna/card.webp);--fill:var(--c6)"><span class="tag" data-i18n="p7.tag">Front-end</span>
     <span><h3>Owna</h3><p data-i18n="p7.metric">Registro de autoria com hash e certificado, em React</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card wide" href="projects/radar-governamental.html" style="--fill:var(--c12)"><span class="tag" data-i18n="p16.tag">Sistema interno</span>
+  <a class="box p-card wide" href="projects/radar-governamental.html" style="--shot:url(assets/img/radar-governamental/card.webp);--fill:var(--c12)"><span class="tag" data-i18n="p16.tag">Sistema interno</span>
     <span><h3>Radar Governamental</h3><p data-i18n="p16.metric">Painel de operação do maior monitoramento de relações governamentais do país</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
 </div>
 <div class="head sub" id="sites" data-group="sites"><h3><a class="anchor" href="#sites" data-i18n="work.sites">Sites</a></h3><span class="tag" data-case-count="sites">04 cases</span></div>
 <div class="bento" data-group="sites">
-  <a class="box p-card xwide" href="projects/site-dentista.html" style="--fill:var(--c4)"><span class="tag" data-i18n="p11.tag">Freelance</span>
+  <a class="box p-card xwide" href="projects/site-dentista.html" style="--shot:url(assets/img/site-dentista/card.webp);--fill:var(--c4)"><span class="tag" data-i18n="p11.tag">Freelance</span>
     <span><h3>Lírios Odontologia</h3><p data-i18n="p11.metric">Site de uma clínica que até então só existia no Instagram</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card" href="projects/tray-loja-de-aplicativos.html" style="--fill:var(--c8)"><span class="tag" data-i18n="p9.tag">Front-end</span>
+  <a class="box p-card" href="projects/tray-loja-de-aplicativos.html" style="--shot:url(assets/img/tray-loja-de-aplicativos/card.webp);--fill:var(--c8)"><span class="tag" data-i18n="p9.tag">Front-end</span>
     <span><h3>Loja de aplicativos</h3><p data-i18n="p9.metric">Catálogo em Nuxt com renderização no servidor, feito para ser indexado</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card" href="projects/life-site.html" style="--fill:var(--c3)"><span class="tag" data-i18n="p6.tag">Institucional</span>
+  <a class="box p-card" href="projects/life-site.html" style="--shot:url(assets/img/life-site/card.webp);--fill:var(--c3)"><span class="tag" data-i18n="p6.tag">Institucional</span>
     <span><h3>Life Site</h3><p data-i18n="p6.metric">Um catálogo de 8 serviços em 3 gabaritos</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card xwide" href="projects/pergunte-ao-polvo.html" style="--fill:var(--c16)"><span class="tag" data-i18n="p20.tag">Projeto pessoal</span>
+  <a class="box p-card xwide" href="projects/pergunte-ao-polvo.html" style="--shot:url(assets/img/pergunte-ao-polvo/card.webp);--fill:var(--c16)"><span class="tag" data-i18n="p20.tag">Projeto pessoal</span>
     <span><h3>Pergunte ao Polvo</h3><p data-i18n="p20.metric">Recriação de um site que saiu do ar, hoje em cerca de 1.200 acessos por dia</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
 </div>
 <div class="head sub" id="prototipos" data-group="protos"><h3><a class="anchor" href="#prototipos" data-i18n="work.protos">Protótipos</a></h3><span class="tag" data-case-count="protos">04 cases</span></div>
 <div class="bento" data-group="protos">
-  <a class="box p-card" href="projects/life-guard.html" style="--fill:var(--c1)"><span class="tag" data-i18n="p1.tag">Segurança</span>
+  <a class="box p-card" href="projects/life-guard.html" style="--shot:url(assets/img/life-guard/card.webp);--fill:var(--c1)"><span class="tag" data-i18n="p1.tag">Segurança</span>
     <span><h3>Life Guard</h3><p data-i18n="p1.metric">Protótipo de 14 telas para a Life Tecnologia</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card xwide" href="projects/follow-me.html" style="--fill:var(--c13)"><span class="tag" data-i18n="p17.tag">Hackathon</span>
+  <a class="box p-card xwide" href="projects/follow-me.html" style="--shot:url(assets/img/hackathon-unimar/card.webp);--fill:var(--c13)"><span class="tag" data-i18n="p17.tag">Hackathon</span>
     <span><h3>Follow Me</h3><p data-i18n="p17.metric">Localizar o paciente dentro do hospital por pulseira RFID, campeão do hackathon da Unimar</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card xwide" href="projects/greeimage.html" style="--fill:var(--c11)"><span class="tag" data-i18n="p15.tag">Hackathon</span>
+  <a class="box p-card xwide" href="projects/greeimage.html" style="--shot:url(assets/img/greeimage/card.webp);--fill:var(--c11)"><span class="tag" data-i18n="p15.tag">Hackathon</span>
     <span><h3>Greeimage</h3><p data-i18n="p15.metric">Área verde por habitante em mapa de calor, campeão do Space Apps em Marília</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
-  <a class="box p-card" href="projects/fabrica1.html" style="--fill:var(--c14)"><span class="tag" data-i18n="p18.tag">Protótipo</span>
+  <a class="box p-card" href="projects/fabrica1.html" style="--shot:url(assets/img/fabrica1/card.webp);--fill:var(--c14)"><span class="tag" data-i18n="p18.tag">Protótipo</span>
     <span><h3>Fábrica 1</h3><p data-i18n="p18.metric">Recarregar o cartão do bar pelo celular, por aproximação, sem fila no caixa</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
 </div>
 <div class="head" id="contato"><h2><a class="anchor" href="#contato" data-i18n="contact.title">Contato</a></h2></div>
