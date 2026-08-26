@@ -1,0 +1,54 @@
+/* ===== Tokens de cor — claro (padrão) e escuro ===== */
+:root{
+  --bg:#faf7f0; --fg:#17150f; --dim:#6e6a5e; --ink:#17150f;
+  --line:#17150f;                 /* traço dos contornos */
+  --on-fill:#faf7f0;              /* texto sobre um preenchimento sólido */
+  --bar-bg:rgba(250,247,240,.85); /* barra fixa com blur */
+  --c1:#ff5c39; --c2:#2f8f6b; --c3:#3b5bdb; --c4:#e8a33d; --c5:#9b5de5;
+  color-scheme:light;
+}
+
+/* preferência do sistema, a menos que o claro tenha sido escolhido na mão */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#100e0a; --fg:#f3eee3; --dim:#9a9384; --ink:#f3eee3;
+    --line:#3a3529;
+    --on-fill:#100e0a;
+    --bar-bg:rgba(16,14,10,.85);
+    --c1:#ff7a5c; --c2:#43c093; --c3:#7b93ff; --c4:#f0b959; --c5:#b98cff;
+    color-scheme:dark;
+  }
+}
+
+/* escolha explícita pelo botão */
+:root[data-theme="dark"]{
+  --bg:#100e0a; --fg:#f3eee3; --dim:#9a9384; --ink:#f3eee3;
+  --line:#3a3529;
+  --on-fill:#100e0a;
+  --bar-bg:rgba(16,14,10,.85);
+  --c1:#ff7a5c; --c2:#43c093; --c3:#7b93ff; --c4:#f0b959; --c5:#b98cff;
+  color-scheme:dark;
+}
+
+/* botão de tema, mesmo desenho do de idioma */
+.themebtn{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;
+  font-size:.9rem;line-height:1;background:none;border:var(--bw,2px) solid var(--line);
+  color:inherit;cursor:pointer;border-radius:100px;padding:0;
+  transition:background .2s,color .2s,border-color .2s}
+.themebtn:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
+.themebtn .ico-sun{display:none}
+:root[data-theme="dark"] .themebtn .ico-sun{display:block}
+:root[data-theme="dark"] .themebtn .ico-moon{display:none}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .themebtn .ico-sun{display:block}
+  :root:not([data-theme="light"]) .themebtn .ico-moon{display:none}
+}
+
+/* as capas em degradê são artes chapadas: no escuro elas ganham um pouco de contenção.
+   Telas reais (img) ficam intocadas. */
+:root[data-theme="dark"] div.cover,
+:root[data-theme="dark"] .gallery > div{filter:saturate(.92) brightness(.88)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) div.cover,
+  :root:not([data-theme="light"]) .gallery > div{filter:saturate(.92) brightness(.88)}
+}

@@ -2,34 +2,34 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gustavo Andrade — UI &amp; UX Designer</title>
 <meta name="description" content="Gustavo Andrade, UI &amp; UX Designer em São Paulo.">
+<link rel="stylesheet" href="assets/theme.css">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#faf7f0;--fg:#17150f;--dim:#6e6a5e;--ink:#17150f;
- --c1:#ff5c39;--c2:#2f8f6b;--c3:#3b5bdb;--c4:#e8a33d;--c5:#9b5de5;
- --display:"Bricolage Grotesque",system-ui,sans-serif;--sans:"Inter",system-ui,sans-serif;
+:root{--display:"Bricolage Grotesque",system-ui,sans-serif;--sans:"Inter",system-ui,sans-serif;
  --pad:clamp(1rem,3vw,2rem);--maxw:1600px;
  --gut:max(var(--pad), calc((100% - var(--maxw))/2));--r:18px;--bw:2px;--ease:cubic-bezier(.34,1.56,.64,1)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.5;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.5;overflow-x:hidden;
+ transition:background .3s ease,color .3s ease}
 a{color:inherit;text-decoration:none}
 .tag{display:inline-block;align-self:flex-start;max-width:max-content;font-size:.68rem;font-weight:500;
  border:var(--bw) solid currentColor;padding:.2rem .6rem;border-radius:100px}
 .bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem 1rem;padding:1rem var(--gut);
- position:sticky;top:0;z-index:30;background:rgba(250,247,240,.85);backdrop-filter:blur(10px)}
+ position:sticky;top:0;z-index:30;background:var(--bar-bg);backdrop-filter:blur(10px)}
 .bar strong{font-family:var(--display);font-weight:800;font-size:1.05rem}
 .bar nav{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:flex-end}
 .bar nav a{font-size:.8rem;padding:.35rem .8rem;border-radius:100px;border:var(--bw) solid transparent;transition:border-color .2s}
-.bar nav a:hover{border-color:var(--ink)}
+.bar nav a:hover{border-color:var(--line)}
 .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--pad);padding:0 var(--gut) var(--pad)}
-.box{background:transparent;border:var(--bw) solid var(--ink);border-radius:var(--r);
+.box{background:transparent;border:var(--bw) solid var(--line);border-radius:var(--r);
  padding:clamp(1.1rem,2.4vw,1.8rem);position:relative;overflow:hidden;
  transition:transform .45s var(--ease),background .35s,color .35s}
 /* o preenchimento sobe do rodapé no hover */
 a.box::before{content:"";position:absolute;inset:0;z-index:0;background:var(--fill,var(--ink));
  transform:translateY(101%);transition:transform .5s var(--ease)}
 a.box:hover::before{transform:translateY(0)}
-a.box:hover{color:var(--bg);transform:translateY(-4px)}
+a.box:hover{color:var(--on-fill);transform:translateY(-4px)}
 a.box > *{position:relative;z-index:1}
 .b-hero{grid-column:span 3;display:flex;flex-direction:column;justify-content:space-between;min-height:clamp(240px,38vh,400px)}
 .b-hero h1{font-family:var(--display);font-weight:800;margin:.6rem 0 0;
@@ -48,31 +48,32 @@ a.box > *{position:relative;z-index:1}
 .p-card.wide{grid-column:span 2}
 .p-card h3{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,3vw,2.1rem);margin:.9rem 0 .2rem;letter-spacing:-.025em}
 .p-card p{margin:0;font-size:.85rem;color:var(--dim)}
-a.p-card:hover p{color:rgba(250,247,240,.8)}
+a.p-card:hover p{color:color-mix(in srgb,var(--on-fill) 78%,transparent)}
 .p-card__go{margin-top:1.2rem;font-size:.8rem;font-weight:500;display:flex;align-items:center;gap:.4rem}
 .p-card__go i{font-style:normal}
 a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{transition:transform .3s var(--ease)}
-.b-contact{grid-column:span 4;text-align:center;padding:clamp(2.5rem,7vw,5rem) var(--pad);border-color:var(--ink)}
+.b-contact{grid-column:span 4;text-align:center;padding:clamp(2.5rem,7vw,5rem) var(--pad);border-color:var(--line)}
 .b-contact .big{font-family:var(--display);font-weight:800;display:block;font-size:clamp(2rem,9vw,6.5rem);
  line-height:.92;letter-spacing:-.04em;margin:.8rem 0 1.6rem}
 .b-contact .big span{color:transparent;-webkit-text-stroke:var(--bw) var(--ink);transition:-webkit-text-stroke-color .35s}
 .b-contact:hover .big span{-webkit-text-stroke-color:var(--c1)}
 .chips{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
-.chips a{font-size:.82rem;padding:.45rem 1rem;border-radius:100px;border:var(--bw) solid var(--ink);
+.chips a{font-size:.82rem;padding:.45rem 1rem;border-radius:100px;border:var(--bw) solid var(--line);
  max-width:100%;overflow-wrap:anywhere;transition:background .25s,color .25s}
-.chips a:hover{background:var(--c1);border-color:var(--c1);color:var(--bg)}
+.chips a:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
 .foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1rem var(--gut) 2rem;font-size:.72rem;color:var(--dim)}
 @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.b-hero,.b-role,.p-card.wide,.b-contact{grid-column:span 2}}
 @media(max-width:520px){.bento{grid-template-columns:1fr}.b-hero,.b-role,.p-card.wide,.b-contact{grid-column:span 1}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
-.langbtn{font-size:.8rem;font-weight:500;background:none;border:var(--bw) solid var(--ink);
- color:inherit;cursor:pointer;padding:.35rem .8rem;border-radius:100px;transition:background .2s,color .2s}
-.langbtn:hover{background:var(--c1);border-color:var(--c1);color:var(--bg)}
+.langbtn{font-size:.8rem;font-weight:500;background:none;border:var(--bw) solid var(--line);
+ color:inherit;cursor:pointer;padding:.35rem .8rem;border-radius:100px;transition:background .2s,color .2s,border-color .2s}
+.langbtn:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
 </style>
 <link rel="stylesheet" href="assets/transition.css">
+<script>(function(){try{var t=localStorage.getItem("ga-theme");if(t!=="dark"&&t!=="light")t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
 </head><body>
 <div class="bar"><strong>Gustavo Andrade</strong>
-<nav><a href="#w" data-i18n="nav.work">Projetos</a><a href="#c" data-i18n="nav.contact">Contato</a><button class="langbtn" data-lang-toggle>EN</button></nav></div>
+<nav><a href="#w" data-i18n="nav.work">Projetos</a><a href="#c" data-i18n="nav.contact">Contato</a><button class="themebtn" data-theme-toggle aria-label="Alternar tema"><span class="ico-moon" aria-hidden="true">☾</span><span class="ico-sun" aria-hidden="true">☀</span></button><button class="langbtn" data-lang-toggle>EN</button></nav></div>
 <div class="bento">
   <div class="box b-hero"><span class="tag" style="color:var(--c2)" data-i18n="hero.statusShort">● Disponível · São Paulo, BR</span>
     <div><h1>Gustavo<br>Andrade<span>.</span></h1>
@@ -104,5 +105,6 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
 </div>
 <div class="foot"><span data-i18n="foot.rights">© 2026 Gustavo Andrade</span><span data-i18n="foot.b">Outline 2px · preenche no hover</span></div>
 <script src="assets/i18n.js"></script>
+<script src="assets/theme.js"></script>
 <script src="assets/transition.js"></script>
 </body></html>

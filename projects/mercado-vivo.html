@@ -5,16 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gustavo Andrade — UI &amp; UX Designer</title>
 <meta name="description" content="Gustavo Andrade, UI &amp; UX Designer em São Paulo.">
+<link rel="stylesheet" href="../assets/theme.css">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/case-bento.css">
 <link rel="stylesheet" href="../assets/transition.css">
+<script>(function(){try{var t=localStorage.getItem("ga-theme");if(t!=="dark"&&t!=="light")t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
 </head><body>
 <div class="bar">
   <strong><a href="../index.html">Gustavo Andrade</a></strong>
   <nav>
     <a href="../index.html#w" data-i18n="nav.work">Projetos</a>
     <a href="../index.html#c" data-i18n="nav.contact">Contato</a>
-    <button class="langbtn" data-lang-toggle>EN</button>
+    <button class="themebtn" data-theme-toggle aria-label="Alternar tema"><span class="ico-moon" aria-hidden="true">☾</span><span class="ico-sun" aria-hidden="true">☀</span></button><button class="langbtn" data-lang-toggle>EN</button>
   </nav>
 </div>
 
@@ -72,5 +74,6 @@
 </div>
 <script src="../assets/i18n-cases.js"></script>
 <script src="../assets/i18n.js"></script>
+<script src="../assets/theme.js"></script>
 <script src="../assets/transition.js"></script>
 </body></html>
