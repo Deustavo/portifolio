@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life Guard — Gustavo Andrade</title>
+<meta name="description" content="Protótipo do app que conecta as câmeras de segurança da Life Tecnologia ao celular do cliente.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='25' font-size='26'%3E%E2%97%89%3C/text%3E%3C/svg%3E">
+<style>
+/* ---------- telas do Life Guard ---------- */
+img.hero-art { object-fit: cover; }
+.lg-strip {
+  background: var(--paper-2); border-radius: 12px;
+  padding: clamp(1.4rem, 4vw, 2.4rem);
+}
+.lg-strip > .eyebrow { display: block; margin: 0 0 1.4rem; }
+.lg-grid {
+  display: grid; gap: clamp(1rem, 3vw, 1.8rem);
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+}
+.lg-shot { display: flex; flex-direction: column; gap: .65rem; }
+.lg-shot img {
+  width: 100%; border-radius: 11px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .18);
+}
+.lg-shot span {
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink-soft);
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__mark" href="../variantes/index.html">← Gustavo Andrade<em>.</em></a>
+  <div class="nav__links">
+    <a href="../variantes/index.html" data-i18n="nav.work">Projetos</a>
+    <a href="../variantes/index.html" data-i18n="nav.contact">Contato</a>
+    <button class="themer" aria-label="Alternar tema">◐</button>
+    <button class="themer" data-lang-toggle style="width:auto;border-radius:100px;padding:0 .7rem;font-size:.7rem">EN</button>
+  </div>
+</nav>
+
+<div class="shell">
+
+  <header class="case__head pad">
+    <p class="eyebrow" data-i18n="lg.kicker">Case 01 — 2021</p>
+    <h1 class="case__title">Life Guard</h1>
+    <p class="case__sub" data-i18n="lg.sub">Protótipo de um aplicativo para a Life Tecnologia: as câmeras de segurança instaladas na casa do cliente, no celular dele, sem manual e sem senha para esquecer.</p>
+
+    <div class="case__facts">
+      <div><span class="eyebrow" data-i18n="lg.f1">Cliente</span><p data-i18n="lg.v1">Life Tecnologia</p></div>
+      <div><span class="eyebrow" data-i18n="lg.f2">Papel</span><p data-i18n="lg.v2">UI &amp; UX Design, prototipação</p></div>
+      <div><span class="eyebrow" data-i18n="lg.f3">Escopo</span><p data-i18n="lg.v3">App iOS + Android, 14 telas</p></div>
+      <div><span class="eyebrow" data-i18n="lg.f4">Ano</span><p>2021</p></div>
+    </div>
+
+    <img class="hero-art rise" src="../assets/img/life-guard/hero.png"
+         alt="Telas do Life Guard sobre o laranja da marca" data-i18n-attr="alt:lg.heroAlt"
+         width="1920" height="1080">
+  </header>
+
+  <main class="case__body pad">
+    <section class="block rise">
+      <h3 data-i18n="lg.h1">O contexto</h3>
+      <div data-i18n="lg.c1"><p>A Life Tecnologia vende internet e instala câmeras de segurança na casa do cliente. O equipamento era bom; o jeito de olhar para ele, não. O cliente recebia o software genérico do fabricante — login por e-mail e senha que ninguém lembra, menu em inglês, nenhuma relação com a marca de quem vendeu.</p><p>O resultado chegava na central de atendimento em forma de ligação: <i>não consigo ver minha câmera</i>. A pergunta que me trouxeram foi se dava para ter um app da Life onde o cliente entrasse com o número que já está no cadastro e visse a casa dele na primeira tela.</p></div>
+    </section>
+
+    <hr class="rule">
+
+    <section class="block rise">
+      <h3 data-i18n="lg.h2">O processo</h3>
+      <div data-i18n="lg.c2"><p>Comecei pelo caminho mais curto entre abrir o app e ver a sala de estar, e desenhei tudo em volta disso. Entrada por celular e código de validação, sem senha para criar nem para esquecer. Depois da entrada, uma tela de perfil — a assinatura é da casa, não de uma pessoa, então marido, esposa e filho precisavam de acessos separados sem virar três contas.</p><p>A home virou a lista de câmeras com o nome do cômodo, não o número do canal. O player abre ao vivo e leva para a gravação por data em um toque. O menu da conta reúne o que antes era ligação: gerenciar usuários, alterar plano, relatar problema, falar com a central.</p><p>A parte que deu mais trabalho foram os estados que costumam ficar de fora. Número não registrado, busca sem resultado e — o mais comum na operação da Life — o cliente que assinou mas ainda está na fila de instalação. Em vez de uma home vazia sugerindo que algo quebrou, uma tela que diz o que está acontecendo e que isso pode levar alguns dias.</p><p>A interface é escura porque o conteúdo é vídeo: quadro escuro faz a imagem da câmera ser a coisa mais clara da tela. O laranja da marca ficou reservado para ação — botão principal, link, item ativo. Nada mais disputa atenção com a imagem.</p></div>
+    </section>
+
+    <div class="lg-strip rise">
+      <span class="eyebrow" data-i18n="lg.ga">Entrada — do splash ao perfil</span>
+      <div class="lg-grid">
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/splash.png" alt="Splash" data-i18n-attr="alt:lg.g1"><span data-i18n="lg.g1">Splash</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/aviso-wifi.png" alt="Aviso de Wi-Fi" data-i18n-attr="alt:lg.g2"><span data-i18n="lg.g2">Aviso de Wi-Fi</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/login.png" alt="Entrada por celular" data-i18n-attr="alt:lg.g3"><span data-i18n="lg.g3">Entrada por celular</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/verificacao.png" alt="Código de validação" data-i18n-attr="alt:lg.g4"><span data-i18n="lg.g4">Código de validação</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/perfis.png" alt="Quem está acessando" data-i18n-attr="alt:lg.g5"><span data-i18n="lg.g5">Quem está acessando</span></figure>
+      </div>
+    </div>
+
+    <div class="lg-strip rise">
+      <span class="eyebrow" data-i18n="lg.gb">Uso diário — câmeras, player e conta</span>
+      <div class="lg-grid">
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/home.png" alt="Lista de câmeras" data-i18n-attr="alt:lg.g6"><span data-i18n="lg.g6">Lista de câmeras</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/player-ao-vivo.png" alt="Player ao vivo" data-i18n-attr="alt:lg.g7"><span data-i18n="lg.g7">Player ao vivo</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/player-gravacao.png" alt="Gravação por data" data-i18n-attr="alt:lg.g8"><span data-i18n="lg.g8">Gravação por data</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/menu.png" alt="Menu da conta" data-i18n-attr="alt:lg.g9"><span data-i18n="lg.g9">Menu da conta</span></figure>
+      </div>
+    </div>
+
+    <div class="lg-strip rise">
+      <span class="eyebrow" data-i18n="lg.gc">Estados e gestão — o que costuma faltar</span>
+      <div class="lg-grid">
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/login-erro.png" alt="Número não registrado" data-i18n-attr="alt:lg.g10"><span data-i18n="lg.g10">Número não registrado</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/busca-vazia.png" alt="Busca sem resultado" data-i18n-attr="alt:lg.g11"><span data-i18n="lg.g11">Busca sem resultado</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/aguardando-instalacao.png" alt="Aguardando instalação" data-i18n-attr="alt:lg.g12"><span data-i18n="lg.g12">Aguardando instalação</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/usuarios.png" alt="Gerenciar usuários" data-i18n-attr="alt:lg.g13"><span data-i18n="lg.g13">Gerenciar usuários</span></figure>
+        <figure class="lg-shot" style="margin:0"><img loading="lazy" src="../assets/img/life-guard/editar-usuario.png" alt="Editar usuário" data-i18n-attr="alt:lg.g14"><span data-i18n="lg.g14">Editar usuário</span></figure>
+      </div>
+    </div>
+
+    <hr class="rule">
+
+    <section class="block rise">
+      <h3 data-i18n="lg.h3">O resultado</h3>
+      <div data-i18n="lg.c3"><p>A entrega foi o protótipo navegável: 14 telas, do splash até a edição de um usuário, com os caminhos de erro e os estados vazios já resolvidos — o tipo de decisão que normalmente sobra para a fase de desenvolvimento e custa caro lá.</p><ul><li>Entrada sem senha: celular + código de validação</li><li>Perfis múltiplos por assinatura, sem multiplicar contas</li><li>Estados de erro, busca vazia e pré-instalação desenhados</li><li>Componentes e espaçamentos pensados para virar React Native direto</li></ul><p>O projeto parou no protótipo, e ele valeu como protótipo: deu à Life uma versão concreta do produto para discutir — escopo, esforço e cara da marca — em vez de uma descrição.</p></div>
+    </section>
+  </main>
+
+  <div class="nextup pad">
+    <span class="eyebrow" data-i18n="lg.next">Próximo projeto</span>
+    <a href="solara.html">Solara ↗</a>
+  </div>
+
+  <footer class="foot">
+    <span data-i18n="foot.rights">© 2026 Gustavo Andrade</span>
+    <a href="../variantes/index.html" data-i18n="lg.work">Trabalhar juntos →</a>
+  </footer>
+</div>
+
+<script src="../assets/main.js"></script>
+<script src="../assets/i18n.js"></script>
+</body>
+</html>

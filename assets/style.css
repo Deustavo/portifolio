@@ -324,6 +324,7 @@ img { max-width: 100%; display: block; }
 }
 .block p { margin: 0 0 1rem; max-width: 62ch; font-size: 1.02rem; }
 .block ul { margin: 0; padding-left: 1.1rem; color: var(--ink-soft); }
+.block ul + p { margin-top: 1.15rem; }
 .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
 .gallery > div { aspect-ratio: 4 / 3; border-radius: 10px; overflow: hidden; }
 
