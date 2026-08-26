@@ -33,7 +33,7 @@ const DICT = {
     "stat.inline":    "Desde 2019 · 20+ produtos<br>2× hackathon · Pós USP/Esalq",
 
     "work.title":     "Projetos selecionados",
-    "work.count":     "09 cases",
+    "work.count":     "07 cases",
 
     "contact.kicker": "Contato · resposta em 24h",
     "contact.cta":    "Vamos<br>conversar",
@@ -57,10 +57,6 @@ const DICT = {
     /* projetos — 01 e 06 reais, 02–05 ainda placeholder */
     "p1.sub": "Segurança · App iOS/Android · 2021", "p1.tag": "Segurança",
     "p1.metric": "Protótipo de 14 telas para a Life Tecnologia",
-    "p2.sub": "Saúde · UX Research · 2025",        "p2.tag": "Saúde",
-    "p3.sub": "Marca · Site institucional · 2024", "p3.tag": "Marca",
-    "p4.sub": "Marketplace · E-commerce · 2023",   "p4.tag": "Marketplace",
-    "p5.sub": "Design System · B2B · 2022",        "p5.tag": "Design System",
     "p6.sub": "Site institucional · Multi-público · 2021", "p6.tag": "Institucional",
     "p6.metric": "Um catálogo de 8 serviços em 3 gabaritos",
     "p7.sub": "Blockchain · React · 2022", "p7.tag": "Front-end",
@@ -69,6 +65,10 @@ const DICT = {
     "p8.metric": "Consulta de pedidos das lojas Tray, pixel perfect e mobile first",
     "p9.sub": "E-commerce · Nuxt · 2024", "p9.tag": "Front-end",
     "p9.metric": "Catálogo em Nuxt com renderização no servidor, feito para ser indexado",
+    "p10.sub": "CRM · Discador · 2026", "p10.tag": "Engenharia",
+    "p10.metric": "Reescrita do CRM e do discador que o agente usa o dia inteiro",
+    "p11.sub": "Odontologia · Nuxt · 2026", "p11.tag": "Freelance",
+    "p11.metric": "Site de uma clínica que até então só existia no Instagram",
     "p.more": "Ver case",
 
     /* ---- case Life Guard ---- */
@@ -186,7 +186,48 @@ const DICT = {
     "lapp.g1": "Home, com a busca em destaque e a faixa de aplicativos mais instalados",
     "lapp.g2": "Coleção Mais instalados, a lista completa em grade de três colunas",
     "lapp.g3": "Categoria Pós-vendas, com a navegação lateral pelas demais categorias",
-    "lapp.g4": "Página do Tray Envios, com o botão de instalar acima da descrição do aplicativo"
+    "lapp.g4": "Página do Tray Envios, com o botão de instalar acima da descrição do aplicativo",
+
+    /* ---- case Ricochet360 ---- */
+    "r360.title": "Ricochet360",
+    "r360.kicker": "Case 06 · 2026",
+    "r360.sub":    "Reescrita do CRM e do discador do Ricochet360, o sistema em que o agente de vendas passa o dia inteiro. Trabalho em andamento.",
+    "r360.f1": "Cliente",  "r360.v1": "Ricochet360",
+    "r360.f2": "Papel",    "r360.v2": "Engenharia de software",
+    "r360.f3": "Escopo",   "r360.v3": "Reescrita do CRM e do discador",
+    "r360.f4": "Ano",
+    "r360.h1": "O contexto",
+    "r360.c1": "<p>O Ricochet360 é um telefone na nuvem com um CRM em volta. O agente recebe e faz chamada dentro do próprio sistema, e o lead que entrou por um formulário já chega distribuído para alguém, com ligação, SMS, e-mail, tarefa e negociação registrados no mesmo lugar. Quem usa não abre o sistema para consultar uma coisa, fica dentro dele o turno inteiro.</p><p>A versão que está no ar é de 2014 e cresceu por adição. Cada recurso novo ganhou sua tela ao lado das anteriores, e a tela de um lead terminou com quatro barras de ação, três blocos de aba concorrendo entre si e o mesmo dado aparecendo em lugares diferentes. Isso não é discussão de estética. Um discador existe para reduzir o tempo entre o lead entrar e alguém falar com ele, e uma tela que obriga a procurar devolve esse tempo.</p><p>Entrei como engenheiro de software para reescrever esse sistema.</p>",
+    "r360.h2": "O processo",
+    "r360.c2": "<p>A primeira decisão foi não traduzir o legado tela por tela. Reescrita que copia a estrutura antiga só entrega a mesma confusão em CSS novo. Comecei pelo que o agente faz a cada minuto, ligar, anotar, mudar status, e deixei a árvore de configuração para depois.</p><p>A navegação virou uma coluna só. O legado espalhava os módulos entre uma faixa de ícones à esquerda, um menu no topo e atalhos soltos dentro da tela. Agora Dashboard, Lead management, Text messaging, Email Messaging, Call logs, Voicemail, Tasks, Deals e Referrals ficam em uma lista, e tudo que é configuração desce para um bloco próprio embaixo, com rótulo. Administrador e agente usam o mesmo sistema, mas não na mesma hora do dia, e a ordem da lista respeita isso.</p><p>A tela do lead ficou em duas colunas com papéis fixos. À esquerda a identidade, que não muda enquanto a pessoa trabalha: foto, ID, quando e por quem foi criado, telefone, e-mail, fornecedor, status, dono e tags. À direita o que aconteceu, em abas com contador: notas, e-mails, SMS, tarefas, documentos, contatos, negociações, histórico de chamada e timeline. O contador é o detalhe que faz diferença, porque decide se vale clicar na aba. E ligar, mandar e-mail e mandar SMS saíram das abas para uma barra fixa no pé, já que são as três ações que a pessoa repete o dia inteiro e não podem depender de onde ela está navegando.</p><p>O painel foi dividido por pergunta em vez de por widget. Master, Performance, Gamification, Emails e Calls são abas, e dentro de Calls os recortes de entrada, saída e sala de espera são chips com a contagem já visível. O agente vê o tamanho de cada fila antes de escolher qual abrir.</p>",
+    "r360.h3": "O resultado",
+    "r360.c3": "<p>O projeto está em andamento. O que já está de pé é a base da interface nova:</p><ul><li>Navegação consolidada em uma coluna, com a área de configuração separada do trabalho do dia</li><li>Tela do lead em duas colunas, identidade fixa à esquerda e atividade em abas com contador à direita</li><li>Barra de ação fixa para ligar, mandar e-mail e mandar SMS de qualquer tela</li><li>Painel dividido por pergunta, com a contagem de cada fila de chamada visível no próprio filtro</li></ul><p>Não vou dizer que substituiu o legado, porque não substituiu. Os dois convivem enquanto os módulos são portados um a um, e essa convivência define o ritmo do projeto: nenhuma tela antiga é desligada antes de a nova dar conta do que a antiga fazia. É a parte menos vistosa da reescrita e a que mais decide se ela chega ao fim.</p>",
+    "r360.heroAlt": "Telas da versão nova do Ricochet360 repetidas em um mosaico inclinado",
+    "r360.ga": "O ponto de partida, o sistema de 2014",
+    "r360.gb": "A versão nova, painel e tela do lead",
+    "r360.g1": "Tela de lead do sistema legado, com quatro barras de ação e as abas repetidas em dois blocos",
+    "r360.g2": "Painel novo na aba de chamadas, com os recortes da fila em chips contados",
+    "r360.g3": "Tela do lead reescrita, identidade fixa à esquerda e atividade em abas com contador",
+    /* ---- case Lírios Odontologia ---- */
+    "lirios.title": "Lírios Odontologia",
+    "lirios.kicker": "Case 07 · 2026",
+    "lirios.sub":    "Site da clínica Lírios Odontologia, em São Paulo. Freelance de ponta a ponta: desenho das telas, código, texto e publicação.",
+    "lirios.f1": "Cliente",  "lirios.v1": "Lírios Odontologia",
+    "lirios.f2": "Papel",    "lirios.v2": "Design, front-end, conteúdo e publicação",
+    "lirios.f3": "Escopo",   "lirios.v3": "Site da clínica, do desenho ao ar",
+    "lirios.f4": "Ano",
+    "lirios.h1": "O contexto",
+    "lirios.c1": "<p>A Lírios Odontologia é a clínica da Dra. Gabriela Geronimo, em São Paulo, e trabalha com implante, estética e reabilitação oral. Toda a presença da clínica na internet era o perfil do Instagram. Funcionava para quem já conhecia e não existia para quem não conhecia.</p><p>Isso cria dois problemas ao mesmo tempo. Quem procura implante dentário na região digita isso em um buscador e não encontra a clínica, porque perfil de rede social não responde busca. E quem chega pelo Instagram vê o post do dia, não o conjunto: quem é a profissional, o que ela faz, como é a primeira consulta, como marcar.</p><p>Peguei o projeto como freelance e fiz tudo: o desenho das telas, o código, os textos e a publicação no domínio.</p>",
+    "lirios.h2": "O processo",
+    "lirios.c2": "<p>A primeira decisão foi o tom. Consultório odontológico tem um problema de imagem que nenhum outro tipo de clínica tem na mesma intensidade: muita gente adia a consulta por medo. Um site de clareza clínica, branco e azul, reforça exatamente a associação que atrapalha. Puxei a paleta do próprio logotipo da clínica, creme e dourado, coloquei um serifado grande na chamada e deixei o verde escuro só nos botões. A frase de abertura fala de vida e de sorriso, não de procedimento.</p><p>Depois veio a escolha de tecnologia, e ela vem do primeiro problema do contexto. O site é feito em Nuxt e sai renderizado no servidor, com título e descrição próprios por seção. Para uma clínica que precisa ser achada em busca local, a página tem que chegar ao buscador com o conteúdo já no HTML da resposta, e não como um esqueleto que só ganha texto depois que o JavaScript roda.</p><p>A parte mais importante da página é a prova. Em odontologia estética a decisão é sobre resultado, e resultado se vê. Montei um carrossel de vídeos de pacientes reais falando do tratamento, e logo abaixo os depoimentos escritos com a nota. A clínica já tinha esse material solto no Instagram, onde ele some em uma semana. No site ele fica parado no meio do caminho de quem está decidindo.</p><p>O fim do caminho é sempre a mesma coisa: uma conversa no WhatsApp. É por lá que a clínica agenda, então não faz sentido pedir formulário. O botão está fixo no topo, aparece no primeiro bloco junto com o convite para agendar avaliação e volta no bloco final com endereço e Instagram. Entre a decisão e o contato coloquei as perguntas que travam o agendamento, se a avaliação já inicia o tratamento, se precisa de exame, quanto tempo dura, se dá para tratar em etapas. São as dúvidas que chegariam por mensagem antes de marcar. Respondidas na página, a conversa começa mais perto do agendamento.</p>",
+    "lirios.h3": "O resultado",
+    "lirios.c3": "<p>O site está no ar em liriosodontologia.com.</p><ul><li>Front-end em Nuxt com renderização no servidor, publicado no domínio próprio</li><li>Identidade tirada do logotipo da clínica, em creme, dourado e verde escuro</li><li>Carrossel de resultados em vídeo e depoimentos de pacientes com nota</li><li>Dúvidas frequentes em acordeão, cobrindo o que costuma travar o agendamento</li><li>Contato pelo WhatsApp alcançável do topo, do primeiro bloco e do fim da página</li></ul><p>Não tenho número de conversão para mostrar. O site é recente e a medição está com a clínica. O que dá para afirmar é o que mudou de lugar: antes a pessoa dependia do Instagram para saber qualquer coisa sobre a clínica, agora existe um endereço que responde sozinho e termina em uma conversa.</p>",
+    "lirios.heroAlt": "Telas do site da Lírios Odontologia repetidas em um mosaico inclinado",
+    "lirios.ga": "A entrada do site",
+    "lirios.gb": "A prova e o caminho até a conversa",
+    "lirios.g1": "Home, com o logotipo da clínica, a chamada em serifado e os dois caminhos para agendar",
+    "lirios.g2": "Resultados em vídeo, com o carrossel de casos de pacientes e os depoimentos logo abaixo",
+    "lirios.g3": "As dúvidas frequentes em acordeão e o bloco de contato com WhatsApp, endereço e Instagram"
   },
   en: {
     "doc.title":      "Gustavo Andrade — Product Design & Software Engineering",
@@ -217,7 +258,7 @@ const DICT = {
     "stat.inline":    "Since 2019 · 20+ products<br>2× hackathon · USP/Esalq postgrad",
 
     "work.title":     "Selected work",
-    "work.count":     "09 cases",
+    "work.count":     "07 cases",
 
     "contact.kicker": "Contact · reply within 24h",
     "contact.cta":    "Let's<br>talk",
@@ -252,10 +293,6 @@ const DICT = {
 
     "p1.sub": "Security · iOS/Android app · 2021", "p1.tag": "Security",
     "p1.metric": "14-screen prototype for Life Tecnologia",
-    "p2.sub": "Health · UX Research · 2025",      "p2.tag": "Health",
-    "p3.sub": "Brand · Website · 2024",           "p3.tag": "Brand",
-    "p4.sub": "Marketplace · E-commerce · 2023",  "p4.tag": "Marketplace",
-    "p5.sub": "Design System · B2B · 2022",       "p5.tag": "Design System",
     "p6.sub": "Marketing site · Multi-audience · 2021", "p6.tag": "Marketing site",
     "p6.metric": "An 8-service catalogue in 3 templates",
     "p7.sub": "Blockchain · React · 2022", "p7.tag": "Front-end",
@@ -264,6 +301,10 @@ const DICT = {
     "p8.metric": "Order lookup for Tray stores, pixel perfect and mobile first",
     "p9.sub": "E-commerce · Nuxt · 2024", "p9.tag": "Front-end",
     "p9.metric": "A Nuxt catalogue with server side rendering, built to be indexed",
+    "p10.sub": "CRM · Dialer · 2026", "p10.tag": "Engineering",
+    "p10.metric": "Rewriting the CRM and dialer an agent lives in all day",
+    "p11.sub": "Dentistry · Nuxt · 2026", "p11.tag": "Freelance",
+    "p11.metric": "A site for a clinic that until then only existed on Instagram",
     "p.more": "View case",
 
     /* ---- Life Guard case ---- */
@@ -381,16 +422,50 @@ const DICT = {
     "lapp.g1": "Home, with search up front and a strip of the most installed apps",
     "lapp.g2": "The Most installed collection, the full list in a three column grid",
     "lapp.g3": "The Post-purchase category, with side navigation through the other categories",
-    "lapp.g4": "The Tray Envios page, with the install button above the app description"
+    "lapp.g4": "The Tray Envios page, with the install button above the app description",
+
+    /* ---- case Ricochet360 ---- */
+    "r360.title": "Ricochet360",
+    "r360.kicker": "Case 06 · 2026",
+    "r360.sub":    "Rewriting the CRM and dialer behind Ricochet360, the system a sales agent spends the whole day inside. Work in progress.",
+    "r360.f1": "Client", "r360.v1": "Ricochet360",
+    "r360.f2": "Role",   "r360.v2": "Software engineering",
+    "r360.f3": "Scope",  "r360.v3": "Rewriting the CRM and the dialer",
+    "r360.f4": "Year",
+    "r360.h1": "The context",
+    "r360.c1": "<p>Ricochet360 is a cloud phone system with a CRM around it. An agent takes and places calls inside the system itself, and a lead that came in through a form arrives already assigned to someone, with calls, texts, emails, tasks and deals logged in the same place. Nobody opens this to look one thing up, they sit in it for the whole shift.</p><p>The version in production dates from 2014 and grew by addition. Every new feature got its own screen next to the previous ones, and a lead screen ended up with four action bars, three tab blocks competing with each other and the same field showing in more than one spot. This is not a question of taste. A dialer exists to shorten the gap between a lead arriving and somebody talking to them, and a screen that makes you hunt gives that time back.</p><p>I came in as a software engineer to rewrite the system.</p>",
+    "r360.h2": "The process",
+    "r360.c2": "<p>The first decision was not to translate the legacy screen by screen. A rewrite that copies the old structure just ships the same confusion in fresh CSS. I started from what the agent does every minute, call, take a note, change a status, and left the configuration tree for later.</p><p>Navigation became a single column. The legacy spread the modules across an icon rail on the left, a menu on top and loose shortcuts inside the screen. Now Dashboard, Lead management, Text messaging, Email Messaging, Call logs, Voicemail, Tasks, Deals and Referrals sit in one list, and everything that is configuration drops into its own labelled block underneath. Admins and agents use the same system, but not at the same hour of the day, and the order of the list respects that.</p><p>The lead screen went to two columns with fixed jobs. On the left the identity, which does not change while the person works: photo, ID, when and by whom it was created, phone, email, vendor, status, owner and tags. On the right what happened, in tabs with counters: notes, emails, texts, tasks, docs, contacts, deals, call history and timeline. The counter is the detail that earns its place, because it decides whether the tab is worth a click. And calling, emailing and texting moved out of the tabs into a bar pinned to the bottom, since those are the three actions the person repeats all day and they cannot depend on where they happen to be.</p><p>The dashboard was split by question instead of by widget. Master, Performance, Gamification, Emails and Calls are tabs, and inside Calls the inbound, outbound and waiting room cuts are chips with the count already showing. The agent sees how big each queue is before choosing which one to open.</p>",
+    "r360.h3": "The outcome",
+    "r360.c3": "<p>The project is in progress. What stands so far is the base of the new interface:</p><ul><li>Navigation consolidated into one column, with the configuration area kept apart from the day&apos;s work</li><li>Two column lead screen, identity fixed on the left and activity in counted tabs on the right</li><li>A pinned action bar for calling, emailing and texting from any screen</li><li>Dashboard split by question, with each call queue&apos;s count visible in the filter itself</li></ul><p>I am not going to say it replaced the legacy, because it has not. The two live side by side while modules get ported one at a time, and that coexistence sets the pace of the project: no old screen goes dark before the new one covers what the old one did. It is the least photogenic part of a rewrite and the part that most decides whether it finishes.</p>",
+    "r360.heroAlt": "Screens from the new Ricochet360 repeated in a tilted mosaic",
+    "r360.ga": "The starting point, the 2014 system",
+    "r360.gb": "The new version, dashboard and lead screen",
+    "r360.g1": "A lead screen in the legacy system, with four action bars and the tabs repeated in two blocks",
+    "r360.g2": "The new dashboard on the calls tab, queue cuts as counted chips",
+    "r360.g3": "The rewritten lead screen, identity fixed on the left and activity in counted tabs",
+    /* ---- Lírios Odontologia case ---- */
+    "lirios.title": "Lírios Odontologia",
+    "lirios.kicker": "Case 07 · 2026",
+    "lirios.sub":    "Website for the Lírios Odontologia dental clinic in São Paulo. A freelance job end to end: screen design, code, copy and launch.",
+    "lirios.f1": "Client",  "lirios.v1": "Lírios Odontologia",
+    "lirios.f2": "Role",    "lirios.v2": "Design, front-end, content and launch",
+    "lirios.f3": "Scope",   "lirios.v3": "The clinic website, from design to live",
+    "lirios.f4": "Year",
+    "lirios.h1": "The context",
+    "lirios.c1": "<p>Lírios Odontologia is Dr. Gabriela Geronimo\'s clinic in São Paulo, working with implants, cosmetic dentistry and oral rehabilitation. The clinic\'s entire online presence was its Instagram profile. It worked for people who already knew the clinic, and it did not exist for anyone who did not.</p><p>That creates two problems at once. Someone searching for a dental implant nearby types that into a search engine and does not find the clinic, because a social profile does not answer a search. And whoever arrives through Instagram sees the post of the day, not the whole picture: who the dentist is, what she does, what the first appointment is like, how to book it.</p><p>I took the project as a freelance job and did all of it: the screen design, the code, the copy and the launch on the clinic\'s own domain.</p>",
+    "lirios.h2": "The process",
+    "lirios.c2": "<p>The first decision was tone. A dental practice has an image problem no other kind of clinic has to the same degree: plenty of people put off the appointment out of fear. A site built on clinical clarity, white and blue, reinforces exactly the association that gets in the way. I pulled the palette from the clinic\'s own logo, cream and gold, set the headline in a large serif and kept the dark green for buttons only. The opening line talks about life and smiling, not about procedures.</p><p>Then came the technology choice, and it follows straight from the first problem above. The site is built in Nuxt and is rendered on the server, with its own title and description per section. For a clinic that needs to be found in local search, the page has to reach the search engine with the content already in the HTML of the response, not as a shell that only gets its text once JavaScript runs.</p><p>The most important part of the page is proof. In cosmetic dentistry the decision is about results, and results are something you look at. I built a carousel of videos of real patients talking about their treatment, with the written testimonials and ratings right below it. The clinic already had that material scattered across Instagram, where it disappears within a week. On the site it sits still, right in the path of someone who is deciding.</p><p>The end of that path is always the same thing: a WhatsApp conversation. That is how the clinic books appointments, so asking for a form makes no sense. The button is pinned in the header, shows up in the first block next to the invitation to book an assessment, and comes back in the closing block with the address and the Instagram handle. Between the decision and the contact I placed the questions that stall a booking: whether the assessment already starts the treatment, whether extra exams are needed, how long the appointment takes, whether treatment can be done in stages. Those are the questions that would arrive as messages before booking. Answered on the page, the conversation starts closer to the appointment.</p>",
+    "lirios.h3": "The outcome",
+    "lirios.c3": "<p>The site is live at liriosodontologia.com.</p><ul><li>Nuxt front-end with server-side rendering, published on the clinic\'s own domain</li><li>Identity pulled from the clinic logo, in cream, gold and dark green</li><li>Carousel of video results and patient testimonials with ratings</li><li>Frequently asked questions in an accordion, covering what usually stalls a booking</li><li>WhatsApp contact reachable from the header, the first block and the end of the page</li></ul><p>I have no conversion numbers to show. The site is recent and the measurement sits with the clinic. What I can state is what moved: before, you needed Instagram to learn anything about the clinic, and now there is an address that answers on its own and ends in a conversation.</p>",
+    "lirios.heroAlt": "Screens of the Lírios Odontologia website repeated in a tilted mosaic",
+    "lirios.ga": "The way in",
+    "lirios.gb": "The proof and the path to the conversation",
+    "lirios.g1": "Home, with the clinic logo, the serif headline and the two ways to book",
+    "lirios.g2": "Video results, with the carousel of patient cases and the testimonials right below",
+    "lirios.g3": "The FAQ accordion and the contact block with WhatsApp, address and Instagram"
   }
 };
-
-/* funde o conteúdo dos cases, quando i18n-cases.js estiver carregado antes */
-if (window.GA_CASES) {
-  for (const lang of Object.keys(DICT)) {
-    Object.assign(DICT[lang], window.GA_CASES[lang] || {});
-  }
-}
 
 const STORE = "ga-lang";
 
