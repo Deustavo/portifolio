@@ -15,6 +15,8 @@ const DICT = {
     "hero.role":      "UI &amp; UX<br>Designer",
     "hero.roleInline":"UI &amp; UX Designer",
     "hero.roleLabel": "Função",
+    "hero.roles":     "UI &amp; UX Designer|Product Designer|Design Systems|Front-end amigável|Pesquisa e protótipo",
+    "hero.cue":       "Ver os projetos",
     "hero.bio":       "Designer de produto desde 2019. Gosto de problema mal definido: pesquiso, prototipo e corto até a interface ficar óbvia.",
     "hero.bioShort":  "UI &amp; UX Designer. Desenho interfaces e entendo o código que as sustenta.",
 
@@ -107,6 +109,8 @@ const DICT = {
     "hero.role":      "UI &amp; UX<br>Designer",
     "hero.roleInline":"UI &amp; UX Designer",
     "hero.roleLabel": "Role",
+    "hero.roles":     "UI &amp; UX Designer|Product Designer|Design Systems|Front-end friendly|Research and prototyping",
+    "hero.cue":       "See the projects",
     "hero.bio":       "Product designer since 2019. I like badly defined problems: I research, prototype and cut until the interface becomes obvious.",
     "hero.bioShort":  "UI &amp; UX Designer. I design interfaces and understand the code behind them.",
 

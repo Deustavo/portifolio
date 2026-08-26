@@ -31,13 +31,38 @@ a.box::before{content:"";position:absolute;inset:0;z-index:0;background:var(--fi
 a.box:hover::before{transform:translateY(0)}
 a.box:hover{color:var(--on-fill);transform:translateY(-4px)}
 a.box > *{position:relative;z-index:1}
-.b-hero{grid-column:span 3;display:flex;flex-direction:column;justify-content:space-between;min-height:clamp(240px,38vh,400px)}
-.b-hero h1{font-family:var(--display);font-weight:800;margin:.6rem 0 0;
- font-size:clamp(2.2rem,7.5vw,5.4rem);line-height:.9;letter-spacing:-.035em}
-.b-hero h1 span{color:var(--c1)}
-.b-hero p{margin:1rem 0 0;max-width:40ch;color:var(--dim);font-size:.95rem}
-.b-role{grid-column:span 1;display:flex;flex-direction:column;justify-content:space-between;border-color:var(--c1);color:var(--c1)}
-.b-role h2{font-family:var(--display);font-weight:600;font-size:clamp(1.2rem,2.6vw,1.9rem);line-height:1.05;margin:.8rem 0 0;letter-spacing:-.02em}
+/* ===== hero de largura cheia ===== */
+.b-hero{grid-column:span 4;display:flex;flex-direction:column;gap:clamp(1.2rem,4vh,2.4rem);
+ justify-content:space-between;min-height:clamp(320px,56vh,620px);padding:clamp(1.4rem,3vw,2.6rem)}
+.b-hero__top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+.hero-name{font-family:var(--display);font-weight:800;margin:0;
+ font-size:clamp(3rem,13vw,9rem);line-height:.86;letter-spacing:-.045em}
+.hero-name .line{display:block;overflow:hidden;padding-bottom:.06em}
+.hero-name .ch{display:inline-block;will-change:transform,opacity}
+.hero-name .dot{font-style:normal;color:var(--c1);display:inline-block}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;flex-wrap:wrap}
+.hero-bio{margin:0;max-width:46ch;color:var(--dim);font-size:clamp(.95rem,1.3vw,1.15rem)}
+.hero-cue{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:500;
+ border:var(--bw) solid var(--line);border-radius:100px;padding:.5rem 1rem;white-space:nowrap;
+ transition:background .25s,color .25s,border-color .25s}
+.hero-cue:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
+.hero-cue i{font-style:normal;animation:cueBob 1.8s ease-in-out infinite}
+@keyframes cueBob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px)}}
+/* cargo que se troca sozinho */
+.hero-role{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;color:var(--c1)}
+.hero-role__lbl{font-size:.68rem;font-weight:500;border:var(--bw) solid currentColor;
+ padding:.2rem .6rem;border-radius:100px}
+.hero-role__slot{display:block;overflow:hidden;line-height:1.45;height:1.45em;
+ font-size:clamp(.95rem,1.7vw,1.35rem);transition:width .55s var(--ease)}
+.hero-role__word{display:block;font-family:var(--display);font-weight:600;
+ letter-spacing:-.02em;white-space:nowrap;line-height:1.45}
+/* malha de pontos que segue o cursor */
+.hero-dots{position:absolute;inset:-25%;z-index:0;pointer-events:none;color:var(--fg);opacity:.16;
+ background-image:radial-gradient(currentColor 1.3px,transparent 1.3px);background-size:24px 24px;
+ -webkit-mask-image:radial-gradient(280px 280px at var(--mx,50%) var(--my,115%),#000 0%,rgba(0,0,0,.38) 46%,transparent 78%);
+ mask-image:radial-gradient(280px 280px at var(--mx,50%) var(--my,115%),#000 0%,rgba(0,0,0,.38) 46%,transparent 78%);
+ transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.b-hero > *:not(.hero-dots){position:relative;z-index:1}
 .b-stat{display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
 .b-stat b{font-family:var(--display);font-weight:800;font-size:clamp(1.8rem,4.5vw,3rem);line-height:1;letter-spacing:-.03em}
 .b-stat.long b{font-size:clamp(1.3rem,3.1vw,2.1rem)}
@@ -62,8 +87,10 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
  max-width:100%;overflow-wrap:anywhere;transition:background .25s,color .25s}
 .chips a:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
 .foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1rem var(--gut) 2rem;font-size:.72rem;color:var(--dim)}
-@media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.b-hero,.b-role,.p-card.wide,.b-contact{grid-column:span 2}}
-@media(max-width:520px){.bento{grid-template-columns:1fr}.b-hero,.b-role,.p-card.wide,.b-contact{grid-column:span 1}}
+@media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.b-hero,.p-card.wide,.b-contact{grid-column:span 2}}
+@media(max-width:520px){.bento{grid-template-columns:1fr}.b-hero,.p-card.wide,.b-contact{grid-column:span 1}
+ .b-hero__top{flex-direction:column}.hero-name{font-size:clamp(2.6rem,17vw,4rem)}
+ .b-hero{min-height:auto;gap:1.5rem}.hero-foot{align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 .langbtn{font-size:.8rem;font-weight:500;background:none;border:var(--bw) solid var(--line);
  color:inherit;cursor:pointer;padding:.35rem .8rem;border-radius:100px;transition:background .2s,color .2s,border-color .2s}
@@ -75,13 +102,25 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
 <div class="bar"><strong>Gustavo Andrade</strong>
 <nav><a href="#w" data-i18n="nav.work">Projetos</a><a href="#c" data-i18n="nav.contact">Contato</a><button class="themebtn" data-theme-toggle aria-label="Alternar tema"><span class="ico-moon" aria-hidden="true">☾</span><span class="ico-sun" aria-hidden="true">☀</span></button><button class="langbtn" data-lang-toggle>EN</button></nav></div>
 <div class="bento">
-  <div class="box b-hero"><span class="tag" style="color:var(--c2)" data-i18n="hero.statusShort">● Disponível · São Paulo, BR</span>
-    <div><h1>Gustavo<br>Andrade<span>.</span></h1>
-      <p data-i18n="hero.bioShort">UI &amp; UX Designer. Desenho interfaces e entendo o código que as sustenta.</p></div></div>
-  <div class="box b-role"><span class="tag" data-i18n="hero.roleLabel">Função</span><h2 data-i18n="hero.role">UI &amp; UX Designer</h2></div>
-  <div class="box b-stat long"><b data-i18n="stat.since">Desde 2019</b><small data-i18n="stat.sinceLbl">de prática</small></div>
-  <div class="box b-stat"><b data-i18n="stat.products">20+</b><small data-i18n="stat.productsLbl">produtos entregues</small></div>
-  <div class="box b-stat"><b data-i18n="stat.awards">2×</b><small data-i18n="stat.awardsLbl">vitórias em hackathon</small></div>
+  <div class="box b-hero" data-hero>
+    <div class="hero-dots" aria-hidden="true"></div>
+    <div class="b-hero__top">
+      <span class="tag" style="color:var(--c2)" data-i18n="hero.statusShort">● Disponível · São Paulo, BR</span>
+      <div class="hero-role">
+        <span class="hero-role__lbl" data-i18n="hero.roleLabel">Função</span>
+        <span class="hero-role__slot"><span class="hero-role__word">UI &amp; UX Designer</span></span>
+        <span hidden data-i18n="hero.roles" data-roles>UI &amp; UX Designer|Product Designer|Design Systems|Front-end amigável</span>
+      </div>
+    </div>
+    <h1 class="hero-name"><span class="line" data-split>Gustavo</span><span class="line" data-split>Andrade<i class="dot">.</i></span></h1>
+    <div class="hero-foot">
+      <p class="hero-bio" data-i18n="hero.bioShort">UI &amp; UX Designer. Desenho interfaces e entendo o código que as sustenta.</p>
+      <a class="hero-cue" href="#w"><span data-i18n="hero.cue">Ver os projetos</span><i>↓</i></a>
+    </div>
+  </div>
+  <div class="box b-stat long"><b data-count data-i18n="stat.since">Desde 2019</b><small data-i18n="stat.sinceLbl">de prática</small></div>
+  <div class="box b-stat"><b data-count data-i18n="stat.products">20+</b><small data-i18n="stat.productsLbl">produtos entregues</small></div>
+  <div class="box b-stat"><b data-count data-i18n="stat.awards">2×</b><small data-i18n="stat.awardsLbl">vitórias em hackathon</small></div>
   <div class="box b-stat long"><b data-i18n="stat.edu">USP/Esalq</b><small data-i18n="stat.eduLbl">pós em Eng. de Software</small></div>
 </div>
 <div class="head" id="w"><h2 data-i18n="work.title">Projetos</h2><span class="tag" data-i18n="work.count">05 cases</span></div>
@@ -107,4 +146,5 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
 <script src="assets/i18n.js"></script>
 <script src="assets/theme.js"></script>
 <script src="assets/transition.js"></script>
+<script src="assets/hero.js"></script>
 </body></html>
