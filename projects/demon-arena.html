@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demon Arena — Gustavo Andrade</title>
+<meta name="description" content="Jogo online de navegador com arena 1x1 e defesa de base cooperativa de 1 a 4 jogadores. Canvas puro no cliente, servidor autoritativo em Node com WebSocket.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/case-bento.css">
+<link rel="stylesheet" href="../assets/transition.css">
+<link rel="stylesheet" href="../assets/interactions.css">
+<script>(function(){try{var t=localStorage.getItem("ga-theme");if(t!=="dark"&&t!=="light")t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
+</head><body>
+<div class="bar">
+  <strong><a href="../index.html">Gustavo Andrade</a></strong>
+  <nav>
+    <a href="../index.html#projetos" data-i18n="nav.work">Projetos</a>
+    <a href="../index.html#contato" data-i18n="nav.contact">Contato</a>
+    <button class="themebtn" data-theme-toggle aria-label="Alternar tema"><span class="ico-moon" aria-hidden="true">☾</span><span class="ico-sun" aria-hidden="true">☀</span></button><button class="langbtn" data-lang-toggle>EN</button>
+  </nav>
+</div>
+
+<div class="wrap">
+  <header class="box head">
+    <span class="tag" data-i18n="demon.kicker">Case 15 · 2026</span>
+    <h1>Demon Arena</h1>
+    <p class="head__sub" data-i18n="demon.sub">—</p>
+  </header>
+
+  <div class="facts">
+    <div class="fact"><span data-i18n="demon.f1">Cliente</span><strong data-i18n="demon.v1">—</strong></div>
+    <div class="fact"><span data-i18n="demon.f2">Papel</span><strong data-i18n="demon.v2">—</strong></div>
+    <div class="fact"><span data-i18n="demon.f3">Escopo</span><strong data-i18n="demon.v3">—</strong></div>
+    <div class="fact"><span data-i18n="demon.f4">Ano</span><strong>2026</strong></div>
+  </div>
+
+  <img class="cover" src="../assets/img/demon-arena/hero.png" alt=""
+       data-i18n-attr="alt:demon.heroAlt" width="1920" height="1080">
+
+  <section class="box block">
+    <h2 data-i18n="demon.h1">O contexto</h2>
+    <div data-i18n="demon.c1">—</div>
+  </section>
+
+  <section class="box block">
+    <h2 data-i18n="demon.h2">O processo</h2>
+    <div data-i18n="demon.c2">—</div>
+  </section>
+
+  <section class="box">
+    <span class="strip__lbl" data-i18n="demon.ga">—</span>
+    <div class="shots shots--3">
+      <figure class="shot"><img loading="lazy" src="../assets/img/demon-arena/menu-inicial.png" alt="" data-i18n-attr="alt:demon.g1"><figcaption data-i18n="demon.g1">—</figcaption></figure>
+      <figure class="shot"><img loading="lazy" src="../assets/img/demon-arena/arena-pvp.png" alt="" data-i18n-attr="alt:demon.g2"><figcaption data-i18n="demon.g2">—</figcaption></figure>
+      <figure class="shot"><img loading="lazy" src="../assets/img/demon-arena/fim-de-partida.png" alt="" data-i18n-attr="alt:demon.g3"><figcaption data-i18n="demon.g3">—</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="box">
+    <span class="strip__lbl" data-i18n="demon.gb">—</span>
+    <div class="shots shots--3">
+      <figure class="shot"><img loading="lazy" src="../assets/img/demon-arena/defesa-da-base.png" alt="" data-i18n-attr="alt:demon.g4"><figcaption data-i18n="demon.g4">—</figcaption></figure>
+      <figure class="shot"><img loading="lazy" src="../assets/img/demon-arena/arvore-de-talentos.png" alt="" data-i18n-attr="alt:demon.g5"><figcaption data-i18n="demon.g5">—</figcaption></figure>
+      <figure class="shot"><img loading="lazy" src="../assets/img/demon-arena/relicario.png" alt="" data-i18n-attr="alt:demon.g6"><figcaption data-i18n="demon.g6">—</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="box block">
+    <h2 data-i18n="demon.h3">O resultado</h2>
+    <div data-i18n="demon.c3">—</div>
+    <div class="kpis" style="--fill:var(--c15)">
+      <a class="kpi" href="https://demonarena.vercel.app/" target="_blank" rel="noopener"><span data-i18n="demon.l1">Jogar no navegador ↗</span></a>
+    </div>
+  </section>
+
+  <a class="box next" href="sistema-pilates.html" style="--fill:var(--c9)">
+    <span class="tag" data-i18n="case.next">Próximo projeto</span>
+    <strong data-i18n="mcb.title">MC Blessed Pilates</strong>
+    <span>↗</span>
+  </a>
+</div>
+<div class="foot">
+  <span data-i18n="foot.rights">© 2026 Gustavo Andrade</span>
+  <a href="../index.html#contato" data-i18n="case.cta">Trabalhar juntos →</a>
+</div>
+<script src="../assets/i18n.js"></script>
+<script src="../assets/theme.js"></script>
+<script src="../assets/transition.js"></script>
+<script src="../assets/interactions.js"></script>
+</body></html>

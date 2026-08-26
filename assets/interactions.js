@@ -101,7 +101,10 @@
       var nw = el.img.naturalWidth, nh = el.img.naturalHeight;
       if (!nw || !nh) return;
       var availW = el.fig.clientWidth;
-      var availH = el.fig.clientHeight - el.cap.offsetHeight - 14;
+      /* a legenda ocupa a linha de baixo do grid: o que a imagem pode usar é a
+         altura do figure menos a legenda já renderizada e o gap entre as duas */
+      var gap = parseFloat(getComputedStyle(el.fig).rowGap) || 14;
+      var availH = el.fig.clientHeight - el.cap.offsetHeight - gap;
       if (availW < 40 || availH < 40) return;
       var k = Math.min(availW / nw, availH / nh, MAX_UP);
       el.img.style.width = Math.round(nw * k) + 'px';
