@@ -85,6 +85,8 @@ img.cover{object-fit:cover;height:auto}
 @media(min-width:620px){.shots{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(min-width:1000px){.shots{grid-template-columns:repeat(5,minmax(0,1fr))}}
 /* grupos de contagem fixa, para a linha fechar cheia */
+.shots--2{grid-template-columns:1fr}
+@media(min-width:700px){.shots--2{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .shots--3{grid-template-columns:1fr}
 @media(min-width:700px){.shots--3{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .shots--4{grid-template-columns:repeat(2,minmax(0,1fr))}

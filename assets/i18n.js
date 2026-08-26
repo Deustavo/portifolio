@@ -33,7 +33,7 @@ const DICT = {
     "stat.inline":    "Desde 2019 · 20+ produtos<br>2× hackathon · Pós USP/Esalq",
 
     "work.title":     "Projetos selecionados",
-    "work.count":     "06 cases",
+    "work.count":     "07 cases",
 
     "contact.kicker": "Contato · resposta em 24h",
     "contact.cta":    "Vamos<br>conversar",
@@ -63,6 +63,8 @@ const DICT = {
     "p5.sub": "Design System · B2B · 2022",        "p5.tag": "Design System",
     "p6.sub": "Site institucional · Multi-público · 2021", "p6.tag": "Institucional",
     "p6.metric": "Um catálogo de 8 serviços em 3 gabaritos",
+    "p7.sub": "Blockchain · React · 2022", "p7.tag": "Front-end",
+    "p7.metric": "Front-end em React de um registro autoral em blockchain",
     "p.more": "Ver case",
 
     /* ---- case Life Guard ---- */
@@ -123,7 +125,23 @@ const DICT = {
     "lsite.g4": "Internet fixa",
     "lsite.g5": "Celular",
     "lsite.g6": "Life Guard",
-    "lsite.g7": "Game Station"
+    "lsite.g7": "Game Station",
+
+    /* ---- case Owna ---- */
+    "owna.title": "Owna",
+    "owna.kicker": "Case 03 \u00b7 2022",
+    "owna.sub":    "Sistema onde a obra do cliente \u00e9 registrada em blockchain e o autor recebe um certificado com o hash do arquivo e o n\u00famero da autentica\u00e7\u00e3o. Entrei como desenvolvedor front-end.",
+    "owna.f1": "Cliente",  "owna.v1": "Owna Lurin Tech",
+    "owna.f2": "Papel",    "owna.v2": "Desenvolvimento front-end, React",
+    "owna.f3": "Escopo",   "owna.v3": "Plataforma de registro autoral",
+    "owna.f4": "Ano",
+    "owna.h1": "O contexto",
+    "owna.c1": "<p>A Owna registrava em blockchain a autoria das obras dos clientes. O arquivo gera um hash, esse hash entra em uma transa\u00e7\u00e3o com data e hora em UTC, e o autor recebe um certificado que aponta para esse registro. \u00c9 uma resposta t\u00e9cnica para uma pergunta velha, que \u00e9 provar desde quando uma obra existe.</p><p>Eu n\u00e3o desenhei o produto. Entrei para ficar \u00e0 frente das demandas de front-end, com React como ferramenta principal.</p>",
+    "owna.h2": "O processo",
+    "owna.c2": "<p>O React era a parte que eu j\u00e1 sabia fazer. O que era novo estava depois dele. Foi meu primeiro cargo como desenvolvedor pleno, e a primeira vez que teste e deploy eram assunto meu, e n\u00e3o de outra pessoa. Passei o projeto aprendendo essas duas ferramentas em cima de c\u00f3digo que j\u00e1 estava em uso.</p><p>A pe\u00e7a que exige mais do front-end \u00e9 o certificado, porque \u00e9 a \u00fanica que sai da plataforma e vai ser lida por quem n\u00e3o \u00e9 usu\u00e1rio. Ele carrega o t\u00edtulo da obra, o nome do arquivo, o hashcode inteiro, o n\u00famero da autentica\u00e7\u00e3o em blockchain e dois QR, um de autores e um de titulares. Tem seletor de apar\u00eancia clara e escura, download e vers\u00e3o para celular. Um hashcode de 64 caracteres em tela de telefone \u00e9 o tipo de detalhe que decide o layout.</p>",
+    "owna.h3": "O resultado",
+    "owna.c3": "<p>Respondi pelo front-end da plataforma enquanto estive no projeto.</p><p>O que levei dele foi menos sobre React e mais sobre o que vem depois de escrever a tela: escrever o teste que segura a regra e acompanhar a publica\u00e7\u00e3o, em vez de entregar branch e sair.</p>",
+    "owna.heroAlt": "Certificado de registro autoral da Owna nos temas claro e escuro e na vers\u00e3o para celular"
   },
   en: {
     "doc.title":      "Gustavo Andrade — Product Design & Software Engineering",
@@ -154,7 +172,7 @@ const DICT = {
     "stat.inline":    "Since 2019 · 20+ products<br>2× hackathon · USP/Esalq postgrad",
 
     "work.title":     "Selected work",
-    "work.count":     "06 cases",
+    "work.count":     "07 cases",
 
     "contact.kicker": "Contact · reply within 24h",
     "contact.cta":    "Let's<br>talk",
@@ -195,6 +213,8 @@ const DICT = {
     "p5.sub": "Design System · B2B · 2022",       "p5.tag": "Design System",
     "p6.sub": "Marketing site · Multi-audience · 2021", "p6.tag": "Marketing site",
     "p6.metric": "An 8-service catalogue in 3 templates",
+    "p7.sub": "Blockchain · React · 2022", "p7.tag": "Front-end",
+    "p7.metric": "React front-end for a blockchain authorship registry",
     "p.more": "View case",
 
     /* ---- Life Guard case ---- */
@@ -255,7 +275,23 @@ const DICT = {
     "lsite.g4": "Fixed internet",
     "lsite.g5": "Mobile",
     "lsite.g6": "Life Guard",
-    "lsite.g7": "Game Station"
+    "lsite.g7": "Game Station",
+
+    /* ---- case Owna ---- */
+    "owna.title": "Owna",
+    "owna.kicker": "Case 03 \u00b7 2022",
+    "owna.sub":    "A system that records a client's work on a blockchain and hands the author a certificate carrying the file hash and the authentication number. I joined as the front-end developer.",
+    "owna.f1": "Client", "owna.v1": "Owna Lurin Tech",
+    "owna.f2": "Role",   "owna.v2": "Front-end development, React",
+    "owna.f3": "Scope",  "owna.v3": "Authorship registry platform",
+    "owna.f4": "Year",
+    "owna.h1": "The context",
+    "owna.c1": "<p>Owna recorded the authorship of its clients' works on a blockchain. The file produces a hash, that hash goes into a transaction stamped with a UTC date and time, and the author receives a certificate pointing at that record. It is a technical answer to an old question, which is proving how far back a work exists.</p><p>I did not design the product. I came in to take the lead on the front-end work, with React as the main tool.</p>",
+    "owna.h2": "The process",
+    "owna.c2": "<p>React was the part I already knew how to do. What was new came after it. This was my first mid-level developer role, and the first time testing and deployment were mine to answer for rather than someone else's. I spent the project learning both of those on top of code that was already in use.</p><p>The piece that asks the most of the front-end is the certificate, because it is the only one that leaves the platform and gets read by someone who is not a user. It carries the title of the work, the file name, the full hashcode, the blockchain authentication number and two QR codes, one for authors and one for rights holders. It has a light and dark appearance switch, a download and a phone version. A 64 character hashcode on a phone screen is the kind of detail that settles the layout.</p>",
+    "owna.h3": "The outcome",
+    "owna.c3": "<p>I answered for the platform's front-end while I was on the project.</p><p>What I took from it was less about React and more about what comes after writing the screen: writing the test that holds the rule and following the release, instead of handing over a branch and walking away.</p>",
+    "owna.heroAlt": "Owna authorship certificate in light and dark themes and in its phone version"
   }
 };
 
