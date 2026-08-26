@@ -9,7 +9,7 @@
  --pad:clamp(1rem,3vw,2rem);--maxw:1600px;
  --gut:max(var(--pad), calc((100% - var(--maxw))/2));--r:18px;--bw:2px;--ease:cubic-bezier(.34,1.56,.64,1)}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);line-height:1.5;overflow-x:hidden;
  transition:background .3s ease,color .3s ease}
 a{color:inherit;text-decoration:none}
@@ -57,10 +57,10 @@ a.box > *{position:relative;z-index:1}
 .hero-role__word{display:block;font-family:var(--display);font-weight:600;
  letter-spacing:-.02em;white-space:nowrap;line-height:1.45}
 /* malha de pontos que segue o cursor */
-.hero-dots{position:absolute;inset:-25%;z-index:0;pointer-events:none;color:var(--fg);opacity:.16;
- background-image:radial-gradient(currentColor 1.3px,transparent 1.3px);background-size:24px 24px;
- -webkit-mask-image:radial-gradient(280px 280px at var(--mx,50%) var(--my,115%),#000 0%,rgba(0,0,0,.38) 46%,transparent 78%);
- mask-image:radial-gradient(280px 280px at var(--mx,50%) var(--my,115%),#000 0%,rgba(0,0,0,.38) 46%,transparent 78%);
+.hero-dots{position:absolute;inset:-25%;z-index:0;pointer-events:none;color:var(--fg);opacity:.55;
+ background-image:radial-gradient(currentColor 2px,transparent 2px);background-size:22px 22px;
+ -webkit-mask-image:radial-gradient(340px 340px at var(--mx,50%) var(--my,115%),#000 0%,rgba(0,0,0,.72) 48%,transparent 82%);
+ mask-image:radial-gradient(340px 340px at var(--mx,50%) var(--my,115%),#000 0%,rgba(0,0,0,.72) 48%,transparent 82%);
  transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform .5s cubic-bezier(.22,.61,.36,1)}
 .b-hero > *:not(.hero-dots){position:relative;z-index:1}
 .b-stat{display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
@@ -75,6 +75,12 @@ a.box > *{position:relative;z-index:1}
 .head.sub h3::before{content:"";width:clamp(18px,3vw,34px);height:var(--bw);background:var(--line);border-radius:2px}
 .head.sub .tag{color:var(--dim)}
 .head + .head.sub{padding-top:.6rem}
+.head .anchor{color:inherit;text-decoration:none;position:relative;cursor:pointer;transition:color .2s}
+.head .anchor::after{content:"#";position:absolute;left:100%;margin-left:.3em;color:var(--c1);
+ opacity:0;transform:translateX(-.25em);transition:opacity .2s,transform .2s;pointer-events:none}
+.head .anchor:hover{color:var(--c1)}
+.head .anchor:hover::after,.head .anchor:focus-visible::after{opacity:1;transform:none}
+.head .anchor:focus-visible{outline:var(--bw) solid var(--c1);outline-offset:.25em;border-radius:4px}
 .p-card{display:flex;flex-direction:column;justify-content:space-between;min-height:220px}
 .p-card.wide{grid-column:span 2}
 .p-card h3{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,3vw,2.1rem);margin:.9rem 0 .2rem;letter-spacing:-.025em}
@@ -107,7 +113,7 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
 <script>(function(){try{var t=localStorage.getItem("ga-theme");if(t!=="dark"&&t!=="light")t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
 </head><body>
 <div class="bar"><strong>Gustavo Andrade</strong>
-<nav><a href="#w" data-i18n="nav.work">Projetos</a><a href="#c" data-i18n="nav.contact">Contato</a><button class="themebtn" data-theme-toggle aria-label="Alternar tema"><span class="ico-moon" aria-hidden="true">☾</span><span class="ico-sun" aria-hidden="true">☀</span></button><button class="langbtn" data-lang-toggle>EN</button></nav></div>
+<nav><a href="#projetos" data-i18n="nav.work">Projetos</a><a href="#contato" data-i18n="nav.contact">Contato</a><button class="themebtn" data-theme-toggle aria-label="Alternar tema"><span class="ico-moon" aria-hidden="true">☾</span><span class="ico-sun" aria-hidden="true">☀</span></button><button class="langbtn" data-lang-toggle>EN</button></nav></div>
 <div class="bento">
   <div class="box b-hero" data-hero>
     <div class="hero-dots" aria-hidden="true"></div>
@@ -122,7 +128,7 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
     <h1 class="hero-name"><span class="line" data-split>Gustavo</span><span class="line" data-split>Andrade<i class="dot">.</i></span></h1>
     <div class="hero-foot">
       <p class="hero-bio" data-i18n="hero.bioShort">UI &amp; UX, front-end e engenharia de software. Desenho a interface e construo o código que a sustenta.</p>
-      <a class="hero-cue" href="#w"><span data-i18n="hero.cue">Ver os projetos</span><i>↓</i></a>
+      <a class="hero-cue" href="#projetos"><span data-i18n="hero.cue">Ver os projetos</span><i>↓</i></a>
     </div>
   </div>
   <div class="box b-stat long"><b data-count data-i18n="stat.since">Desde 2019</b><small data-i18n="stat.sinceLbl">de prática</small></div>
@@ -130,7 +136,7 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
   <div class="box b-stat"><b data-count data-i18n="stat.awards">2×</b><small data-i18n="stat.awardsLbl">vitórias em hackathon</small></div>
   <div class="box b-stat long"><b data-i18n="stat.edu">USP/Esalq</b><small data-i18n="stat.eduLbl">pós em Eng. de Software</small></div>
 </div>
-<div class="head" id="w"><h2 data-i18n="work.title">Projetos selecionados</h2><span class="tag" data-i18n="work.count" data-work-count>10 cases</span></div>
+<div class="head" id="projetos"><h2><a class="anchor" href="#projetos" data-i18n="work.title">Projetos selecionados</a></h2><span class="tag" data-i18n="work.count" data-work-count>10 cases</span></div>
 <div class="filters" data-filters role="group" aria-label="Filtrar projetos" data-i18n-attr="aria-label:filter.label">
   <button class="chip is-on" type="button" data-filter="all"><span data-i18n="filter.all">Tudo</span></button>
   <button class="chip" type="button" data-filter="games"><span data-i18n="work.games">Jogos</span></button>
@@ -138,12 +144,12 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
   <button class="chip" type="button" data-filter="sites"><span data-i18n="work.sites">Sites</span></button>
   <button class="chip" type="button" data-filter="protos"><span data-i18n="work.protos">Protótipos</span></button>
 </div>
-<div class="head sub" data-group="games"><h3 data-i18n="work.games">Jogos</h3><span class="tag" data-i18n="work.gamesN">01 case</span></div>
+<div class="head sub" id="jogos" data-group="games"><h3><a class="anchor" href="#jogos" data-i18n="work.games">Jogos</a></h3><span class="tag" data-i18n="work.gamesN">01 case</span></div>
 <div class="bento" data-group="games">
   <a class="box p-card wide" href="projects/jogo-chinela-destroyer.html" style="--fill:var(--c2)"><span class="tag" data-i18n="p12.tag">Jogo</span>
     <span><h3>Chinela Destroyer</h3><p data-i18n="p12.metric">Meu primeiro jogo, feito sozinho do sprite ao código</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
 </div>
-<div class="head sub" data-group="systems"><h3 data-i18n="work.systems">Sistemas</h3><span class="tag" data-i18n="work.systemsN">05 cases</span></div>
+<div class="head sub" id="sistemas" data-group="systems"><h3><a class="anchor" href="#sistemas" data-i18n="work.systems">Sistemas</a></h3><span class="tag" data-i18n="work.systemsN">05 cases</span></div>
 <div class="bento" data-group="systems">
   <a class="box p-card wide" href="projects/metrics.html" style="--fill:var(--c10)"><span class="tag" data-i18n="p14.tag">Projeto pessoal</span>
     <span><h3>Metrics</h3><p data-i18n="p14.metric">YouTube, Twitch e Kick somados em tempo real, com relatório no fim</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
@@ -156,7 +162,7 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
   <a class="box p-card" href="projects/owna.html" style="--fill:var(--c6)"><span class="tag" data-i18n="p7.tag">Front-end</span>
     <span><h3>Owna</h3><p data-i18n="p7.metric">Registro de autoria com hash e certificado, em React</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
 </div>
-<div class="head sub" data-group="sites"><h3 data-i18n="work.sites">Sites</h3><span class="tag" data-i18n="work.sitesN">03 cases</span></div>
+<div class="head sub" id="sites" data-group="sites"><h3><a class="anchor" href="#sites" data-i18n="work.sites">Sites</a></h3><span class="tag" data-i18n="work.sitesN">03 cases</span></div>
 <div class="bento" data-group="sites">
   <a class="box p-card wide" href="projects/site-dentista.html" style="--fill:var(--c4)"><span class="tag" data-i18n="p11.tag">Freelance</span>
     <span><h3>Lírios Odontologia</h3><p data-i18n="p11.metric">Site de uma clínica que até então só existia no Instagram</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
@@ -165,12 +171,13 @@ a.p-card:hover .p-card__go span{transform:translateX(4px)}.p-card__go span{trans
   <a class="box p-card" href="projects/life-site.html" style="--fill:var(--c3)"><span class="tag" data-i18n="p6.tag">Institucional</span>
     <span><h3>Life Site</h3><p data-i18n="p6.metric">Um catálogo de 8 serviços em 3 gabaritos</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
 </div>
-<div class="head sub" data-group="protos"><h3 data-i18n="work.protos">Protótipos</h3><span class="tag" data-i18n="work.protosN">01 case</span></div>
+<div class="head sub" id="prototipos" data-group="protos"><h3><a class="anchor" href="#prototipos" data-i18n="work.protos">Protótipos</a></h3><span class="tag" data-i18n="work.protosN">01 case</span></div>
 <div class="bento" data-group="protos">
   <a class="box p-card wide" href="projects/life-guard.html" style="--fill:var(--c1)"><span class="tag" data-i18n="p1.tag">Segurança</span>
     <span><h3>Life Guard</h3><p data-i18n="p1.metric">Protótipo de 14 telas para a Life Tecnologia</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>&#8594;</span></span></span></a>
 </div>
-<div class="bento" id="c">
+<div class="head" id="contato"><h2><a class="anchor" href="#contato" data-i18n="contact.title">Contato</a></h2></div>
+<div class="bento">
   <div class="box b-contact"><span class="tag" style="color:var(--c2)" data-i18n="contact.kicker">Contato · resposta em 24h</span>
     <a class="big" href="https://wa.me/5511977416788" target="_blank" rel="noopener" data-i18n="contact.ctaB">Bora<br><span>construir?</span></a>
     <div class="chips"><a href="mailto:gustavorodriguesandrade00@gmail.com" target="_blank" rel="noopener">gustavorodriguesandrade00@gmail.com</a>

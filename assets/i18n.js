@@ -57,6 +57,7 @@ const DICT = {
     "work.protos":    "Protótipos",
     "work.protosN":   "01 case",
 
+    "contact.title":  "Contato",
     "contact.kicker": "Contato · resposta em 24h",
     "contact.cta":    "Vamos<br>conversar",
     "contact.ctaB":   "Bora<br><span>construir?</span>",
@@ -380,6 +381,7 @@ const DICT = {
     "work.protos":    "Prototypes",
     "work.protosN":   "01 case",
 
+    "contact.title":  "Contact",
     "contact.kicker": "Contact · reply within 24h",
     "contact.cta":    "Let's<br>talk",
     "contact.ctaB":   "Let's<br><span>build it?</span>",
