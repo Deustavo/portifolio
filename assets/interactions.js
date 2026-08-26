@@ -350,13 +350,53 @@
       paintCount();
     }
 
+    /* a URL guarda o recorte: cada grupo tem um id de ancora (#jogos, #sistemas)
+       e esse id vale como filtro, tanto ao abrir a pagina quanto ao clicar */
+    var byHash = {};
+    var byName = {};
+    groups.forEach(function (g) {
+      if (!g.id || !g.dataset.group) return;
+      byHash[g.id] = g.dataset.group;
+      if (!byName[g.dataset.group]) byName[g.dataset.group] = g.id;
+    });
+
+    function nameFromHash() {
+      var h = (location.hash || '').replace(/^#/, '');
+      if (!h) return null;
+      if (byHash[h]) return byHash[h];
+      /* aceita tambem o nome interno do filtro, caso alguem digite #protos */
+      return byName[h] ? h : null;
+    }
+
+    function writeHash(name) {
+      var hash = name === 'all' ? '' : '#' + (byName[name] || name);
+      var url = location.pathname + location.search + hash;
+      if (history.replaceState) history.replaceState(null, '', url);
+      else location.hash = hash;
+    }
+
     chips.forEach(function (c) {
       c.setAttribute('aria-pressed', c.dataset.filter === 'all' ? 'true' : 'false');
       c.addEventListener('click', function () {
         if (c.dataset.filter === active) return;
         run(c.dataset.filter);
+        writeHash(c.dataset.filter);
       });
     });
+
+    window.addEventListener('hashchange', function () {
+      var name = nameFromHash() || 'all';
+      if (name !== active) run(name);
+    });
+
+    var initial = nameFromHash();
+    if (initial) {
+      run(initial);
+      /* depois de esconder os outros grupos a pagina encurta: reancora no alvo */
+      var target = document.getElementById((location.hash || '').replace(/^#/, ''));
+      if (target) requestAnimationFrame(function () { target.scrollIntoView(); });
+    }
+
     onLang(paintCount);
   }
 
