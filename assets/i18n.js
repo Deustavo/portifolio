@@ -33,7 +33,7 @@ const DICT = {
     "stat.inline":    "Desde 2019 · 20+ produtos<br>2× hackathon · Pós USP/Esalq",
 
     "work.title":     "Projetos selecionados",
-    "work.count":     "08 cases",
+    "work.count":     "09 cases",
 
     "contact.kicker": "Contato · resposta em 24h",
     "contact.cta":    "Vamos<br>conversar",
@@ -67,6 +67,8 @@ const DICT = {
     "p7.metric": "Front-end em React de um registro autoral em blockchain",
     "p8.sub": "E-commerce · Front-end · 2023", "p8.tag": "Front-end",
     "p8.metric": "Consulta de pedidos das lojas Tray, pixel perfect e mobile first",
+    "p9.sub": "E-commerce · Nuxt · 2024", "p9.tag": "Front-end",
+    "p9.metric": "Catálogo em Nuxt com renderização no servidor, feito para ser indexado",
     "p.more": "Ver case",
 
     /* ---- case Life Guard ---- */
@@ -162,7 +164,29 @@ const DICT = {
     "cdc.ga": "As três telas da consulta, do resumo ao detalhe",
     "cdc.g1": "Minha conta, com o último pedido, a linha do tempo do status e o preenchimento do cadastro",
     "cdc.g2": "Meus pedidos, a lista com data, valor e situação de cada compra",
-    "cdc.g3": "Detalhe do pedido, com os produtos, o endereço de entrega e o resumo do pagamento"
+    "cdc.g3": "Detalhe do pedido, com os produtos, o endereço de entrega e o resumo do pagamento",
+
+    /* ---- case Loja de aplicativos ---- */
+    "lapp.title": "Loja de aplicativos",
+    "lapp.kicker": "Case 05 · 2024",
+    "lapp.sub":    "Catálogo dos aplicativos que o lojista instala no painel e na loja da Tray Commerce. Fui o principal responsável pelo front-end.",
+    "lapp.f1": "Cliente",  "lapp.v1": "Tray Commerce",
+    "lapp.f2": "Papel",    "lapp.v2": "Desenvolvimento front-end",
+    "lapp.f3": "Escopo",   "lapp.v3": "Catálogo de aplicativos da plataforma",
+    "lapp.f4": "Ano",
+    "lapp.h1": "O contexto",
+    "lapp.c1": "<p>A plataforma da Tray aceita aplicativos de terceiros, que o lojista instala no painel e na própria loja para resolver frete, pós-venda, marketing, integração com marketplace. O que faltava era o lugar onde esse aplicativo é apresentado antes de ser instalado.</p><p>Quem procura um app não sai do painel pensando em passear por um catálogo. A pessoa tem um problema, digita esse problema em um buscador e cai direto na página de um aplicativo. Isso muda o que a página precisa ser: cada app é uma porta de entrada independente do site, e não uma folha pendurada em um menu.</p><p>Fui o principal responsável pelo desenvolvimento do front-end.</p>",
+    "lapp.h2": "O processo",
+    "lapp.c2": "<p>A primeira decisão foi o Nuxt. É um framework em cima do Vue com renderização no servidor, e escolhi por causa do parágrafo acima: se a página tem que ser indexada, o buscador precisa receber o conteúdo já montado no HTML da resposta, não um esqueleto que só ganha texto depois que o JavaScript roda no navegador. Uma aplicação Vue comum entrega o esqueleto. O Nuxt entrega a página.</p><p>Com o SSR resolvido, cuidei dos metadados página por página. Título, descrição e as tags de compartilhamento saem do conteúdo de cada aplicativo e de cada categoria, então a listagem de logística e a página do Tray Envios não chegam ao índice com o mesmo cabeçalho. E configurei o Google Tag Manager para que a medição não dependesse de alguém abrir o código a cada tag nova.</p><p>O layout foi feito mobile first e pixel perfect. As duas coisas juntas, porque catálogo é um problema de grade: o card do aplicativo tem ícone, nome, descrição cortada e o selo de pago ou grátis, e essa mesma peça precisa cair em uma coluna no celular e em três no desktop sem quebrar o alinhamento que o design definiu.</p><p>Todo componente saiu com documentação e teste unitário. Um catálogo cresce por repetição, o mesmo card aparece na home, na coleção e na categoria, então o componente é reusado antes de estar estável. O teste é o que permite mexer nele depois sem descobrir o estrago em produção.</p>",
+    "lapp.h3": "O resultado",
+    "lapp.c3": "<p>A loja de aplicativos está no ar com o catálogo completo da plataforma.</p><ul><li>Front-end em Nuxt com renderização no servidor, para as páginas serem indexáveis</li><li>Metadados próprios por aplicativo, categoria e coleção</li><li>Google Tag Manager configurado para medição sem depender de deploy</li><li>Grade de cards resolvida do celular para cima, fiel ao desenho</li><li>Documentação e teste unitário para todos os componentes</li></ul><p>O que esse projeto me ensinou foi olhar SEO como decisão de arquitetura e não como ajuste de fim de sprint. A escolha do framework veio antes da primeira tela, e foi ela que determinou se o resto do trabalho seria encontrado.</p>",
+    "lapp.heroAlt": "Telas da loja de aplicativos da Tray repetidas em um mosaico inclinado",
+    "lapp.ga": "A descoberta, da home à coleção",
+    "lapp.gb": "A categoria e a página do aplicativo",
+    "lapp.g1": "Home, com a busca em destaque e a faixa de aplicativos mais instalados",
+    "lapp.g2": "Coleção Mais instalados, a lista completa em grade de três colunas",
+    "lapp.g3": "Categoria Pós-vendas, com a navegação lateral pelas demais categorias",
+    "lapp.g4": "Página do Tray Envios, com o botão de instalar acima da descrição do aplicativo"
   },
   en: {
     "doc.title":      "Gustavo Andrade — Product Design & Software Engineering",
@@ -193,7 +217,7 @@ const DICT = {
     "stat.inline":    "Since 2019 · 20+ products<br>2× hackathon · USP/Esalq postgrad",
 
     "work.title":     "Selected work",
-    "work.count":     "08 cases",
+    "work.count":     "09 cases",
 
     "contact.kicker": "Contact · reply within 24h",
     "contact.cta":    "Let's<br>talk",
@@ -238,6 +262,8 @@ const DICT = {
     "p7.metric": "React front-end for a blockchain authorship registry",
     "p8.sub": "E-commerce · Front-end · 2023", "p8.tag": "Front-end",
     "p8.metric": "Order lookup for Tray stores, pixel perfect and mobile first",
+    "p9.sub": "E-commerce · Nuxt · 2024", "p9.tag": "Front-end",
+    "p9.metric": "A Nuxt catalogue with server side rendering, built to be indexed",
     "p.more": "View case",
 
     /* ---- Life Guard case ---- */
@@ -333,7 +359,29 @@ const DICT = {
     "cdc.ga": "The three screens of the lookup, from summary to detail",
     "cdc.g1": "My account, with the latest order, the status timeline and how complete the profile is",
     "cdc.g2": "My orders, the list with date, amount and status for each purchase",
-    "cdc.g3": "Order detail, with the products, the shipping address and the payment summary"
+    "cdc.g3": "Order detail, with the products, the shipping address and the payment summary",
+
+    /* ---- case App store ---- */
+    "lapp.title": "App store",
+    "lapp.kicker": "Case 05 · 2024",
+    "lapp.sub":    "The catalogue of apps a merchant installs into their Tray Commerce dashboard and storefront. I led the front-end.",
+    "lapp.f1": "Client", "lapp.v1": "Tray Commerce",
+    "lapp.f2": "Role",   "lapp.v2": "Front-end development",
+    "lapp.f3": "Scope",  "lapp.v3": "The platform's app catalogue",
+    "lapp.f4": "Year",
+    "lapp.h1": "The context",
+    "lapp.c1": "<p>Tray's platform takes third party apps, which a merchant installs into the dashboard and into their own store to handle shipping, post-purchase, marketing, marketplace integration. What was missing was the place where an app gets presented before anyone installs it.</p><p>Nobody looking for an app leaves the dashboard meaning to browse a catalogue. They have a problem, they type that problem into a search engine and they land straight on one app's page. That changes what the page has to be: every app is an independent front door to the site, not a leaf hanging off a menu.</p><p>I led the front-end development.</p>",
+    "lapp.h2": "The process",
+    "lapp.c2": "<p>The first decision was Nuxt. It is a framework on top of Vue with server side rendering, and I chose it because of the paragraph above: if the page has to be indexed, the crawler needs the content already assembled in the HTML of the response, not a skeleton that only gets its text once JavaScript runs in the browser. A plain Vue app hands over the skeleton. Nuxt hands over the page.</p><p>With SSR settled, I took care of the metadata page by page. Title, description and the sharing tags come out of each app's and each category's own content, so the logistics listing and the Tray Envios page do not reach the index wearing the same heading. And I set up Google Tag Manager so measurement would not depend on someone opening the code for every new tag.</p><p>The layout was built mobile first and pixel perfect. Both at once, because a catalogue is a grid problem: an app card carries an icon, a name, a truncated description and the paid or free badge, and that same piece has to land in one column on a phone and three on desktop without breaking the alignment design set.</p><p>Every component shipped with documentation and a unit test. A catalogue grows by repetition, the same card shows up on the home, in a collection and in a category, so the component gets reused before it is stable. The test is what lets you touch it later without finding out the damage in production.</p>",
+    "lapp.h3": "The outcome",
+    "lapp.c3": "<p>The app store is live with the platform's full catalogue.</p><ul><li>Nuxt front-end with server side rendering, so the pages are indexable</li><li>Metadata of its own per app, category and collection</li><li>Google Tag Manager set up so measurement does not wait on a deploy</li><li>Card grid solved from the phone up, faithful to the design</li><li>Documentation and a unit test for every component</li></ul><p>What this project taught me was to treat SEO as an architecture decision and not an end of sprint adjustment. The framework choice came before the first screen, and it was that choice that decided whether the rest of the work would be found.</p>",
+    "lapp.heroAlt": "Screens from Tray's app store repeated in a tilted mosaic",
+    "lapp.ga": "Discovery, from the home to a collection",
+    "lapp.gb": "The category and the app page",
+    "lapp.g1": "Home, with search up front and a strip of the most installed apps",
+    "lapp.g2": "The Most installed collection, the full list in a three column grid",
+    "lapp.g3": "The Post-purchase category, with side navigation through the other categories",
+    "lapp.g4": "The Tray Envios page, with the install button above the app description"
   }
 };
 
