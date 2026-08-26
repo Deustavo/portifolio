@@ -38,6 +38,18 @@ const DICT = {
     "contact.cta":    "Vamos<br>conversar",
     "contact.ctaB":   "Bora<br><span>construir?</span>",
 
+    "case.back":      "← Voltar",
+    "case.label":     "Case",
+    "case.client":    "Cliente",
+    "case.role":      "Papel",
+    "case.scope":     "Escopo",
+    "case.year":      "Ano",
+    "case.context":   "O contexto",
+    "case.process":   "O processo",
+    "case.result":    "O resultado",
+    "case.next":      "Próximo projeto",
+    "case.cta":       "Trabalhar juntos →",
+
     "foot.rights":    "© 2026 Gustavo Andrade",
     "foot.a":         "Bloco amarelo · barras pretas",
     "foot.b":         "Outline 2px · preenche no hover",
@@ -52,6 +64,7 @@ const DICT = {
     "p.more": "Ver case",
 
     /* ---- case Life Guard ---- */
+    "lg.title": "Life Guard",
     "lg.kicker": "Case 01 — 2021",
     "lg.sub":    "Protótipo de um aplicativo para a Life Tecnologia: as câmeras de segurança instaladas na casa do cliente, no celular dele, sem manual e sem senha para esquecer.",
     "lg.f1": "Cliente",  "lg.v1": "Life Tecnologia",
@@ -119,6 +132,30 @@ const DICT = {
     "contact.cta":    "Let's<br>talk",
     "contact.ctaB":   "Let's<br><span>build it?</span>",
 
+    "case.back":      "← Voltar",
+    "case.label":     "Case",
+    "case.client":    "Cliente",
+    "case.role":      "Papel",
+    "case.scope":     "Escopo",
+    "case.year":      "Ano",
+    "case.context":   "O contexto",
+    "case.process":   "O processo",
+    "case.result":    "O resultado",
+    "case.next":      "Próximo projeto",
+    "case.cta":       "Trabalhar juntos →",
+
+    "case.back":      "← Back",
+    "case.label":     "Case",
+    "case.client":    "Client",
+    "case.role":      "Role",
+    "case.scope":     "Scope",
+    "case.year":      "Year",
+    "case.context":   "The context",
+    "case.process":   "The process",
+    "case.result":    "The outcome",
+    "case.next":      "Next project",
+    "case.cta":       "Let's work together →",
+
     "foot.rights":    "© 2026 Gustavo Andrade",
     "foot.a":         "Yellow slab · black bars",
     "foot.b":         "2px outline · fills on hover",
@@ -132,6 +169,7 @@ const DICT = {
     "p.more": "View case",
 
     /* ---- Life Guard case ---- */
+    "lg.title": "Life Guard",
     "lg.kicker": "Case 01 — 2021",
     "lg.sub":    "Prototype of an app for Life Tecnologia: the security cameras installed in the client's home, on their phone, with no manual and no password to forget.",
     "lg.f1": "Client", "lg.v1": "Life Tecnologia",
@@ -166,6 +204,13 @@ const DICT = {
     "lg.work": "Let's work together →"
   }
 };
+
+/* funde o conteúdo dos cases, quando i18n-cases.js estiver carregado antes */
+if (window.GA_CASES) {
+  for (const lang of Object.keys(DICT)) {
+    Object.assign(DICT[lang], window.GA_CASES[lang] || {});
+  }
+}
 
 const STORE = "ga-lang";
 
