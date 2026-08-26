@@ -53,7 +53,35 @@ Colete do usuário (pergunte o que faltar, não invente):
    chegam ao disco. Gere placeholders com os nomes finais (PIL, fundo escuro,
    borda laranja, texto `PLACEHOLDER` + rótulo + dimensão) e avise que ele
    precisa sobrescrever os arquivos.
-6. Quando ele largar os arquivos na pasta, confira um por um antes de renomear.
+6. Screenshot de sistema real vem com dado de pessoa de verdade: nome, telefone,
+   e-mail, data de nascimento. Não publique e não borre a tela inteira, porque
+   uma tabela borrada não mostra design nenhum. Redesenhe o texto:
+
+   - a fonte dessas telas é Lato (`/usr/share/fonts/truetype/lato/`). Calibre
+     antes de escrever: meça a largura em pixels do texto original e ache o par
+     peso/corpo do Lato que chega mais perto. Nas telas do pilates deu
+     `Bold 14` para nome de tabela, `Medium 13` para card, `Bold 16` para nome
+     em lista de painel e `Regular 13` para texto secundário
+   - para cada trecho, pegue uma caixa de busca que contenha só aquele texto.
+     O fundo é a cor mais frequente da caixa, a cor da fonte é o pixel mais
+     distante do fundo, e a posição vem do bbox da tinta. Assim funciona em
+     card colorido e em linha de tabela sem escrever cor na mão
+   - alinhe pelo bbox: desenhe em `bbox.left - fnt.getbbox(antigo)[0]` e
+     `bbox.bottom - fnt.getbbox(antigo)[3]`. Cai no mesmo lugar do original,
+     com a mesma linha de base. Se o texto novo for mais largo e houver algo à
+     direita, alinhe pela direita em vez da esquerda
+   - use um mapa de nome antigo para nome novo, único para todas as telas. A
+     mesma aluna aparece na agenda e no cadastro, e trocar por nomes diferentes
+     em cada tela entrega a fraude. Mantenha acento, mantenha a ordem
+     alfabética se a tela estiver ordenada, e mantenha o formato do campo
+   - o nome do cliente pode ficar, o nome de terceiro não. Pergunte antes.
+     Usuário logado troque pelo nome dele
+   - `identify` e `convert` não existem nessa máquina, e não há `numpy`. É PIL
+     puro. Confira cada tela com um recorte ampliado em 3x ou 4x antes de
+     instalar, é onde aparece peso errado e retângulo de apagar sobrando
+   - guarde os originais em `assets/img/<slug>/_originais-com-dados-reais/` em
+     vez de apagar, e diga ao usuário que a pasta existe
+7. Quando ele largar os arquivos na pasta, confira um por um antes de renomear.
    Vem screenshot que não é do projeto no meio do lote. O que não for do case,
    tire da pasta em vez de apagar, e diga onde foi parar.
 
@@ -76,6 +104,21 @@ Regras do bloco de galeria:
   linha fechar cheia. Grupo de 1 imagem só, não
 - cada `figure` precisa de `loading="lazy"`, `data-i18n-attr="alt:<pfx>.gN"` e
   `<figcaption data-i18n="<pfx>.gN">`
+
+### Case com link externo
+
+Projeto que está no ar em algum lugar (jogo publicado, repositório aberto, página
+em loja) ganha os links como tiles `.kpi` dentro de `.kpis`, no fim do bloco de
+resultado. A classe já existe no `case-bento.css` e o `.block .kpis{grid-column:2}`
+alinha os tiles com a coluna do texto. O rótulo de cada link é chave de i18n, e o
+conteúdo do `<a>` precisa vir dentro de um `<span>`, senão o texto fica atrás do
+preenchimento do hover:
+
+```html
+<div class="kpis" style="--fill:var(--cN)">
+  <a class="kpi" href="..." target="_blank" rel="noopener"><span data-i18n="<pfx>.l1">Jogar no navegador ↗</span></a>
+</div>
+```
 
 ## Passo 3 — textos PT e EN
 
