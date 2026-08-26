@@ -33,7 +33,7 @@ const DICT = {
     "stat.inline":    "Desde 2019 · 20+ produtos<br>2× hackathon · Pós USP/Esalq",
 
     "work.title":     "Projetos selecionados",
-    "work.count":     "05 cases",
+    "work.count":     "06 cases",
 
     "contact.kicker": "Contato · resposta em 24h",
     "contact.cta":    "Vamos<br>conversar",
@@ -54,13 +54,15 @@ const DICT = {
     "foot.rights":    "© 2026 Gustavo Andrade",
     "foot.b":         "Outline 2px · preenche no hover",
 
-    /* projetos — 01 real, 02–05 ainda placeholder */
+    /* projetos — 01 e 06 reais, 02–05 ainda placeholder */
     "p1.sub": "Segurança · App iOS/Android · 2021", "p1.tag": "Segurança",
     "p1.metric": "Protótipo de 14 telas para a Life Tecnologia",
     "p2.sub": "Saúde · UX Research · 2025",        "p2.tag": "Saúde",
     "p3.sub": "Marca · Site institucional · 2024", "p3.tag": "Marca",
     "p4.sub": "Marketplace · E-commerce · 2023",   "p4.tag": "Marketplace",
     "p5.sub": "Design System · B2B · 2022",        "p5.tag": "Design System",
+    "p6.sub": "Site institucional · Multi-público · 2021", "p6.tag": "Institucional",
+    "p6.metric": "Um catálogo de 8 serviços em 3 gabaritos",
     "p.more": "Ver case",
 
     /* ---- case Life Guard ---- */
@@ -96,7 +98,32 @@ const DICT = {
     "lg.g13": "Gerenciar usuários",
     "lg.g14": "Editar usuário",
     "lg.next": "Próximo projeto",
-    "lg.work": "Trabalhar juntos →"
+    "lg.work": "Trabalhar juntos →",
+
+    /* ---- case Life Site ---- */
+    "lsite.title": "Life Site",
+    "lsite.kicker": "Case 02 · 2021",
+    "lsite.sub":    "Redesenho do site da Life Tecnologia, uma empresa que vende internet, câmera, telefonia e TV para seis públicos diferentes na mesma vitrine.",
+    "lsite.f1": "Cliente",  "lsite.v1": "Life Tecnologia",
+    "lsite.f2": "Papel",    "lsite.v2": "UI &amp; UX Design, prototipação",
+    "lsite.f3": "Escopo",   "lsite.v3": "Site institucional, 6 públicos",
+    "lsite.f4": "Ano",
+    "lsite.h1": "O contexto",
+    "lsite.c1": "<p>A Life vende mais coisa do que cabe em um menu. Internet fixa, internet móvel, telefonia, HDTV, câmera, rede interna, marketplace e serviços de TI. E vende tudo isso para seis públicos que não se parecem: casa, condomínio, empresa, fazenda, cidade e outros provedores que revendem o link dela.</p><p>O site tratava todo mundo igual. Quem entrava caía numa lista de produtos sem saber qual metade daquilo era para ele. O time comercial resolvia isso no telefone, explicando de novo o que o site já deveria ter dito.</p><p>A pergunta era fácil de formular e chata de resolver: como uma home só recebe o dono de casa procurando 100 mega e o provedor procurando link dedicado, sem parecer duas empresas?</p>",
+    "lsite.h2": "O processo",
+    "lsite.c2": "<p>A primeira decisão foi tirar o público do menu de produtos e colocá-lo acima dele. Nasceu a faixa superior com os seis destinos: para sua casa, para sua cidade, para seu ISP, para sua empresa, para seu condomínio, para sua fazenda. Ela é a primeira coisa da página e não sai da tela.</p><p>Abaixo dela o site inteiro muda de assunto. Escolhido o público, a home mostra os serviços daquele público em uma grade de ícones, com o item ativo em laranja, e depois os planos de fibra em cartões onde a velocidade é a informação maior e o preço vem em segundo lugar. Foi o inverso do que estava lá antes, que abria pelo preço.</p><p>As páginas de produto ganharam um gabarito único: título com a palavra-chave em laranja, um parágrafo, uma citação, a imagem do produto sobre uma forma orgânica laranja, o bloco de vantagens e um botão. Internet fixa, celular, Life Guard e Game Station são a mesma página com o conteúdo trocado. Isso era o ponto: a Life lança produto com frequência e precisava de uma página que o time montasse sem me chamar.</p><p>A parte empresarial pedia densidade em vez de vitrine. Ali os planos viram uma grade de oito cartões com dois destaques em escuro, e o rodapé assume o papel de mapa do site, porque no B2B a pessoa sabe o nome do que quer e só precisa do caminho.</p>",
+    "lsite.h3": "O resultado",
+    "lsite.c3": "<p>A entrega foi o protótipo navegável do site, com a home dos públicos, as páginas de produto, a área empresarial e os menus abertos.</p><ul><li>Seis públicos como primeiro nível de navegação, acima dos produtos</li><li>Um gabarito de página de produto que serve para o catálogo todo</li><li>Cartão de plano com hierarquia de velocidade, e não de preço</li><li>Rodapé como mapa do site, com os oito serviços listados</li></ul><p>O valor do projeto não estava em nenhuma tela isolada, estava em reduzir um catálogo grande a três gabaritos. Depois disso, produto novo na Life passou a ser conteúdo novo, e não página nova.</p>",
+    "lsite.heroAlt": "Home do site da Life com a faixa de públicos e os planos de fibra",
+    "lsite.ga": "A home e os públicos",
+    "lsite.gb": "Um gabarito, quatro produtos",
+    "lsite.g1": "Página inicial",
+    "lsite.g2": "Menu de serviços",
+    "lsite.g3": "Área empresarial",
+    "lsite.g4": "Internet fixa",
+    "lsite.g5": "Celular",
+    "lsite.g6": "Life Guard",
+    "lsite.g7": "Game Station"
   },
   en: {
     "doc.title":      "Gustavo Andrade — Product Design & Software Engineering",
@@ -127,7 +154,7 @@ const DICT = {
     "stat.inline":    "Since 2019 · 20+ products<br>2× hackathon · USP/Esalq postgrad",
 
     "work.title":     "Selected work",
-    "work.count":     "05 cases",
+    "work.count":     "06 cases",
 
     "contact.kicker": "Contact · reply within 24h",
     "contact.cta":    "Let's<br>talk",
@@ -166,6 +193,8 @@ const DICT = {
     "p3.sub": "Brand · Website · 2024",           "p3.tag": "Brand",
     "p4.sub": "Marketplace · E-commerce · 2023",  "p4.tag": "Marketplace",
     "p5.sub": "Design System · B2B · 2022",       "p5.tag": "Design System",
+    "p6.sub": "Marketing site · Multi-audience · 2021", "p6.tag": "Marketing site",
+    "p6.metric": "An 8-service catalogue in 3 templates",
     "p.more": "View case",
 
     /* ---- Life Guard case ---- */
@@ -201,7 +230,32 @@ const DICT = {
     "lg.g13": "Manage users",
     "lg.g14": "Edit user",
     "lg.next": "Next project",
-    "lg.work": "Let's work together →"
+    "lg.work": "Let's work together →",
+
+    /* ---- case Life Site ---- */
+    "lsite.title": "Life Site",
+    "lsite.kicker": "Case 02 · 2021",
+    "lsite.sub":    "Redesign of the Life Tecnologia website, a company selling internet, cameras, telephony and TV to six different audiences from the same storefront.",
+    "lsite.f1": "Client", "lsite.v1": "Life Tecnologia",
+    "lsite.f2": "Role",   "lsite.v2": "UI &amp; UX Design, prototyping",
+    "lsite.f3": "Scope",  "lsite.v3": "Marketing site, 6 audiences",
+    "lsite.f4": "Year",
+    "lsite.h1": "The context",
+    "lsite.c1": "<p>Life sells more than fits in a menu. Fixed internet, mobile internet, telephony, HDTV, cameras, in-home networking, a marketplace and IT services. And it sells all of that to six audiences that look nothing alike: homes, apartment buildings, businesses, farms, city governments and other providers who resell its backbone.</p><p>The site treated everyone the same. Visitors landed on a product list with no way to tell which half of it was meant for them. Sales fixed that on the phone, explaining again what the site should have said already.</p><p>The question was easy to state and tedious to solve: how does a single home page welcome the homeowner shopping for 100 mega and the provider shopping for a dedicated link, without looking like two companies?</p>",
+    "lsite.h2": "The process",
+    "lsite.c2": "<p>The first decision was to pull the audience out of the product menu and put it above it. That produced the top strip with six destinations: for your home, for your city, for your ISP, for your business, for your building, for your farm. It is the first thing on the page and it never leaves the screen.</p><p>Below it, the whole site changes subject. Once an audience is picked, the home page shows that audience's services in a grid of icons, with the active item in orange, followed by the fibre plans as cards where speed is the largest piece of information and price comes second. That inverted what was there before, which led with price.</p><p>Product pages got a single template: a headline with the key word in orange, one paragraph, a pull quote, the product image over an organic orange shape, the benefits block and a button. Fixed internet, mobile, Life Guard and Game Station are the same page with the content swapped. That was the point: Life ships products often and needed a page the team could assemble without calling me.</p><p>The business side asked for density instead of a storefront. There the plans become a grid of eight cards with two dark highlights, and the footer takes over as the sitemap, because in B2B people know the name of what they want and only need the path to it.</p>",
+    "lsite.h3": "The outcome",
+    "lsite.c3": "<p>The deliverable was the clickable prototype of the site, with the audience home page, the product pages, the business area and the open menus.</p><ul><li>Six audiences as the first level of navigation, above the products</li><li>One product-page template that covers the entire catalogue</li><li>Plan cards built around speed, not around price</li><li>Footer as sitemap, listing all eight services</li></ul><p>The value of the project was not in any single screen, it was in cutting a large catalogue down to three templates. After that, a new product at Life became new content instead of a new page.</p>",
+    "lsite.heroAlt": "Life website home page with the audience strip and the fibre plans",
+    "lsite.ga": "The home page and the audiences",
+    "lsite.gb": "One template, four products",
+    "lsite.g1": "Home page",
+    "lsite.g2": "Services menu",
+    "lsite.g3": "Business area",
+    "lsite.g4": "Fixed internet",
+    "lsite.g5": "Mobile",
+    "lsite.g6": "Life Guard",
+    "lsite.g7": "Game Station"
   }
 };
 
