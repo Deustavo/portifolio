@@ -153,3 +153,64 @@ img.cover{cursor:zoom-in}
 .blobcur.is-text{--d:26px;border-radius:100px;animation:none}
 @media(hover:none),(pointer:coarse){.blobcur,.blobdot{display:none}}
 @media(prefers-reduced-motion:reduce){.blobcur,.blobdot{display:none}}
+
+/* ===== 6. menu hambúrguer no mobile ===== */
+/* O botão só existe quando o JS o cria; no desktop ele fica escondido. */
+.menubtn{display:none}
+.nav-tools{display:flex;align-items:center;gap:.4rem}
+@media(max-width:680px){
+  /* a barra volta a caber numa linha só */
+  .bar{flex-wrap:nowrap}
+  .bar strong{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  .menubtn{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;
+    width:2.4rem;height:2.4rem;padding:0;cursor:pointer;background:none;color:inherit;
+    border:var(--bw) solid var(--line);border-radius:100px;-webkit-tap-highlight-color:transparent;
+    transition:background .25s ease,border-color .25s ease,color .25s ease,transform .25s var(--ease)}
+  .menubtn:active{transform:scale(.92)}
+  .bar.nav-open .menubtn{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
+  /* três traços que viram um X */
+  .menubtn i{position:relative;display:block;width:16px;height:2px;border-radius:2px;background:currentColor;
+    transition:transform .4s var(--ease)}
+  .menubtn i::before,.menubtn i::after{content:"";position:absolute;left:0;width:100%;height:100%;
+    border-radius:2px;background:currentColor;transition:transform .4s var(--ease),opacity .2s ease}
+  .menubtn i::before{transform:translateY(-5px)}
+  .menubtn i::after{transform:translateY(5px)}
+  .bar.nav-open .menubtn i{transform:rotate(45deg)}
+  .bar.nav-open .menubtn i::before{transform:rotate(-90deg)}
+  
+  .bar.nav-open .menubtn i::after{transform:none;opacity:0}
+
+  /* o nav vira o painel do dropdown */
+  .bar nav{position:absolute;top:calc(100% - .4rem);right:var(--pad);left:auto;
+    flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:.15rem;
+    width:min(15rem,calc(100vw - var(--pad) * 2));
+    padding:.45rem;border:var(--bw) solid var(--line);border-radius:16px;
+    background:var(--bg);box-shadow:0 20px 44px -24px rgba(0,0,0,.5);
+    transform-origin:top right;transform:translateY(-10px) scale(.95);
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .26s ease,transform .42s var(--ease),visibility 0s linear .42s}
+  .bar.nav-open nav{opacity:1;visibility:visible;pointer-events:auto;transform:none;
+    transition:opacity .22s ease,transform .45s var(--ease),visibility 0s}
+
+  /* cada item entra em cascata */
+  .bar nav > *{opacity:0;transform:translateY(-8px);
+    transition:opacity .25s ease,transform .35s var(--ease)}
+  .bar.nav-open nav > *{opacity:1;transform:none;
+    transition-delay:calc(70ms + var(--i,0) * 60ms)}
+
+  /* no escuro o fio de --line quase desaparece: o painel pede um contorno próprio */
+  :root[data-theme="dark"] .bar nav{border-color:color-mix(in srgb,var(--fg) 30%,transparent)}
+
+  .bar nav a{font-size:.95rem;padding:.6rem .7rem;border-radius:11px;border-color:transparent;text-align:left}
+  .bar nav a:active{background:color-mix(in srgb,var(--fg) 9%,transparent)}
+
+  /* tema e idioma dividem a última linha, atrás de um fio */
+  .nav-tools{display:flex;align-items:center;gap:.4rem;margin-top:.3rem;padding-top:.45rem;
+    border-top:var(--bw) solid color-mix(in srgb,var(--line) 70%,transparent)}
+  .nav-tools .themebtn{flex:0 0 auto;width:2.2rem;height:2.2rem}
+  .nav-tools .langbtn{flex:1 1 auto;text-align:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .bar nav,.bar nav > *,.menubtn i,.menubtn i::before,.menubtn i::after{transition-duration:.01ms}
+}

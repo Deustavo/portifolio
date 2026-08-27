@@ -4,6 +4,7 @@
    3. barra de progresso de leitura nos cases
    4. filtro dos projetos na home
    5. blob maleável que segue o cursor
+   6. menu hambúrguer da barra no mobile
    Tudo é progressivo: sem JS, a página segue funcionando como antes. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -494,7 +495,77 @@
     window.addEventListener('blur', sleep);
   }
 
-  function ready() { lightbox(); tilt(); progress(); filters(); blob(); }
+
+  /* ===== 6. menu hambúrguer no mobile =====
+     O botão e o agrupamento de tema/idioma são criados aqui, para as 17 páginas
+     não precisarem repetir marcação. Sem JS, o nav segue como antes. */
+  function menu() {
+    var bar = document.querySelector('.bar');
+    var nav = bar && bar.querySelector('nav');
+    if (!bar || !nav || bar.querySelector('.menubtn')) return;
+
+    if (!nav.id) nav.id = 'bar-nav';
+
+    /* tema e idioma viram a última linha do painel */
+    var theme = nav.querySelector('[data-theme-toggle]');
+    var lang = nav.querySelector('[data-lang-toggle]');
+    if (theme || lang) {
+      var tools = document.createElement('div');
+      tools.className = 'nav-tools';
+      if (theme) tools.appendChild(theme);
+      if (lang) tools.appendChild(lang);
+      nav.appendChild(tools);
+    }
+
+    /* cascata de entrada dos itens */
+    Array.prototype.forEach.call(nav.children, function (el, i) {
+      el.style.setProperty('--i', i);
+    });
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'menubtn';
+    btn.setAttribute('aria-controls', nav.id);
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Menu');
+    btn.setAttribute('data-i18n-attr', 'aria-label:nav.menu');
+    btn.innerHTML = '<i aria-hidden="true"></i>';
+    bar.appendChild(btn);
+    if (window.GAI18N && window.GAI18N.t) {
+      var lbl = window.GAI18N.t('nav.menu');
+      if (lbl) btn.setAttribute('aria-label', lbl);
+    }
+
+    function open(yes) {
+      bar.classList.toggle('nav-open', yes);
+      btn.setAttribute('aria-expanded', yes ? 'true' : 'false');
+    }
+    function isOpen() { return bar.classList.contains('nav-open'); }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      open(!isOpen());
+    });
+
+    /* clicar num item fecha o painel */
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) open(false);
+    });
+
+    /* clique fora, Esc e volta ao desktop fecham */
+    document.addEventListener('click', function (e) {
+      if (isOpen() && !bar.contains(e.target)) open(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) { open(false); btn.focus(); }
+    });
+    var wide = window.matchMedia('(min-width:681px)');
+    var onWide = function (m) { if (m.matches) open(false); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide);
+    else if (wide.addListener) wide.addListener(onWide);
+  }
+
+  function ready() { lightbox(); tilt(); progress(); filters(); blob(); menu(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
   else ready();
 })();

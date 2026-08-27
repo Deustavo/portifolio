@@ -9,6 +9,7 @@ const DICT = {
     "doc.desc":       "Gustavo Andrade: UI & UX, front-end e engenharia de software em São Paulo. Interfaces claras, produtos com intenção.",
     "nav.work":       "Projetos",
     "nav.contact":    "Contato",
+    "nav.menu":       "Menu",
 
     "hero.status":    "Disponível para projetos · São Paulo, BR",
     "hero.statusShort":"● Disponível · São Paulo, BR",
@@ -497,6 +498,7 @@ const DICT = {
     "doc.desc":       "Gustavo Andrade: UI & UX, front-end and software engineering, based in São Paulo. Clear interfaces, products with intent.",
     "nav.work":       "Work",
     "nav.contact":    "Contact",
+    "nav.menu":       "Menu",
 
     "hero.status":    "Available for projects · São Paulo, BR",
     "hero.statusShort":"● Available · São Paulo, BR",
