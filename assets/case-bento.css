@@ -31,6 +31,13 @@ img{max-width:100%;display:block}
 .head h1{font-family:var(--display);font-weight:800;margin:.8rem 0 .8rem;
   font-size:clamp(2.2rem,8vw,5.6rem);line-height:.92;letter-spacing:-.035em}
 .head__sub{margin:0;max-width:56ch;color:var(--dim);font-size:clamp(1rem,1.7vw,1.15rem)}
+/* link externo do projeto, no canto do cabeçalho */
+.head__cta{display:inline-block;margin-top:1.4rem;padding:.6rem 1.1rem;border-radius:100px;
+  background:var(--fill,var(--c1));border:var(--bw) solid var(--fill,var(--c1));color:var(--on-fill);
+  font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:-.01em;
+  transition:transform .35s var(--ease),background .2s,color .2s}
+.head__cta:hover{background:transparent;color:inherit;transform:translateY(-2px)}
+@media(min-width:821px){.head__cta{position:absolute;top:clamp(1.3rem,3vw,2.4rem);right:clamp(1.3rem,3vw,2.4rem);margin-top:0}}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--pad)}
 .fact{border:var(--bw) solid var(--line);border-radius:var(--r);padding:1rem 1.2rem}
 .fact span{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
