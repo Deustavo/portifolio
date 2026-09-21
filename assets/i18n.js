@@ -71,6 +71,26 @@ const DICT = {
 
     "foot.rights":    "© 2026 Gustavo Andrade",
 
+    /* linktree /projetos */
+    "tree.kicker":    "Jogos",
+    "tree.title":     "Conheça meus jogos",
+    "tree.sub":       "Jogue direto no navegador sem precisar baixar nada",
+    "tree.play":      "Jogar no navegador",
+    "tree.open":      "Abrir o site",
+    "tree.case":      "Ver case",
+    "tree.itch":      "itch.io ↗",
+    "tree.github":    "GitHub ↗",
+    "tree.home":      "Ver o portfólio completo →",
+
+    /* página 404 */
+    "nf.kicker":      "Erro 404",
+    "nf.title":       "Essa página não existe",
+    "nf.sub":         "O endereço está errado ou a página saiu do ar. Os caminhos abaixo continuam de pé.",
+    "nf.home":        "Ir para a home",
+    "nf.projects":    "Ver os projetos",
+    "nf.links":       "Jogar os jogos",
+    "nf.contact":     "Falar comigo",
+
     /* projetos — 01 e 06 reais, 02–05 ainda placeholder */
     "p1.sub": "Segurança · App iOS/Android · 2021", "p1.tag": "Segurança",
     "p1.metric": "Protótipo de 14 telas para a Life Tecnologia",
@@ -571,6 +591,26 @@ const DICT = {
     "case.cta":       "Let's work together →",
 
     "foot.rights":    "© 2026 Gustavo Andrade",
+
+    /* linktree /projetos */
+    "tree.kicker":    "Games",
+    "tree.title":     "Take a look at my games",
+    "tree.sub":       "Play straight in the browser, nothing to download",
+    "tree.play":      "Play in the browser",
+    "tree.open":      "Open the site",
+    "tree.case":      "Read the case",
+    "tree.itch":      "itch.io ↗",
+    "tree.github":    "GitHub ↗",
+    "tree.home":      "See the full portfolio →",
+
+    /* 404 page */
+    "nf.kicker":      "Error 404",
+    "nf.title":       "This page does not exist",
+    "nf.sub":         "The address is wrong or the page is gone. The routes below still work.",
+    "nf.home":        "Go to the home page",
+    "nf.projects":    "See the projects",
+    "nf.links":       "Play the games",
+    "nf.contact":     "Get in touch",
 
     "p1.sub": "Security · iOS/Android app · 2021", "p1.tag": "Security",
     "p1.metric": "14-screen prototype for Life Tecnologia",
