@@ -6,6 +6,7 @@
    5. blob maleável que segue o cursor
    6. menu hambúrguer da barra no mobile
    7. slider do "como eu trabalho" na home
+   8. trajetória com trilho e atalhos de ano no sobre
    Tudo é progressivo: sem JS, a página segue funcionando como antes. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -651,7 +652,70 @@
     io.observe(root);
   }
 
-  function ready() { lightbox(); tilt(); progress(); filters(); blob(); menu(); proc(); }
+  /* =====================================================================
+     8. TRAJETÓRIA
+     O trilho enche conforme a rolagem; o cargo mais perto do centro da
+     tela acende. Os botões de ano levam direto ao cargo.
+     ===================================================================== */
+  function journey() {
+    var tl = document.querySelector('[data-tl]');
+    if (!tl) return;
+    var items = Array.prototype.slice.call(tl.children);
+    var nav = document.createElement('div');
+    nav.className = 'tl-years';
+    var chips = [];
+    items.forEach(function (li) {
+      var y = li.querySelector('time').textContent;
+      if (chips.length && chips[chips.length - 1].year === y) { li.chip = chips[chips.length - 1].btn; return; }
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = y;
+      b.style.setProperty('--fill', li.style.getPropertyValue('--fill'));
+      b.addEventListener('click', function () {
+        li.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      });
+      nav.appendChild(b);
+      chips.push({ year: y, btn: b });
+      li.chip = b;
+    });
+    tl.parentNode.insertBefore(nav, tl);
+
+    var on = null, queued = false;
+    function update() {
+      queued = false;
+      var mid = window.innerHeight / 2;
+      var r = tl.getBoundingClientRect();
+      tl.style.setProperty('--p', Math.max(0, Math.min(1, (mid - r.top) / r.height)).toFixed(3));
+      var best = null, dist = Infinity;
+      items.forEach(function (li) {
+        var b = li.getBoundingClientRect();
+        var d = Math.abs(b.top + b.height / 2 - mid);
+        if (d < dist) { dist = d; best = li; }
+      });
+      if (best === on) return;
+      if (on) on.classList.remove('is-on');
+      best.classList.add('is-on');
+      on = best;
+      chips.forEach(function (c) { c.btn.setAttribute('aria-pressed', c.btn === best.chip ? 'true' : 'false'); });
+    }
+    function queue() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+    update();
+
+    if (reduce || !('IntersectionObserver' in window)) return;
+    tl.classList.add('is-js');
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.2 });
+    items.forEach(function (li) { io.observe(li); });
+  }
+
+  function ready() { lightbox(); tilt(); progress(); filters(); blob(); menu(); proc(); journey(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
   else ready();
 })();
