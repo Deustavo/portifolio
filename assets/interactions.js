@@ -5,6 +5,7 @@
    4. filtro dos projetos na home
    5. blob maleável que segue o cursor
    6. menu hambúrguer da barra no mobile
+   7. slider do "como eu trabalho" na home
    Tudo é progressivo: sem JS, a página segue funcionando como antes. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -565,7 +566,92 @@
     else if (wide.addListener) wide.addListener(onWide);
   }
 
-  function ready() { lightbox(); tilt(); progress(); filters(); blob(); menu(); }
+  /* =====================================================================
+     7. COMO EU TRABALHO
+     Botões, barra e play trocam data-s no palco; o CSS faz a tela mudar.
+     Quando a seção aparece, as etapas passam sozinhas até alguém mexer.
+     ===================================================================== */
+  function proc() {
+    var root = document.querySelector('[data-proc]');
+    if (!root) return;
+    var DUR = 2200;
+    var stage = root.querySelector('.proc-stage');
+    var steps = root.querySelectorAll('.proc-step');
+    var ctl = root.querySelector('.proc-ctl');
+    var bar = ctl.querySelector('.proc-bar');
+    var segs = bar.querySelectorAll('.proc-seg');
+    var btns = ctl.querySelectorAll('.proc-btns button');
+    var play = ctl.querySelector('.proc-play');
+    var cur = 3, timer = null;
+    ctl.hidden = false;
+    bar.style.setProperty('--dur', DUR + 'ms');
+
+    function go(n) {
+      cur = n;
+      stage.setAttribute('data-s', n);
+      for (var i = 0; i < 4; i++) {
+        steps[i].classList.toggle('is-on', i === n);
+        btns[i].setAttribute('aria-pressed', i === n ? 'true' : 'false');
+        /* tocando, o segmento atual enche no tempo da etapa; parado, já aparece cheio */
+        segs[i].classList.toggle('is-done', timer ? i < n : i <= n);
+        segs[i].classList.remove('is-run');
+      }
+      if (timer) { void segs[n].offsetWidth; segs[n].classList.add('is-run'); }
+    }
+    function label() {
+      play.classList.toggle('is-on', !!timer);
+      play.setAttribute('aria-label', timer ? t('proc.pause', 'Pausar') : t('proc.play', 'Reproduzir'));
+    }
+    function stop() { clearTimeout(timer); timer = null; label(); go(cur); }
+    function tick() {
+      if (cur === 3) { timer = null; label(); go(3); return; }
+      timer = setTimeout(tick, DUR);
+      go(cur + 1);
+    }
+    function start(from) {
+      clearTimeout(timer);
+      timer = setTimeout(tick, DUR);
+      label();
+      go(from);
+    }
+
+    play.addEventListener('click', function () {
+      if (timer) stop(); else start(cur === 3 ? 0 : cur);
+    });
+    Array.prototype.forEach.call(btns, function (b, i) {
+      b.addEventListener('click', function () { if (timer) stop(); go(i); });
+    });
+
+    /* arrastar na barra escolhe a etapa pela posição do dedo */
+    function pick(e) {
+      var r = bar.getBoundingClientRect();
+      var n = Math.max(0, Math.min(3, Math.floor((e.clientX - r.left) / r.width * 4)));
+      if (n !== cur) go(n);
+    }
+    bar.addEventListener('pointerdown', function (e) {
+      if (timer) stop();
+      bar.setPointerCapture(e.pointerId);
+      pick(e);
+      bar.addEventListener('pointermove', pick);
+    });
+    function release() { bar.removeEventListener('pointermove', pick); }
+    bar.addEventListener('pointerup', release);
+    bar.addEventListener('pointercancel', release);
+
+    onLang(function () { label(); });
+    label();
+
+    if (reduce || !('IntersectionObserver' in window)) { go(3); return; }
+    go(0);
+    var io = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return;
+      io.disconnect();
+      if (cur === 0) start(0);
+    }, { threshold: 0.5 });
+    io.observe(root);
+  }
+
+  function ready() { lightbox(); tilt(); progress(); filters(); blob(); menu(); proc(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
   else ready();
 })();

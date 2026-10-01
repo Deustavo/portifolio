@@ -148,8 +148,92 @@ a.box:focus-visible{outline:3px solid var(--c1);outline-offset:3px}
  max-width:100%;overflow-wrap:anywhere;transition:background .25s,color .25s}
 .chips a:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
 .foot{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1rem var(--gut) 2rem;font-size:.72rem;color:var(--dim)}
+/* ===== como eu trabalho: a mesma tela passando pelas quatro etapas ===== */
+.b-proc{grid-column:span 4;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(1.2rem,3vw,2.6rem);align-items:center}
+.proc-stage{position:relative;aspect-ratio:4/3;border:var(--bw) solid var(--line);border-radius:calc(var(--r) - 6px);overflow:hidden;
+ background-image:radial-gradient(color-mix(in srgb,var(--fg) 14%,transparent) 1.2px,transparent 1.2px);background-size:18px 18px}
+.pp{position:absolute;left:var(--x);top:var(--y);width:var(--w);height:var(--h);transform:rotate(var(--r,0deg)) scale(var(--k,1));
+ border:var(--bw) dashed var(--dim);border-radius:6px;opacity:var(--o,1);
+ transition:left .7s var(--ease),top .7s var(--ease),width .7s var(--ease),height .7s var(--ease),transform .7s var(--ease),
+  opacity .5s,background .5s,border-color .5s,border-radius .5s,box-shadow .5s}
+.pp::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:800;
+ font-size:clamp(1rem,2.4vw,1.8rem);color:var(--ink);opacity:0;transition:opacity .3s}
+/* 01 pesquiso: post-its espalhados */
+[data-s="0"] .pp{--w:24%;--h:18%;border:0;border-radius:3px;background:color-mix(in srgb,var(--c4) 70%,var(--bg));box-shadow:0 6px 14px rgba(0,0,0,.12)}
+[data-s="0"] .pp::after{opacity:.55}
+[data-s="0"] .pp:nth-child(1){--x:8%;--y:9%;--r:-8deg}
+[data-s="0"] .pp:nth-child(2){--x:38%;--y:6%;--r:5deg}
+[data-s="0"] .pp:nth-child(3){--x:68%;--y:12%;--r:-4deg}
+[data-s="0"] .pp:nth-child(4){--x:14%;--y:41%;--r:6deg}
+[data-s="0"] .pp:nth-child(5){--x:45%;--y:37%;--r:-7deg}
+[data-s="0"] .pp:nth-child(6){--x:71%;--y:44%;--r:9deg}
+[data-s="0"] .pp:nth-child(7){--x:6%;--y:72%;--r:-3deg}
+[data-s="0"] .pp:nth-child(8){--x:36%;--y:70%;--r:7deg}
+[data-s="0"] .pp:nth-child(9){--x:66%;--y:73%;--r:-6deg}
+/* 02 prototipo e 03 corto: wireframe com tudo dentro */
+.proc-stage:not([data-s="0"]) .pp:nth-child(1){--x:8%;--y:8%;--w:60%;--h:10%}
+.proc-stage:not([data-s="0"]) .pp:nth-child(6){--x:72%;--y:8%;--w:20%;--h:10%}
+.proc-stage:not([data-s="0"]) .pp:nth-child(2){--x:8%;--y:22%;--w:84%;--h:8%}
+.proc-stage:not([data-s="0"]) .pp:nth-child(7){--x:8%;--y:34%;--w:40%;--h:20%}
+.proc-stage:not([data-s="0"]) .pp:nth-child(8){--x:52%;--y:34%;--w:40%;--h:20%}
+.proc-stage:not([data-s="0"]) .pp:nth-child(3){--x:8%;--y:58%;--w:40%;--h:9%}
+.proc-stage:not([data-s="0"]) .pp:nth-child(4){--x:52%;--y:58%;--w:40%;--h:9%}
+.proc-stage:not([data-s="0"]) .pp:nth-child(9){--x:8%;--y:72%;--w:84%;--h:8%}
+.proc-stage:not([data-s="0"]) .pp:nth-child(5){--x:8%;--y:84%;--w:30%;--h:9%}
+[data-s="2"] .pp.cut{--o:.55;--k:.92;border-color:var(--c1);
+ background:linear-gradient(to top right,transparent calc(50% - 1.5px),var(--c1) 0 calc(50% + 1.5px),transparent 0)}
+/* 04 construo: sobra o essencial, com cor */
+.proc-stage[data-s="3"] .pp.cut{--o:0;--k:.5}
+.proc-stage[data-s="3"] .pp{border-style:solid;border-color:var(--line)}
+.proc-stage[data-s="3"] .pp:nth-child(1){--x:10%;--y:14%;--w:52%;--h:12%;background:var(--ink);border-color:var(--ink)}
+.proc-stage[data-s="3"] .pp:nth-child(2){--x:10%;--y:31%;--w:44%;--h:6%;background:var(--dim);border-color:var(--dim);border-radius:100px}
+.proc-stage[data-s="3"] .pp:nth-child(3){--x:10%;--y:45%;--w:52%;--h:12%;border-radius:12px}
+.proc-stage[data-s="3"] .pp:nth-child(4){--x:10%;--y:61%;--w:52%;--h:12%;border-radius:12px}
+.proc-stage[data-s="3"] .pp:nth-child(5){--x:10%;--y:79%;--w:30%;--h:11%;background:var(--c1);border-color:var(--c1);border-radius:100px}
+.proc-code{position:absolute;right:5%;top:50%;width:30%;padding:4% 3.5%;display:flex;flex-direction:column;gap:9%;aspect-ratio:3/4;
+ background:var(--ink);border-radius:10px;opacity:0;transform:translate(30%,-50%) rotate(4deg);transition:opacity .4s,transform .7s var(--ease)}
+.proc-code i{display:block;height:6%;width:var(--l);margin-left:var(--in,0);border-radius:4px;background:var(--cc,var(--dim))}
+[data-s="3"] .proc-code{opacity:1;transform:translate(0,-50%) rotate(4deg);transition-delay:.25s}
+.proc-steps{display:grid}
+.proc-step{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .35s,transform .45s var(--ease),visibility .35s}
+.proc-step.is-on{opacity:1;visibility:visible;transform:none}
+.proc-step small{font-size:.75rem;color:var(--dim)}
+.proc-step h3{font-family:var(--display);font-weight:800;margin:.2rem 0 .5rem;font-size:clamp(2rem,5vw,3.6rem);line-height:.95;letter-spacing:-.04em}
+.proc-step h3 em{font-style:normal;color:var(--c1)}
+.proc-step > p{margin:0 0 1rem;color:var(--dim);max-width:42ch}
+.proc-step blockquote{margin:0;padding:.9rem 1rem;border-left:var(--bw) solid var(--fill);border-radius:0 12px 12px 0;
+ background:color-mix(in srgb,var(--fill) 9%,transparent);font-size:.88rem;max-width:48ch}
+.proc-step blockquote a{display:inline-block;margin-top:.5rem;font-size:.78rem;font-weight:500;color:var(--fill)}
+.proc-step blockquote a:hover{text-decoration:underline}
+.proc-ctl{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:.9rem 1rem;align-items:center}
+/* barra em segmentos, estilo stories: enche sozinha no autoplay e aceita arrastar */
+.proc-bar{display:flex;gap:6px;padding:10px 0;cursor:grab;touch-action:none}
+.proc-bar:active{cursor:grabbing}
+.proc-seg{flex:1;height:6px;border-radius:100px;background:color-mix(in srgb,var(--fg) 14%,transparent);overflow:hidden}
+.proc-seg i{display:block;height:100%;border-radius:inherit;background:var(--c1);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.proc-seg.is-done i{transform:scaleX(1)}
+.proc-seg.is-run i{transition:none;animation:procFill var(--dur) linear forwards}
+@keyframes procFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.proc-play{width:2.6rem;height:2.6rem;border-radius:100px;border:var(--bw) solid var(--line);background:none;color:inherit;
+ cursor:pointer;display:grid;place-items:center;transition:background .25s,color .25s,border-color .25s,transform .3s var(--ease)}
+.proc-play:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill);transform:scale(1.06)}
+.proc-play svg{width:1rem;height:1rem}
+.proc-play .ic-pause,.proc-play.is-on .ic-play{display:none}
+.proc-play.is-on .ic-pause{display:block}
+.proc-btns{grid-column:2;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.proc-btns button{font:inherit;color:inherit;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:.15rem;
+ padding:.75rem .9rem;border-radius:14px;border:var(--bw) solid var(--line);background:none;
+ transition:background .3s,color .3s,border-color .3s,transform .35s var(--ease)}
+.proc-btns button b{font-size:.68rem;font-weight:500;color:var(--dim);transition:color .3s}
+.proc-btns button span{font-family:var(--display);font-weight:800;font-size:clamp(.9rem,1.6vw,1.15rem);letter-spacing:-.02em}
+.proc-btns button:hover{transform:translateY(-3px);border-color:var(--c1)}
+.proc-btns button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.proc-btns button[aria-pressed=true] b{color:var(--c1)}
+.proc-btns button:focus-visible,.proc-play:focus-visible{outline:3px solid var(--c1);outline-offset:3px}
+@media(max-width:900px){.b-proc{grid-column:span 2;grid-template-columns:1fr}}
 @media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)}.b-hero,.p-card.wide,.p-card.xwide,.b-contact{grid-column:span 2}}
-@media(max-width:520px){.bento{grid-template-columns:1fr}.b-hero,.p-card.wide,.p-card.xwide,.b-contact{grid-column:span 1}
+@media(max-width:520px){.bento{grid-template-columns:1fr}.b-hero,.p-card.wide,.p-card.xwide,.b-contact,.b-proc{grid-column:span 1}
+ .proc-btns button{padding:.55rem .6rem;border-radius:12px}.proc-btns button b{font-family:var(--display);font-weight:800;font-size:1rem}.proc-btns button span{display:none}
  .b-hero__top{flex-direction:column}.hero-name{font-size:clamp(2.6rem,17vw,4rem)}
  .b-hero{min-height:auto;gap:1.5rem}.hero-foot{align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -236,6 +320,37 @@ a.box:focus-visible{outline:3px solid var(--c1);outline-offset:3px}
     <span><h3>Greeimage</h3><p data-i18n="p15.metric">Área verde por habitante em mapa de calor, campeão do Space Apps em Marília</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span></span></span></a>
   <a class="box p-card" href="projects/fabrica1.html" style="--shot:url(assets/img/fabrica1/card.webp);--fill:var(--c14)"><span class="tag" data-i18n="p18.tag">Protótipo</span>
     <span><h3>Fábrica 1</h3><p data-i18n="p18.metric">Recarregar o cartão do bar pelo celular, por aproximação, sem fila no caixa</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span></span></span></a>
+</div>
+<div class="head" id="processo"><h2><a class="anchor" href="#processo" data-i18n="proc.title">Como eu trabalho</a></h2><span class="tag" data-i18n="proc.hint">Clique ou arraste</span></div>
+<div class="bento">
+  <div class="box b-proc" data-proc>
+    <div class="proc-stage" data-s="3" aria-hidden="true">
+      <span class="pp"></span><span class="pp"></span><span class="pp"></span><span class="pp"></span><span class="pp"></span>
+      <span class="pp cut"></span><span class="pp cut"></span><span class="pp cut"></span><span class="pp cut"></span>
+      <span class="proc-code"><i style="--l:55%;--cc:var(--c5)"></i><i style="--l:70%;--in:12%"></i><i style="--l:45%;--in:24%;--cc:var(--c2)"></i><i style="--l:60%;--in:24%"></i><i style="--l:35%;--in:12%;--cc:var(--c4)"></i><i style="--l:50%;--cc:var(--c5)"></i></span>
+    </div>
+    <div class="proc-steps" aria-live="polite">
+      <div class="proc-step" style="--fill:var(--c11)"><small>01 / 04</small><h3 data-i18n="proc.s1">Pesquiso<em>.</em></h3>
+        <p data-i18n="proc.s1d">Começo pelo problema, não pela tela. Nessa fase ainda é tudo pergunta.</p>
+        <blockquote><span data-i18n="proc.s1q">No Greeimage: benchmarking, How Might We e um Duplo Diamante até chegar a uma solução única, com o excedente anotado como melhoria futura.</span><br><a href="projects/greeimage.html" data-i18n="proc.see">Ver o case →</a></blockquote></div>
+      <div class="proc-step" style="--fill:var(--c1)"><small>02 / 04</small><h3 data-i18n="proc.s2">Prototipo<em>.</em></h3>
+        <p data-i18n="proc.s2d">A pesquisa vira tela navegável, com tudo que parece necessário dentro.</p>
+        <blockquote><span data-i18n="proc.s2q">No Life Guard: protótipo navegável de 14 telas, do splash à edição de usuário, com os caminhos de erro e os estados vazios já resolvidos.</span><br><a href="projects/life-guard.html" data-i18n="proc.see">Ver o case →</a></blockquote></div>
+      <div class="proc-step" style="--fill:var(--c13)"><small>03 / 04</small><h3 data-i18n="proc.s3">Corto<em>.</em></h3>
+        <p data-i18n="proc.s3d">Tiro o que não responde à pergunta da tela, até a interface ficar óbvia.</p>
+        <blockquote><span data-i18n="proc.s3q">No Follow Me: o visitante entra só com o nome e vincula o paciente lendo um QR code, sem cadastro e sem senha.</span><br><a href="projects/follow-me.html" data-i18n="proc.see">Ver o case →</a></blockquote></div>
+      <div class="proc-step is-on" style="--fill:var(--c12)"><small>04 / 04</small><h3 data-i18n="proc.s4">Construo<em>.</em></h3>
+        <p data-i18n="proc.s4d">Depois escrevo o código que sustenta a interface e coloco no ar.</p>
+        <blockquote><span data-i18n="proc.s4q">No Radar Governamental: protótipo navegável e, depois, o front-end do painel. O sistema foi para o ar.</span><br><a href="projects/radar-governamental.html" data-i18n="proc.see">Ver o case →</a></blockquote></div>
+    </div>
+    <div class="proc-ctl" hidden>
+      <button class="proc-play" type="button" aria-label="Reproduzir"><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="5" y="4" width="5" height="16" rx="1.5"/><rect x="14" y="4" width="5" height="16" rx="1.5"/></svg></button>
+      <div class="proc-bar" aria-hidden="true"><span class="proc-seg"><i></i></span><span class="proc-seg"><i></i></span><span class="proc-seg"><i></i></span><span class="proc-seg"><i></i></span></div>
+      <div class="proc-btns" role="group" aria-label="Etapa do processo" data-i18n-attr="aria-label:proc.label">
+        <button type="button"><b>01</b><span data-i18n="proc.b1">Pesquiso</span></button><button type="button"><b>02</b><span data-i18n="proc.b2">Prototipo</span></button><button type="button"><b>03</b><span data-i18n="proc.b3">Corto</span></button><button type="button"><b>04</b><span data-i18n="proc.b4">Construo</span></button>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="head" id="contato"><h2><a class="anchor" href="#contato" data-i18n="contact.title">Contato</a></h2></div>
 <div class="bento">
