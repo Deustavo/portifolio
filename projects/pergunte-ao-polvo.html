@@ -19,14 +19,14 @@
 <link rel="stylesheet" href="../assets/case-bento.css">
 <link rel="stylesheet" href="../assets/transition.css">
 <link rel="stylesheet" href="../assets/interactions.css">
-<script>(function(){try{var t=localStorage.getItem("ga-theme");if(t!=="dark"&&t!=="light")t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
+<script>(function(){try{var t=localStorage.getItem("ga-theme");if(t!=="dark"&&t!=="light")t="dark";document.documentElement.setAttribute("data-theme",t)}catch(e){}})();</script>
 </head><body>
 <div class="bar">
   <strong><a href="../index.html">Gustavo Andrade</a></strong>
   <nav>
     <a href="../index.html#projetos" data-i18n="nav.work">Projetos</a><a href="../sobre.html" data-i18n="nav.about">Sobre</a>
     <a href="../index.html#contato" data-i18n="nav.contact">Contato</a>
-    <button class="themebtn" data-theme-toggle aria-label="Alternar tema"><span class="ico-moon" aria-hidden="true">☾</span><span class="ico-sun" aria-hidden="true">☀</span></button><button class="langbtn" data-lang-toggle>EN</button>
+    <button class="themebtn" data-theme-toggle aria-label="Alternar tema"><span class="ico-moon"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span><span class="ico-sun"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></button><button class="langbtn" data-lang-toggle>EN</button>
   </nav>
 </div>
 
@@ -35,7 +35,7 @@
     <span class="tag" data-i18n="polvo.kicker">Case 16 · 2024</span>
     <h1>Pergunte ao Polvo</h1>
     <p class="head__sub" data-i18n="polvo.sub">—</p>
-    <a class="head__cta" href="https://pergunteaopolvo.com/" target="_blank" rel="noopener" style="--fill:var(--c16)" data-i18n="polvo.l1">↗</a>
+    <a class="head__cta ar ar-out" href="https://pergunteaopolvo.com/" target="_blank" rel="noopener" style="--fill:var(--c16)" data-i18n="polvo.l1"></a>
   </header>
 
   <div class="facts">
@@ -80,20 +80,20 @@
     <h2 data-i18n="polvo.h3">O resultado</h2>
     <div data-i18n="polvo.c3">—</div>
     <div class="kpis" style="--fill:var(--c16)">
-      <a class="kpi" href="https://pergunteaopolvo.com/" target="_blank" rel="noopener"><span data-i18n="polvo.l1">Abrir o site ↗</span></a>
-      <a class="kpi" href="https://github.com/Deustavo/Pergunte-ao-polvo" target="_blank" rel="noopener"><span data-i18n="polvo.l2">Código no GitHub ↗</span></a>
+      <a class="kpi" href="https://pergunteaopolvo.com/" target="_blank" rel="noopener"><span data-i18n="polvo.l1" class="ar ar-out">Abrir o site</span></a>
+      <a class="kpi" href="https://github.com/Deustavo/Pergunte-ao-polvo" target="_blank" rel="noopener"><span data-i18n="polvo.l2" class="ar ar-out">Código no GitHub</span></a>
     </div>
   </section>
 
   <a class="box next" href="sistema-pilates.html" style="--fill:var(--c9)">
     <span class="tag" data-i18n="case.next">Próximo projeto</span>
     <strong data-i18n="mcb.title">MC Blessed Pilates</strong>
-    <span>↗</span>
+    <span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg></span>
   </a>
 </div>
 <div class="foot">
   <span data-i18n="foot.rights">© 2026 Gustavo Andrade</span>
-  <a href="../index.html#contato" data-i18n="case.cta">Trabalhar juntos →</a>
+  <a href="../index.html#contato" data-i18n="case.cta" class="ar">Trabalhar juntos</a>
 </div>
 <script src="../assets/i18n.js"></script>
 <script src="../assets/theme.js"></script>

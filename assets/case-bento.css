@@ -208,3 +208,5 @@ img.cover{object-fit:cover;height:auto}
 .chips a{font-size:.82rem;padding:.45rem 1rem;border-radius:100px;border:var(--bw) solid var(--line);color:inherit;text-decoration:none;
  max-width:100%;overflow-wrap:anywhere;transition:background .25s,color .25s}
 .chips a:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
+.next > span:last-child{align-self:center;font-size:clamp(1.4rem,3vw,2.2rem);display:flex;transition:transform .4s var(--ease)}
+.next:hover > span:last-child{transform:translateX(6px)}

@@ -37,6 +37,7 @@
   transition:background .2s,color .2s,border-color .2s}
 .themebtn:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
 .themebtn .ico-sun{display:none}
+.themebtn .ic{display:block}
 :root[data-theme="dark"] .themebtn .ico-sun{display:block}
 :root[data-theme="dark"] .themebtn .ico-moon{display:none}
 @media (prefers-color-scheme: dark){
@@ -52,3 +53,15 @@
   :root:not([data-theme="light"]) div.cover,
   :root:not([data-theme="light"]) .gallery > div{filter:saturate(.92) brightness(.88)}
 }
+
+/* ícones: um só traço (24px, stroke 3, pontas redondas) em todo o site */
+.ic{display:inline-block;width:1em;height:1em;vertical-align:-.125em;flex:none}
+/* setas depois/antes de um texto traduzido: mesmo desenho, por máscara */
+.ar::after,.ar-back::before{content:"";display:inline-block;width:.85em;height:.85em;vertical-align:-.08em;
+  background:currentColor;-webkit-mask:var(--ar-i) center/contain no-repeat;mask:var(--ar-i) center/contain no-repeat;
+  --ar-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h13M12 5l7 7-7 7'/%3E%3C/svg%3E")}
+.ar::after{margin-left:.4em}
+.ar-back::before{margin-right:.4em;transform:scaleX(-1)}
+.ar-up::after{transform:rotate(-90deg)}
+.ar-down::after{transform:rotate(90deg)}
+.ar-out::after{--ar-i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E")}
