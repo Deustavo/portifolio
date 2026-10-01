@@ -162,11 +162,12 @@ img.cover{object-fit:cover;height:auto}
 .kpis--3{margin-top:0}
 .block .kpis--3{grid-column:auto}
 
-.tl{list-style:none;margin:0;padding:0 0 0 2.4rem;display:grid;position:relative;--p:0}
-/* trilho: tracejado de fundo + preenchimento que acompanha a rolagem */
-.tl::before,.tl::after{content:"";position:absolute;left:.7rem;top:1.6rem;bottom:1.6rem;width:var(--bw);border-radius:2px}
-.tl::before{background:repeating-linear-gradient(var(--line) 0 6px,transparent 6px 12px);opacity:.35}
-.tl::after{background:var(--c1);transform-origin:top;transform:scaleY(var(--p))}
+.tl{list-style:none;margin:0;padding:0 0 0 2.4rem;display:grid;position:relative;--dot:-1.7rem;--dot-y:1.8rem}
+/* trilho: cada cargo desenha o trecho até a próxima estação, na cor dele; enche com a rolagem (--p) */
+.tl li::after{content:"";position:absolute;left:calc(var(--dot) - var(--bw)/2);top:var(--dot-y);height:100%;width:var(--bw);
+  background:linear-gradient(var(--fill,var(--c1)),var(--fill,var(--c1))) top/100% calc(var(--p,0)*100%) no-repeat,
+    repeating-linear-gradient(color-mix(in srgb,var(--line) 35%,transparent) 0 6px,transparent 6px 12px)}
+.tl li:last-child::after{content:none}
 .tl li{display:grid;grid-template-columns:4.5rem minmax(0,1fr);gap:1.2rem;padding:1rem 1rem;position:relative;
   border-radius:var(--r);transition:background .35s,transform .35s var(--ease),opacity .5s}
 /* estação de cada cargo */
@@ -188,7 +189,7 @@ img.cover{object-fit:cover;height:auto}
   border:var(--bw) solid var(--line);border-radius:100px;padding:.3rem .75rem;transition:background .2s,color .2s,transform .25s var(--ease)}
 .tl-years button:hover{transform:translateY(-2px)}
 .tl-years button[aria-pressed="true"]{background:var(--fill,var(--c1));border-color:var(--fill,var(--c1));color:var(--on-fill)}
-@media(max-width:480px){.tl{padding-left:1.9rem}.tl li{grid-template-columns:1fr;gap:.2rem;padding:.8rem}.tl li::before{left:-1.65rem;top:1.2rem}.tl::before,.tl::after{left:.45rem}}
+@media(max-width:480px){.tl{padding-left:1.9rem}.tl li{grid-template-columns:1fr;gap:.2rem;padding:.8rem}.tl li::before{left:-1.65rem;top:1.2rem}.tl{--dot:-1.2rem;--dot-y:1.65rem}}
 @media(prefers-reduced-motion:reduce){.tl.is-js li{opacity:1;transform:none}.tl li.is-on time{transform:none}}
 
 /* contato no fim do sobre (mesmo bloco da home) */

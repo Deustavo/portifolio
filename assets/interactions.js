@@ -684,11 +684,10 @@
     function update() {
       queued = false;
       var mid = window.innerHeight / 2;
-      var r = tl.getBoundingClientRect();
-      tl.style.setProperty('--p', Math.max(0, Math.min(1, (mid - r.top) / r.height)).toFixed(3));
       var best = null, dist = Infinity;
       items.forEach(function (li) {
         var b = li.getBoundingClientRect();
+        li.style.setProperty('--p', Math.max(0, Math.min(1, (mid - b.top) / b.height)).toFixed(3));
         var d = Math.abs(b.top + b.height / 2 - mid);
         if (d < dist) { dist = d; best = li; }
       });
