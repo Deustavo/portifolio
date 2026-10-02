@@ -6,7 +6,8 @@
     "dev": "react-router dev",
     "build": "react-router build && mv build/client/404/index.html build/client/404.html && rmdir build/client/404 && rm build/client/__spa-fallback.html",
     "preview": "serve build/client",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "test": "node --disable-warning=ExperimentalWarning --test 'tests/*.test.ts'"
   },
   "dependencies": {
     "react": "^19.3.0",
