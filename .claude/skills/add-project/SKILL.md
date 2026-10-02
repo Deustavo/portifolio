@@ -5,35 +5,54 @@ description: Adiciona um novo case ao portfólio seguindo o padrão do Life Guar
 
 # Adicionar um case ao portfólio
 
-Todo case do portfólio é a mesma página com conteúdo trocado. Nada de CSS novo,
-nada de layout novo. Se algo não couber nos blocos existentes, pare e pergunte
-antes de inventar componente.
+O site é React Router com prerender. Todo case é a mesma rota
+(`app/routes/case.tsx`) alimentada por dados, então adicionar case é:
+
+1. imagens em `public/assets/img/<slug>/`
+2. uma entrada no array `cases` de `app/data/cases.ts`
+3. as chaves de texto em `app/i18n/dict.ts`, em PT e em EN
+4. `npm run build`
+
+Rota, card na home, contagem de cases, `{n}` dos textos, meta/OG e lista do
+prerender saem do `cases.ts` sozinhos. Nada de CSS novo, nada de componente novo.
+Se algo não couber nos blocos existentes, pare e pergunte antes de inventar.
 
 ## Antes de escrever
 
-Leia estes arquivos para pegar o padrão vigente (o Life Guard é a referência):
+Leia para pegar o padrão vigente (o Life Guard é a referência):
 
-- `projects/life-guard.html` — gabarito da página de case
-- `assets/i18n.js` — dicionário PT/EN, bloco `/* ---- case Life Guard ---- */`
-- `index.html` — grade de cards da home
-- `assets/case-bento.css` — classes disponíveis, não editar
+- `app/data/cases.ts`: tipo `Case` e a entrada `life-guard`
+- `app/i18n/dict.ts`: blocos `/* ---- case Life Guard ---- */` (PT) e
+  `/* ---- Life Guard case ---- */` (EN), e as chaves `p1.*` do card
+- `app/routes/case.tsx`: o gabarito, para ver onde cada chave aparece
+- `app/styles/case-bento.css`: classes disponíveis, não editar
 
 Colete do usuário (pergunte o que faltar, não invente):
 
 | Campo | Exemplo |
 |---|---|
-| slug | `life-site` (kebab-case, vira nome de arquivo e da pasta de imagens) |
+| slug | `life-site` (kebab-case, vira URL `/projects/<slug>` e pasta de imagens) |
 | Nome exibido | `Life Site` |
 | Cliente | `Life Tecnologia` |
 | Papel | `UI & UX Design, prototipação` |
 | Escopo | `Site institucional, 6 públicos` |
 | Ano | `2021` |
-| Prefixo i18n | `lsite` (curto, único, sem colidir com `lg`, `p1`…) |
-| Cor de destaque | `--c1` a `--c5` ou `--ink`, uma ainda não usada por outro card |
+| Grupo na home | jogos, sistemas, sites ou protótipos |
+| Links públicos | jogo no ar, repositório, página em loja (se houver) |
 
-## Passo 1 — imagens
+E decida você, conferindo no código:
 
-1. `mkdir -p assets/img/<slug>`
+- prefixo i18n: curto e único (`lsite`). Confira com
+  `grep -o 'prefix: "[^"]*"' app/data/cases.ts`
+- índice do card: o próximo `pN` livre. Confira com
+  `grep -oE '"p[0-9]+\.tag"' app/i18n/dict.ts | sort -V | tail -1`
+- cor: uma `var(--cN)` ainda não usada por outro case
+  (`grep -o 'fill: "[^"]*"' app/data/cases.ts`). Se todas estiverem em uso,
+  pergunte, porque cor nova é CSS novo no `theme.css`
+
+## Passo 1: imagens
+
+1. `mkdir -p public/assets/img/<slug>`
 2. Nomes em kebab-case descrevendo a tela, não `1.png`: `home.png`,
    `menu-servicos.png`, `internet-fixa.png`.
 3. Screenshot de protótipo costuma vir com a moldura do Figma: margem cinza
@@ -42,9 +61,18 @@ Colete do usuário (pergunte o que faltar, não invente):
    marque cada pixel diferente dela, e recorte pela primeira e última linha e
    coluna com mais de 50% de pixels marcados. O limiar de 50% pula a faixa do
    rótulo, porque texto fino ocupa pouco da largura.
-4. `hero.png` é a capa, largura cheia em `aspect-ratio:16/7`, 1920×1080.
+4. Arquivos fixos da pasta, além das telas:
+
+   | Arquivo | Uso | Tamanho |
+   |---|---|---|
+   | `hero.png` | capa do case | 1920×1080 (outro tamanho: declare em `hero` no `cases.ts`) |
+   | `og.jpg` | og:image da página, montado pelo `seo.ts` | 1200×630 |
+   | `card.webp` | fundo do card na home e no `/jogos` | confira os existentes, ex. `life-guard/card.webp` |
+
+   As telas da galeria são os nomes que vão em `galleries[].shots`.
+5. `hero.png` é a capa, largura cheia em `aspect-ratio:16/7`, 1920×1080.
    Screenshot vertical direto na capa fica cortado. O padrão do portfólio é um
-   mosaico inclinado, igual ao `assets/img/life-guard/hero.png`: telas em
+   mosaico inclinado, igual ao `public/assets/img/life-guard/hero.png`: telas em
    colunas contínuas sobre fundo creme `#f9e8d8`, cantos arredondados em 20px,
    sombra preta a 85 de alfa com desfoque gaussiano de 26, canvas grande girado
    `-12°` e recorte central de 1920×1080. Tela de celular é estreita, então
@@ -53,11 +81,11 @@ Colete do usuário (pergunte o que faltar, não invente):
    uma na outra e a capa vira um borrão. Aí use coluna de cerca de 900px de
    largura e 90px de intervalo nos dois eixos, com as colunas deslocadas
    verticalmente entre si para o creme aparecer entre as telas.
-5. Se o usuário colou as imagens no chat em vez de dar arquivos, elas **não**
+6. Se o usuário colou as imagens no chat em vez de dar arquivos, elas **não**
    chegam ao disco. Gere placeholders com os nomes finais (PIL, fundo escuro,
    borda laranja, texto `PLACEHOLDER` + rótulo + dimensão) e avise que ele
    precisa sobrescrever os arquivos.
-6. Screenshot de sistema real vem com dado de pessoa de verdade: nome, telefone,
+7. Screenshot de sistema real vem com dado de pessoa de verdade: nome, telefone,
    e-mail, data de nascimento. Não publique e não borre a tela inteira, porque
    uma tabela borrada não mostra design nenhum. Redesenhe o texto:
 
@@ -83,68 +111,104 @@ Colete do usuário (pergunte o que faltar, não invente):
    - `identify` e `convert` não existem nessa máquina, e não há `numpy`. É PIL
      puro. Confira cada tela com um recorte ampliado em 3x ou 4x antes de
      instalar, é onde aparece peso errado e retângulo de apagar sobrando
-   - guarde os originais em `assets/img/<slug>/_originais-com-dados-reais/` em
-     vez de apagar, e diga ao usuário que a pasta existe
-7. Quando ele largar os arquivos na pasta, confira um por um antes de renomear.
+   - guarde os originais em `_originais/<slug>/` na raiz do repo, fora de
+     `public/`, em vez de apagar, e diga ao usuário que a pasta existe. Tudo
+     que está em `public/` vai para o build e fica acessível na URL
+8. Quando ele largar os arquivos na pasta, confira um por um antes de renomear.
    Vem screenshot que não é do projeto no meio do lote. O que não for do case,
    tire da pasta em vez de apagar, e diga onde foi parar.
 
-## Passo 2 — página do case
+## Passo 2: entrada no `cases.ts`
 
-Copie `projects/life-guard.html` para `projects/<slug>.html` e troque:
+Adicione um objeto ao array `cases`. **A posição no array é a ordem do card na
+home**, dentro do grupo dele. Campos do tipo `Case`:
 
-- `<title>` e `<meta name="description">` (estáticos, em PT)
-- `<h1>` com o nome exibido
-- todo `lg.` pelo prefixo novo
-- os caminhos `../assets/img/life-guard/` pela pasta nova
-- a quantidade de `.fact`, de blocos `<section class="box">` de galeria e de
-  `<figure class="shot">` conforme o material real
+| Campo | Obrigatório | O que faz |
+|---|---|---|
+| `slug` | sim | URL `/projects/<slug>` e pasta padrão das imagens |
+| `name` | sim | `<h1>` do case, `<h3>` do card e base do `<title>` (montado por `caseTitle`) |
+| `prefix` | sim | prefixo de todas as chaves do case no `dict.ts` |
+| `card` | sim | prefixo das chaves do card (`pN.tag`, `pN.metric`) |
+| `imgDir` | não | pasta em `/assets/img/` quando não é o slug (o `follow-me` usa `hackathon-unimar`) |
+| `fill` | sim | cor do case: card, tiles de link, CTA, barra de leitura e o "próximo projeto" que aponta para ele |
+| `group` | sim | `"games"`, `"systems"`, `"sites"` ou `"protos"`: seção e filtro da home |
+| `size` | não | `"wide"` ocupa 2 das 4 colunas da grade, `"xwide"` ocupa 3. Sem `size`, 1 coluna |
+| `shotArt` | não | o `card.webp` é arte com fundo transparente: encosta no canto inferior direito em altura cheia, sem máscara, em vez de cobrir o card como screenshot (só o Chinela) |
+| `year` | sim | valor do quarto fato (`f4`, "Ano") |
+| `description` | sim | meta description e og:description, em PT |
+| `hero` | não | `[largura, altura]` do `hero.png` quando não é 1920×1080 |
+| `galleries` | sim | lista de galerias, cada uma `{ cols?, shots }`. `shots` são os arquivos da pasta. Pode ser `[]` (Owna) |
+| `earlyGallery` | não | `true` põe a 1ª galeria entre "O contexto" e "O processo"; o padrão é todas depois do processo |
+| `links` | não | hrefs que viram tiles `.kpi` no fim do bloco de resultado; rótulos `l1..lN` |
+| `cta` | não | `true` põe um botão no cabeçalho com `links[0]` e rótulo `l1`. Exige `links` |
+| `plainLinks` | não | `true` tira a seta dos tiles e do CTA (só o Chinela) |
+| `next` | sim | slug do case que aparece em "Próximo projeto" no rodapé |
+| `mascote` | não | `{ img, audio, delay }`: a gata que mia no canto (só o Chinela). Não use sem pedido |
 
-Regras do bloco de galeria:
+Regras da galeria:
 
-- 2 ou 3 grupos, cada um com sua `.strip__lbl` explicando o recorte do grupo
-- `.shots` sozinha abre em 5 colunas no desktop. Grupo com 3 ou 4 telas deixa
-  coluna vazia à direita, então some `shots--3` ou `shots--4` na `div` para a
-  linha fechar cheia. Grupo de 1 imagem só, não
-- cada `figure` precisa de `loading="lazy"`, `data-i18n-attr="alt:<pfx>.gN"` e
-  `<figcaption data-i18n="<pfx>.gN">`
+- 2 ou 3 grupos, cada um com seu rótulo explicando o recorte do grupo
+- sem `cols` a grade abre em 5 colunas no desktop. Grupo com 2, 3 ou 4 telas
+  deixa coluna vazia à direita, então ponha `cols: 2 | 3 | 4` para a linha
+  fechar cheia. Grupo de 1 imagem só, sem `cols`
+- no máximo 4 galerias (rótulos `ga` a `gd`)
 
-### Case com link externo
+### Grade da home
 
-Projeto que está no ar em algum lugar (jogo publicado, repositório aberto, página
-em loja) ganha os links como tiles `.kpi` dentro de `.kpis`, no fim do bloco de
-resultado. A classe já existe no `case-bento.css` e o `.block .kpis{grid-column:2}`
-alinha os tiles com a coluna do texto. O rótulo de cada link é chave de i18n, e o
-conteúdo do `<a>` precisa vir dentro de um `<span>`, senão o texto fica atrás do
-preenchimento do hover:
+Cada grupo tem sua grade de 4 colunas. Some as larguras dos cards do grupo
+(1, `wide` = 2, `xwide` = 3) e ajuste `size` para fechar linhas cheias, sem
+sobra pendurada. Mexer no `size` de outro case do grupo é permitido.
 
-```html
-<div class="kpis" style="--fill:var(--cN)">
-  <a class="kpi" href="..." target="_blank" rel="noopener"><span data-i18n="<pfx>.l1">Jogar no navegador ↗</span></a>
-</div>
+### Corrente do "próximo projeto"
+
+Os `next` formam um ciclo fechado que passa por todos os cases. Encaixe o novo
+em um ponto: escolha o case `A` que vai apontar para ele, copie o `next` de `A`
+para o novo e troque o `next` de `A` para o slug novo. Se esquecer de mexer em
+`A`, o case novo fica fora do ciclo; se apontar para slug que não existe, a
+página quebra. Para ver a corrente:
+
+```bash
+grep -oE 'slug: "[^"]*"|next: "[^"]*"' app/data/cases.ts
 ```
 
-## Passo 3 — textos PT e EN
+### Jogo
 
-No `assets/i18n.js`, adicione um bloco por idioma logo depois do último bloco de
-case, dentro de `pt:` e de `en:`. Mesmas chaves nos dois, na mesma ordem:
+Se o case for jogo publicado, pergunte se ele entra no `/jogos`. Se sim,
+adicione em `app/data/games.ts` (`slug`, link principal `play`, `cta` e os
+chips de itch/GitHub). Nome, cor, thumb e textos vêm do case.
+
+## Passo 3: textos PT e EN
+
+No `app/i18n/dict.ts`, adicione um bloco `/* ---- case Nome ---- */` depois do
+último bloco de case, dentro de `pt:` e de `en:`. Mesmas chaves nos dois, na
+mesma ordem. Chaves que o gabarito usa (`<pfx>` é o `prefix`):
 
 ```
-<pfx>.title <pfx>.kicker <pfx>.sub
-<pfx>.f1..f4 / <pfx>.v1..v3        rótulos e valores dos fatos
-<pfx>.h1 <pfx>.c1                  contexto  (c* aceita HTML: <p>, <ul>, <i>)
-<pfx>.h2 <pfx>.c2                  processo
-<pfx>.h3 <pfx>.c3                  resultado
-<pfx>.heroAlt
-<pfx>.ga <pfx>.gb [<pfx>.gc]       rótulos dos grupos
-<pfx>.g1..gN                       legenda de cada tela
+<pfx>.title                         nome no card "Próximo projeto" de quem aponta para ele
+<pfx>.kicker <pfx>.sub              etiqueta e subtítulo do cabeçalho
+<pfx>.f1 <pfx>.f2 <pfx>.f3 <pfx>.f4 rótulos dos fatos (Cliente, Papel, Escopo, Ano)
+<pfx>.v1 <pfx>.v2 <pfx>.v3          valores dos três primeiros fatos (o do Ano é `year`)
+<pfx>.heroAlt                       alt da capa
+<pfx>.h1 <pfx>.c1                   contexto   (c* aceita HTML: <p>, <ul>, <i>)
+<pfx>.h2 <pfx>.c2                   processo
+<pfx>.h3 <pfx>.c3                   resultado
+<pfx>.ga <pfx>.gb [<pfx>.gc <pfx>.gd]  rótulo de cada galeria, na ordem do array
+<pfx>.g1..gN                        alt e legenda de cada tela, numeração contínua
+                                    entre as galerias (a 2ª galeria continua do g4, não do g1)
+<pfx>.l1..lN                        rótulo de cada link, na ordem de `links` (l1 também é o CTA)
+pN.tag pN.metric                    etiqueta e frase do card na home e no /jogos
 ```
+
+`pN.sub`, `<pfx>.next` e `<pfx>.work` existem em cases antigos mas não são
+lidos por nada; não precisa criar. O total de cases e a etiqueta "NN cases"
+são calculados, não há chave para atualizar.
 
 Cuidados:
 
-- `&` dentro de valor precisa ser `&amp;`, porque o valor é injetado como HTML
-- o `kicker` segue a numeração dos cases: `Case 02 · 2021`
-- ao inserir depois da última chave de um bloco, acrescente a vírgula que faltava
+- o valor é injetado como HTML: `&` vira `&amp;`
+- o `kicker` segue a numeração dos cases: `Case 17 · 2021`. Pegue o maior
+  número com `grep -o 'Case [0-9]*' app/i18n/dict.ts | sort -V | tail -1`
+- rótulo de link costuma terminar em `↗` quando vai para fora (veja `chinela.l1`)
 
 ### Como escrever a prosa
 
@@ -163,49 +227,30 @@ O tom do portfólio é primeira pessoa, seco, sem adjetivo de vendedor.
   decisão de design em vez de fabricar um percentual. Se um dado for suposição
   (ano, papel, se foi para produção), avise o usuário no fim em vez de deixar
   passar como fato.
+- **Não invente conteúdo.** Só o que o usuário contou e o que as imagens
+  mostram. Legenda descreve a tela que está na imagem.
 - O EN é tradução do mesmo conteúdo, não um texto novo, e também sem travessão.
+- A `description` do `cases.ts` segue as mesmas regras.
 
-## Passo 4 — card na home
-
-Em `index.html`, dentro do `.bento` de projetos:
-
-```html
-<a class="box p-card wide" href="projects/<slug>.html" style="--fill:var(--cN)"><span class="tag" data-i18n="pK.tag">Rótulo</span>
-  <span><h3>Nome</h3><p data-i18n="pK.metric">Uma linha concreta</p><span class="p-card__go"><i data-i18n="p.more">Ver case</i> <span>→</span></span></span></a>
-```
-
-- `pK` é o próximo índice livre de projeto no `i18n.js` (`p6`, `p7`…); adicione
-  `pK.sub`, `pK.tag` e `pK.metric` em PT e EN
-- a grade tem 4 colunas. `wide` ocupa 2. Some as larguras de todos os cards e
-  ajuste quem é `wide` para fechar linhas cheias, sem sobra pendurada
-- atualize `work.count` (`"05 cases"` → `"06 cases"`) nos dois idiomas
-
-## Passo 5 — corrente de navegação
-
-O rodapé de cada case aponta para o próximo, em ciclo fechado. Encaixe o case
-novo em um ponto da corrente: altere o `.box next` do case anterior para apontar
-ao novo (`href`, `--fill` e `data-i18n` do título) e faça o novo apontar para
-quem o anterior apontava.
+## Passo 4: conferir
 
 ```bash
-grep -n 'class="box next"' -A3 projects/*.html
+npm run typecheck
+npm run build      # falha listando as chaves que faltam em PT ou EN
+npm run preview    # serve build/client; abra / e /projects/<slug>
 ```
 
-## Passo 6 — conferir
-
-```bash
-node --check assets/i18n.js
-python3 -m http.server 8000   # abra /index.html e /projects/<slug>.html
-```
+O `react-router.config.ts` confere, para cada case, todas as chaves do Passo 3
+(galerias, legendas e links contados a partir do `cases.ts`) em PT e EN, e
+derruba `dev`, `typecheck` e `build` se faltar alguma.
 
 Checklist:
 
-- [ ] `node --check` passa no `i18n.js`
-- [ ] toda chave `data-i18n` da página nova existe em `pt` **e** em `en`
-- [ ] nenhuma imagem faltando (aba Network sem 404)
+- [ ] `typecheck` e `build` passam
+- [ ] nenhuma imagem faltando (aba Network sem 404): hero, og, card e telas
 - [ ] tema claro e escuro, e o toggle EN, sem `—` sobrando na tela
-- [ ] a grade da home fecha as linhas em desktop, tablet e mobile
+- [ ] a grade do grupo na home fecha as linhas em desktop, tablet e mobile
 - [ ] nenhum travessão na prosa PT ou EN
-- [ ] a corrente de "próximo projeto" continua fechando o ciclo
+- [ ] o "Próximo projeto" do case anterior abre o novo, e o do novo segue o ciclo
 
 Feche relatando o que foi suposto e o que o usuário ainda precisa fornecer.

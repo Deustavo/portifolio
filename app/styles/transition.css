@@ -1,0 +1,16 @@
+/* ===== Entrada e saída de página: os blocos caem e ficam translúcidos ===== */
+/* Os estados são aplicados por transition.js em estilo inline, para funcionar
+   igual em todas as páginas. Aqui ficam só o véu e o respeito ao reduced-motion. */
+
+/* z-index abaixo da .bar (30): o véu cobre só o conteúdo */
+.fade-veil{position:fixed;inset:0;z-index:29;background:var(--bg,#faf7f0);opacity:0;pointer-events:none;
+  transition:opacity .45s ease-in}
+html.is-leaving .fade-veil{opacity:.55;pointer-events:auto}
+
+@media(prefers-reduced-motion:reduce){
+  .fade-veil{display:none}
+}
+
+/* antes da hidratação: os blocos já nascem no estado inicial da entrada
+   (classe posta pelo script do <head> em root.tsx), senão a página pisca inteira */
+html.tr-pre :is(.bento > *, .head, .filters, .wrap > *, .foot){opacity:0;transform:translateY(28px) scale(.985)}
