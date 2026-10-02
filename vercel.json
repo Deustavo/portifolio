@@ -1,7 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "build/client",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/sobre.html", "destination": "/sobre", "permanent": true },
+    { "source": "/jogos.html", "destination": "/jogos", "permanent": true },
+    { "source": "/projects/:slug.html", "destination": "/projects/:slug", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/assets/img/(.*)",
@@ -10,9 +19,9 @@
       ]
     },
     {
-      "source": "/assets/(.*).(css|js)",
+      "source": "/_app/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
   ]
