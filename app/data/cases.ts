@@ -23,7 +23,7 @@ export type Case = {
   cta?: true; // .head__cta com links[0] e rótulo l1
   plainLinks?: true; // cta e kpis sem a seta "ar ar-out" (só Chinela)
   next: string; // slug do próximo case
-  mascote?: { img: string; audio: string; delay: number };
+  mascote?: number; // ms até a Chinela chegar andando no canto (só Chinela)
 };
 
 export const cases: Case[] = [
@@ -47,7 +47,7 @@ export const cases: Case[] = [
     cta: true,
     plainLinks: true,
     next: "demon-arena",
-    mascote: { img: "/assets/img/jogo-chinela-destroyer/chinela.png", audio: "/assets/audio/miado1.mp3", delay: 3000 },
+    mascote: 3000,
   },
   {
     slug: "demon-arena",

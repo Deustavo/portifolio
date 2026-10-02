@@ -77,6 +77,7 @@ export const DICT: Record<Lang, Record<string, string>> = {
     "lb.hintTouch":   "Deslize para navegar · toque fora para fechar",
     "cat.meow":       "Ouvir a Chinela miar",
     "cat.dismiss":    "Dispensar a Chinela",
+    "cat.controls":   "WASD ou setas para me mover",
 
     "work.title":     "Projetos selecionados",
     "work.games":     "Jogos",
@@ -634,6 +635,7 @@ export const DICT: Record<Lang, Record<string, string>> = {
     "lb.hintTouch":   "Swipe to browse · tap outside to close",
     "cat.meow":       "Hear Chinela meow",
     "cat.dismiss":    "Dismiss Chinela",
+    "cat.controls":   "WASD or arrow keys to move me",
 
     "work.title":     "Selected work",
     "work.games":     "Games",

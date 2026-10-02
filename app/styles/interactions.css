@@ -90,35 +90,30 @@ img.cover{cursor:zoom-in}
 .shot img:focus-visible, img.cover:focus-visible{outline:3px solid var(--c1);outline-offset:4px}
 .lb-lock{overflow:hidden}
 
-/* ---------- 5. mascote (só no case do Chinela Destroyer) ---------- */
-.mascote{position:fixed;right:clamp(.5rem,2vw,1.6rem);bottom:clamp(.5rem,2vw,1.6rem);
-  z-index:35;width:clamp(92px,12vw,148px);line-height:0;
-  transform:translateY(135%) rotate(10deg);opacity:0;
-  transition:transform .8s var(--ease),opacity .45s ease}
-.mascote.is-in{transform:none;opacity:1}
-.mascote__cat{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;line-height:0}
-.mascote__cat img{width:100%;height:auto;filter:drop-shadow(0 8px 16px rgba(0,0,0,.3));
-  transition:transform .32s var(--ease)}
-.mascote__cat:hover img{transform:translateY(-6px) rotate(-3deg)}
-.mascote__cat:focus-visible{outline:3px solid var(--c1);outline-offset:4px;border-radius:12px}
-.mascote.is-meowing .mascote__cat img{animation:meow .55s ease}
-@keyframes meow{0%,100%{transform:none}
-  22%{transform:translateY(-12px) rotate(-7deg)}
-  55%{transform:translateY(-2px) rotate(5deg)}
-  78%{transform:translateY(-5px) rotate(-2deg)}}
+/* ---------- 5. Chinela (componente Chinela): anda pelo rodapé da janela em todas as páginas ---------- */
+.chinela{position:fixed;left:0;bottom:0;z-index:35;width:128px;height:128px;will-change:transform}
+.chinela__sprite{display:block;width:100%;height:100%;background-size:1000% 100%;
+  background-position:calc(var(--f,0) * 100% / 9) 0;transform:scaleX(var(--face,1));
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
 /* o ✕ só aparece no hover ou no foco; no toque, onde hover não existe, fica sempre */
-.mascote__x{position:absolute;top:-2px;left:-2px;width:1.6rem;height:1.6rem;padding:0;
+.chinela__x{position:absolute;top:14px;right:6px;width:1.6rem;height:1.6rem;padding:0;
   display:inline-flex;align-items:center;justify-content:center;font-family:inherit;font-size:.7rem;
   background:var(--bg);border:var(--bw) solid var(--line);color:inherit;cursor:pointer;
   border-radius:100px;opacity:0;transition:opacity .25s ease,background .2s,color .2s,border-color .2s}
-.mascote:hover .mascote__x,.mascote:focus-within .mascote__x{opacity:1}
-.mascote__x:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
-@media(hover:none){.mascote__x{opacity:1}}
+.chinela__x:hover{background:var(--c1);border-color:var(--c1);color:var(--on-fill)}
+@media(hover:none){.chinela__x{opacity:1}}
+.chinela__cat{display:block;width:100%;height:100%;padding:0;border:0;background:none;cursor:pointer}
+.chinela__cat:focus-visible{outline:3px solid var(--c1);outline-offset:4px;border-radius:12px}
+.chinela:hover .chinela__x,.chinela:focus-within .chinela__x{opacity:1}
+.chinela__hint{position:absolute;bottom:calc(100% + .3rem);right:0;
+  white-space:nowrap;padding:.4rem .65rem;font-size:.75rem;font-weight:600;line-height:1.2;
+  background:#ffd23f;color:#111;box-shadow:3px 3px 0 #111;
+  animation:hintIn .5s .6s var(--ease) both}
+@keyframes hintIn{from{opacity:0;transform:translateY(6px)}}
 
 @media(prefers-reduced-motion:reduce){
   .bento.is-filtering > *{animation:none}
   .lb,.lb__img{transition:none}
-  .mascote.is-meowing .mascote__cat img{animation:none}
 }
 
 /* ---------- 6. blob que segue o cursor ---------- */

@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router";
 import { usePageTransition } from "../hooks/usePageTransition";
 import { Bar } from "./Bar";
 import { BlobCursor } from "./BlobCursor";
+import { Chinela } from "./Chinela";
 import { Foot } from "./Foot";
 
 export default function Layout() {
@@ -15,6 +16,7 @@ export default function Layout() {
       {/* home e sobre já terminam no bloco de contato */}
       <Foot cta={page !== "/" && page !== "/sobre"} />
       <BlobCursor />
+      <Chinela />
     </>
   );
 }

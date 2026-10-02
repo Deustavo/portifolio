@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { useEffect, type CSSProperties } from "react";
 import { useLocation } from "react-router";
 import type { Route } from "./+types/case";
 import { caseBySlug, caseTitle, imgDir } from "../data/cases";
@@ -11,7 +11,7 @@ import { Fact, Facts } from "../components/Facts";
 import { Gallery, Shot } from "../components/Gallery";
 import { Kpi, Kpis } from "../components/Kpis";
 import { Lightbox, useZoom } from "../components/Lightbox";
-import { Mascote } from "../components/Mascote";
+import { CHEGAR } from "../components/Chinela";
 import { NextCase } from "../components/NextCase";
 import { ReadBar } from "../components/ReadBar";
 import { T } from "../components/T";
@@ -46,6 +46,13 @@ export default function Case() {
   const p = c.prefix;
   const dir = imgDir(c);
   const arrow = c.plainLinks ? undefined : "ar ar-out";
+
+  // a Chinela chega andando no canto um tempo depois de abrir o case dela
+  useEffect(() => {
+    if (!c.mascote) return;
+    const t = setTimeout(() => window.dispatchEvent(new Event(CHEGAR)), c.mascote);
+    return () => clearTimeout(t);
+  }, [c.mascote]);
 
   // legendas g1..gN contínuas entre as galerias
   let n = 0;
@@ -100,7 +107,6 @@ export default function Case() {
         <NextCase c={caseBySlug[c.next]} />
       </div>
       <ReadBar fill={c.fill} />
-      {c.mascote && <Mascote {...c.mascote} />}
     </Lightbox>
   );
 }
