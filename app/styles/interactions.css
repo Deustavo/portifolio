@@ -109,6 +109,9 @@ img.cover{cursor:zoom-in}
   white-space:nowrap;padding:.4rem .65rem;font-size:.75rem;font-weight:600;line-height:1.2;
   background:#ffd23f;color:#111;box-shadow:3px 3px 0 #111;
   animation:hintIn .5s .6s var(--ease) both}
+/* letras derrubadas: o original some, a cópia cai (ver knock em Chinela.tsx) */
+::highlight(chinela-caiu){color:transparent}
+.chinela-letra{position:fixed;z-index:34;pointer-events:none;white-space:pre}
 @keyframes hintIn{from{opacity:0;transform:translateY(6px)}}
 
 @media(prefers-reduced-motion:reduce){

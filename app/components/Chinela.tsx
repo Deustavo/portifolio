@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
 import { useLang } from "../i18n/LangProvider";
 
 export const STORE = "ga-chinela"; // "free" ou "corner"
@@ -21,6 +22,70 @@ const KEYS: Record<string, "l" | "r" | "j" | "lick"> = {
   w: "j", arrowup: "j", " ": "j", s: "lick", arrowdown: "lick",
 };
 
+// onde ela consegue subir: pousa no topo quando cai de cima, atravessa por baixo
+const PLATS = ".box, .tag, .kpi, .shot, img, button, .tree__chip";
+const FALLEN = "chinela-caiu";
+
+const caretAt = (px: number, py: number): [Node, number] | null => {
+  if ("caretPositionFromPoint" in document) {
+    const p = document.caretPositionFromPoint(px, py);
+    return p && [p.offsetNode, p.offset];
+  }
+  const r = (document as Document).caretRangeFromPoint?.(px, py);
+  return r ? [r.startContainer, r.startOffset] : null;
+};
+
+// letras derrubadas: o original some via ::highlight (sem tocar no DOM do React) e uma cópia cai
+const knocked = new WeakMap<Text, { data: string; offs: Set<number> }>();
+function knock(box: { l: number; r: number; t: number; b: number }) {
+  if (typeof Highlight === "undefined" || !CSS.highlights) return;
+  let hl = CSS.highlights.get(FALLEN);
+  if (!hl) CSS.highlights.set(FALLEN, (hl = new Highlight()));
+  for (let i = 0; i < 4; i++)
+    for (let j = 0; j < 4; j++) {
+      const hit = caretAt(box.l + ((box.r - box.l) * (i + 0.5)) / 4, box.t + ((box.b - box.t) * (j + 0.5)) / 4);
+      if (!hit || hit[0].nodeType !== Node.TEXT_NODE) continue;
+      const t = hit[0] as Text;
+      let k = knocked.get(t);
+      if (!k || k.data !== t.data) knocked.set(t, (k = { data: t.data, offs: new Set() }));
+      for (const off of [hit[1] - 1, hit[1]]) {
+        if (off < 0 || off >= t.length || k.offs.has(off) || !t.data[off].trim()) continue;
+        const range = new Range();
+        range.setStart(t, off);
+        range.setEnd(t, off + 1);
+        const rr = range.getBoundingClientRect();
+        if (rr.right < box.l || rr.left > box.r || rr.bottom < box.t || rr.top > box.b) continue;
+        k.offs.add(off);
+        hl.add(range);
+        drop(t.data[off], rr, t.parentElement!);
+      }
+    }
+}
+
+function drop(ch: string, rr: DOMRect, from: Element) {
+  const cs = getComputedStyle(from);
+  const fill = cs.webkitTextFillColor;
+  const s = document.createElement("span");
+  s.className = "chinela-letra";
+  s.textContent = ch;
+  Object.assign(s.style, {
+    left: `${rr.left}px`, top: `${rr.top}px`, height: `${rr.height}px`, lineHeight: `${rr.height}px`,
+    fontFamily: cs.fontFamily, fontSize: cs.fontSize, fontWeight: cs.fontWeight, fontStyle: cs.fontStyle,
+    color: fill && fill !== "rgba(0, 0, 0, 0)" ? fill : cs.color,
+  });
+  document.body.append(s);
+  const dx = (Math.random() - 0.5) * 120;
+  const rot = (Math.random() - 0.5) * 540;
+  s.animate(
+    [
+      { transform: "none", easing: "ease-out" },
+      { transform: `translate(${dx * 0.2}px, -24px) rotate(${rot * 0.15}deg)`, offset: 0.2, easing: "cubic-bezier(.5,0,1,1)" },
+      { transform: `translate(${dx}px, ${innerHeight - rr.top + 80}px) rotate(${rot}deg)` },
+    ],
+    { duration: 1000 + Math.random() * 500, fill: "forwards" },
+  ).finished.then(() => s.remove(), () => s.remove());
+}
+
 type Mode = "off" | "free" | "out" | "away" | "home" | "corner";
 
 const save = (m: "free" | "corner") => {
@@ -40,6 +105,7 @@ export function Chinela() {
   const { ta } = useLang();
   const [mode, setMode] = useState<Mode>("off");
   const [hint, setHint] = useState(true);
+  const page = useLocation().pathname;
   const el = useRef<HTMLDivElement>(null);
   // o loop roda fora do React; os cliques mexem nele por aqui
   const ctl = useRef({ release: () => {}, close: () => {} });
@@ -56,6 +122,9 @@ export function Chinela() {
     window.addEventListener(CHEGAR, chega);
     return () => window.removeEventListener(CHEGAR, chega);
   }, []);
+
+  // trocou de página: as letras derrubadas da anterior não valem mais
+  useEffect(() => CSS.highlights?.get(FALLEN)?.clear(), [page]);
 
   const on = mode !== "off";
   useEffect(() => {
@@ -76,6 +145,13 @@ export function Chinela() {
     let last = performance.now();
     let raf = 0;
     let timer = 0;
+    // plataforma onde ela está em pé (null = chão) e a que ela acabou de atravessar para baixo
+    let plat: Element | null = null;
+    let skip: Element | null = null;
+    let plats: Element[] = [];
+    let platsAt = 0;
+    let frames = 0;
+    const feet = (r: DOMRect) => r.right > x + W * 0.3 && r.left < x + W * 0.7;
     const go = (next: Mode) => {
       m = next;
       setMode(next);
@@ -96,6 +172,7 @@ export function Chinela() {
     ctl.current.close = () => {
       // pula e cai para baixo da tela; depois de um tempo volta andando pro canto
       held.clear();
+      plat = null;
       vy = JUMP;
       drift = 0;
       save("corner");
@@ -135,16 +212,50 @@ export function Chinela() {
             go("home");
           }, BACK_IN);
         }
-      } else if (y > 0 || vy > 0) {
-        vy -= GRAVITY * dt;
-        y = Math.max(0, y + vy * dt);
-        if (y === 0) {
-          vy = 0;
-          drift = 0;
+      } else {
+        // em pé numa plataforma ela acompanha a rolagem; saiu da borda ou a plataforma sumiu, cai
+        if (plat) {
+          const r = plat.getBoundingClientRect();
+          if (!plat.isConnected || r.top < W * 0.6 || !feet(r)) plat = null;
+          else if (r.top >= innerHeight) (plat = null), (y = 0);
+          else y = innerHeight - r.top;
+        }
+        if (!plat && (y > 0 || vy > 0)) {
+          const prev = y;
+          vy -= GRAVITY * dt;
+          y = Math.max(0, y + vy * dt);
+          if (vy < 0 && m === "free") {
+            if (now - platsAt > 500) {
+              plats = [...document.querySelectorAll(PLATS)].filter((e) => !e.closest(".chinela, .lb"));
+              platsAt = now;
+            }
+            // pousa no topo mais alto que ela cruzou descendo
+            for (const e of plats) {
+              if (e === skip) continue;
+              const r = e.getBoundingClientRect();
+              const top = innerHeight - r.top;
+              if (r.width < 24 || r.top < W * 0.6 || r.top > innerHeight || !feet(r)) continue;
+              if (prev >= top && y <= top && (!plat || top > y)) (plat = e), (y = top);
+            }
+          }
+          if (plat || y === 0) {
+            vy = 0;
+            drift = 0;
+            skip = null;
+          }
         }
       }
 
-      const air = y !== 0;
+      if (m === "free" && (dir || vy) && frames++ % 2 === 0) {
+        // o hit-test não pode achar ela mesma
+        const b = el.current!;
+        b.style.pointerEvents = "none";
+        const t = innerHeight - y;
+        knock({ l: x + W * 0.15, r: x + W * 0.85, t: t - W * 0.8, b: t - 2 });
+        b.style.pointerEvents = "";
+      }
+
+      const air = y !== 0 && !plat;
       let frame = 0;
       if (air) frame = 4;
       else if (dir) {
@@ -188,8 +299,15 @@ export function Chinela() {
       e.preventDefault();
       if (e.type === "keyup") return void held.delete(k);
       setHint(false);
-      if (k === "j" && y === 0 && !e.repeat) vy = JUMP;
-      else if (k === "lick" && y === 0 && !held.size) {
+      const grounded = y === 0 || plat;
+      if (k === "j" && grounded && !e.repeat) {
+        vy = JUMP;
+        plat = null;
+      } else if (k === "lick" && plat && !e.repeat) {
+        // ↓ em cima de algo: desce atravessando
+        skip = plat;
+        plat = null;
+      } else if (k === "lick" && grounded && !held.size) {
         idle = LICK;
         frameAt = performance.now();
       } else if (k === "l" || k === "r") held.add(k);
