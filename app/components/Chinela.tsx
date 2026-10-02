@@ -151,8 +151,12 @@ export function Chinela() {
     let plat: Element | null = null;
     let skip: Element | null = null;
     let plats: Element[] = [];
+    // topo de cada plataforma no frame anterior, para pegar as que sobem com a rolagem
+    const tops = new WeakMap<Element, number>();
     let platsAt = 0;
     let frames = 0;
+    let lastX = x;
+    let lastY = y;
     const feet = (r: DOMRect) => r.right > x + W * 0.3 && r.left < x + W * 0.7;
     const go = (next: Mode) => {
       m = next;
@@ -222,33 +226,39 @@ export function Chinela() {
           else if (r.top >= innerHeight) (plat = null), (y = 0);
           else y = innerHeight - r.top;
         }
-        if (!plat && (y > 0 || vy > 0)) {
-          const prev = y;
+        const prev = y;
+        const loose = !plat;
+        if (loose && (y > 0 || vy > 0)) {
           vy -= GRAVITY * dt;
           y = Math.max(0, y + vy * dt);
-          if (vy < 0 && m === "free") {
-            if (now - platsAt > 500) {
-              plats = [...document.querySelectorAll(PLATS)].filter((e) => !e.closest(".chinela, .lb"));
-              platsAt = now;
-            }
-            // pousa no topo mais alto que ela cruzou descendo
-            for (const e of plats) {
-              if (e === skip) continue;
-              const r = e.getBoundingClientRect();
-              const top = innerHeight - r.top;
-              if (r.width < 24 || r.top < W * 0.6 || r.top > innerHeight || !feet(r)) continue;
-              if (prev >= top && y <= top && (!plat || top > y)) (plat = e), (y = top);
-            }
+        }
+        if (m === "free") {
+          if (now - platsAt > 500) {
+            plats = [...document.querySelectorAll(PLATS)].filter((e) => !e.closest(".chinela, .lb"));
+            platsAt = now;
           }
-          if (plat || y === 0) {
-            vy = 0;
-            drift = 0;
-            skip = null;
+          // pousa no topo mais alto que cruzou os pés dela: ela caindo ou o elemento subindo com a rolagem
+          for (const e of plats) {
+            const r = e.getBoundingClientRect();
+            const top = innerHeight - r.top;
+            const was = tops.get(e) ?? top;
+            tops.set(e, top);
+            if (!loose || vy > 0 || e === skip) continue;
+            if (r.width < 24 || r.top < W * 0.6 || r.top > innerHeight || !feet(r)) continue;
+            if (prev >= was && y <= top && (!plat || top > y)) (plat = e), (y = top);
           }
+        }
+        if (loose && (plat || y === 0)) {
+          vy = 0;
+          drift = 0;
+          skip = null;
         }
       }
 
-      if (m === "free" && (dir || vy) && frames++ % 2 === 0) {
+      const moved = Math.abs(x - lastX) + Math.abs(y - lastY) > 0.5;
+      lastX = x;
+      lastY = y;
+      if (m === "free" && moved && frames++ % 2 === 0) {
         // o hit-test não pode achar ela mesma
         const b = el.current!;
         b.style.pointerEvents = "none";
