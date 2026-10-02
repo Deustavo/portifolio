@@ -112,6 +112,10 @@ img.cover{cursor:zoom-in}
 /* letras derrubadas: o original some, a cópia cai (ver knock em Chinela.tsx) */
 ::highlight(chinela-caiu){color:transparent}
 .chinela-letra{position:fixed;z-index:34;pointer-events:none;white-space:pre}
+/* "Clique em mim": centrado na cabeça dela, some sozinho depois de 3s */
+.chinela__hint--click{left:0;right:0;width:max-content;margin-inline:auto;
+  animation:hintIn .5s .6s var(--ease) both,hintOut .4s 3.6s ease forwards}
+@keyframes hintOut{to{opacity:0;visibility:hidden}}
 @keyframes hintIn{from{opacity:0;transform:translateY(6px)}}
 
 @media(prefers-reduced-motion:reduce){

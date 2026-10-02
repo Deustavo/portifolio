@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { TOCA } from "../../components/Chinela";
 import { COARSE } from "../../hooks/useMedia";
 import mini from "./foto-mini.webp";
 
@@ -51,9 +52,13 @@ function draw(box: HTMLElement, cv: HTMLCanvasElement, probe: HTMLCanvasElement,
     }
 }
 
-/** Foto do sobre em malha de pontos; o cursor (ou o toque) abre um furo que mostra a foto. */
+const COM_CHINELA = "/assets/img/sobre/eu-e-chinela.webp";
+
+/** Foto do sobre em malha de pontos; o cursor (ou o toque) abre um furo que mostra a foto.
+    Quando a Chinela encosta, o furo cresce dali até tomar tudo e a foto vira a dos dois, sem pontos. */
 export function HalftonePhoto() {
   const ref = useRef<HTMLDivElement>(null);
+  const [comChinela, setComChinela] = useState(false);
 
   useEffect(() => {
     const box = ref.current!;
@@ -87,6 +92,32 @@ export function HalftonePhoto() {
     box.addEventListener("pointerleave", leave);
     box.addEventListener("click", click);
 
+    let found = false;
+    const toca = (e: Event) => {
+      if (found) return;
+      found = true;
+      const { x, y } = (e as CustomEvent<{ x: number; y: number }>).detail;
+      const next = new Image();
+      next.src = COM_CHINELA;
+      // só troca com a foto nova já pronta, para o furo não revelar um vazio
+      next.decode().catch(() => {}).then(() => {
+        unhover();
+        const r = box.getBoundingClientRect();
+        cv.style.setProperty("--mx", x - r.left + "px");
+        cv.style.setProperty("--my", y - r.top + "px");
+        setComChinela(true);
+        box.classList.add("is-found");
+        cv.addEventListener("transitionend", () => (cv.remove(), ro.disconnect(), mo.disconnect()), { once: true });
+      });
+    };
+    const unhover = () => {
+      box.classList.remove("is-open");
+      box.removeEventListener("pointermove", move);
+      box.removeEventListener("pointerleave", leave);
+      box.removeEventListener("click", click);
+    };
+    box.addEventListener(TOCA, toca);
+
     src.onload = () => {
       box.appendChild(cv);
       draw(box, cv, probe, src);
@@ -100,16 +131,19 @@ export function HalftonePhoto() {
       ro.disconnect();
       mo.disconnect();
       cv.remove();
-      box.classList.remove("is-open");
-      box.removeEventListener("pointermove", move);
-      box.removeEventListener("pointerleave", leave);
-      box.removeEventListener("click", click);
+      unhover();
+      box.classList.remove("is-found");
+      box.removeEventListener(TOCA, toca);
     };
   }, []);
 
   return (
-    <div className="box about__photo" ref={ref}>
-      <img src="/assets/img/sobre/foto.webp" alt="Gustavo Andrade" width={800} height={1000} />
+    <div className="box about__photo" ref={ref} data-chinela-toca="">
+      {comChinela ? (
+        <img src={COM_CHINELA} alt="Gustavo Andrade com a Chinela" width={800} height={1000} />
+      ) : (
+        <img src="/assets/img/sobre/foto.webp" alt="Gustavo Andrade" width={800} height={1000} />
+      )}
     </div>
   );
 }

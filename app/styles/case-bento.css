@@ -155,7 +155,7 @@ img.cover{object-fit:cover;height:auto}
 .about{display:grid;gap:var(--pad);grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
 @media(max-width:820px){.about{grid-template-columns:1fr}}
 .about__photo{padding:0;min-height:320px;display:grid}
-.about__photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:brightness(.82) contrast(1.05)}
+.about__photo img{display:block;width:100%;height:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 35%;filter:brightness(.82) contrast(1.05)}
 /* foto em malha de pontos; o cursor abre um furo que mostra a foto de verdade */
 @property --hole{syntax:'<length>';inherits:false;initial-value:0px}
 .about__photo canvas{position:absolute;inset:0;width:100%;height:100%;--hole:0px;
@@ -163,6 +163,8 @@ img.cover{object-fit:cover;height:auto}
  mask-image:radial-gradient(circle at var(--mx,50%) var(--my,50%),transparent calc(var(--hole) * .55),#000 var(--hole));
  transition:--hole .45s cubic-bezier(.22,.61,.36,1)}
 .about__photo.is-open canvas{--hole:150px}
+/* a Chinela encostou: o furo cresce de onde ela tocou até apagar os pontos */
+.about__photo.is-found canvas{--hole:1400px;transition:--hole 1.4s cubic-bezier(.55,0,.35,1)}
 @media(prefers-reduced-motion:reduce){.about__photo canvas{transition:none}}
 .about__photo--empty{display:grid;place-items:center;border-style:dashed;color:var(--dim)}
 .about .head{display:grid;align-content:end;gap:.9rem}

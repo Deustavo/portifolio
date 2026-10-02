@@ -78,6 +78,7 @@ export const DICT: Record<Lang, Record<string, string>> = {
     "cat.meow":       "Ouvir a Chinela miar",
     "cat.dismiss":    "Dispensar a Chinela",
     "cat.controls":   "WASD ou setas para me mover",
+    "cat.click":      "Clique em mim",
 
     "work.title":     "Projetos selecionados",
     "work.games":     "Jogos",
@@ -636,6 +637,7 @@ export const DICT: Record<Lang, Record<string, string>> = {
     "cat.meow":       "Hear Chinela meow",
     "cat.dismiss":    "Dismiss Chinela",
     "cat.controls":   "WASD or arrow keys to move me",
+    "cat.click":      "Click me",
 
     "work.title":     "Selected work",
     "work.games":     "Games",

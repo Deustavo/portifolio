@@ -6,6 +6,8 @@ export const STORE = "ga-chinela"; // "free" ou "corner"
 const AUDIO = "/assets/audio/miado1.mp3";
 const BACK_IN = 4000; // depois de fechada, quanto tempo ela some antes de voltar pro canto
 export const CHEGAR = "chinela:chega";
+// disparado nos elementos com data-chinela-toca quando ela encosta neles
+export const TOCA = "chinela:toca";
 
 const SPRITE = "/assets/img/jogo-chinela-destroyer/chinelaSprite.png";
 const W = 128; // quadro de 64px do sprite, ampliado 2x
@@ -252,6 +254,12 @@ export function Chinela() {
         b.style.pointerEvents = "none";
         const t = innerHeight - y;
         knock({ l: x + W * 0.15, r: x + W * 0.85, t: t - W * 0.8, b: t - 2 });
+        // de pé em cima também conta como encostar
+        for (const e of document.querySelectorAll("[data-chinela-toca]")) {
+          const r = e.getBoundingClientRect();
+          if (r.right < x + W * 0.15 || r.left > x + W * 0.85 || r.bottom < t - W * 0.8 || r.top > t + 4) continue;
+          e.dispatchEvent(new CustomEvent(TOCA, { detail: { x: x + W / 2, y: t - W / 2 } }));
+        }
         b.style.pointerEvents = "";
       }
 
@@ -331,6 +339,7 @@ export function Chinela() {
   return (
     <div ref={el} className="chinela" hidden={mode === "away"}>
       {mode === "free" && hint && <span className="chinela__hint">{ta("cat.controls")}</span>}
+      {mode === "corner" && <span className="chinela__hint chinela__hint--click">{ta("cat.click")}</span>}
       {mode === "corner" ? (
         <button type="button" className="chinela__cat" aria-label={ta("cat.meow")} onClick={() => ctl.current.release()}>
           {sprite}
