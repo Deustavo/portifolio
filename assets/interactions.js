@@ -7,6 +7,7 @@
    6. menu hambúrguer da barra no mobile
    7. slider do "como eu trabalho" na home
    8. trajetória com trilho e atalhos de ano no sobre
+   9. foto do sobre em malha de pontos, revelada pelo cursor
    Tudo é progressivo: sem JS, a página segue funcionando como antes. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -714,7 +715,99 @@
     items.forEach(function (li) { io.observe(li); });
   }
 
-  function ready() { lightbox(); tilt(); progress(); filters(); blob(); menu(); proc(); journey(); }
+  /* ---------- 9. foto do sobre em malha de pontos ---------- */
+  /* Lê a foto num canvas pequeno (um pixel por célula) e desenha um ponto
+     por célula, maior onde a foto é clara no tema escuro e onde é escura no
+     claro. O canvas fica por cima da foto; o furo da máscara mostra a real.
+     A leitura usa a cópia pequena em data: URI do data-halftone, porque no
+     file:// o navegador bloqueia ler os pixels da foto original.
+     ponytail: a cópia é gerada à mão; trocou a foto, gere de novo (160x200, cinza). */
+  function halftone() {
+    var box = document.querySelector('[data-halftone]');
+    var img = box && box.querySelector('img');
+    if (!img) return;
+    var cv = document.createElement('canvas');
+    cv.setAttribute('aria-hidden', 'true');
+    var ctx = cv.getContext('2d');
+    var probe = document.createElement('canvas');
+    var pctx = probe.getContext('2d', { willReadFrequently: true });
+    var queued = false;
+    var src = new Image();
+
+    function draw() {
+      queued = false;
+      var dpr = window.devicePixelRatio || 1;
+      var W = Math.round(box.clientWidth * dpr), H = Math.round(box.clientHeight * dpr);
+      if (!W || !H) return;
+      var cell = 8 * dpr;
+      var cols = Math.ceil(W / cell), rows = Math.ceil(H / cell);
+      cv.width = W; cv.height = H;
+      probe.width = cols; probe.height = rows;
+
+      /* mesmo recorte do object-fit:cover / object-position:50% 35% */
+      var k = Math.max(cols / src.naturalWidth, rows / src.naturalHeight);
+      var dw = src.naturalWidth * k, dh = src.naturalHeight * k;
+      pctx.imageSmoothingQuality = 'high';
+      pctx.drawImage(src, (cols - dw) * .5, (rows - dh) * .35, dw, dh);
+      var px;
+      try { px = pctx.getImageData(0, 0, cols, rows).data; }
+      catch (e) { cv.remove(); return; } /* canvas contaminado (file://): fica só a foto */
+
+      var css = getComputedStyle(box);
+      var dark = document.documentElement.getAttribute('data-theme') !== 'light';
+      ctx.fillStyle = css.getPropertyValue('--bg');
+      ctx.fillRect(0, 0, W, H);
+      ctx.fillStyle = css.getPropertyValue('--fg');
+      /* estica o contraste: o mais escuro vira 0 e o mais claro vira 1 */
+      var lum = [], lo = 1, hi = 0;
+      for (var i = 0; i < px.length; i += 4) {
+        var v = (px[i] * .299 + px[i + 1] * .587 + px[i + 2] * .114) / 255;
+        lum.push(v); if (v < lo) lo = v; if (v > hi) hi = v;
+      }
+      var span = hi - lo || 1;
+      var max = cell * .58;
+      for (var y = 0; y < rows; y++) {
+        for (var x = 0; x < cols; x++) {
+          var l = (lum[y * cols + x] - lo) / span;
+          var t = dark ? Math.pow(l, .8) : Math.pow(1 - l, 1.2);
+          if (t < .06) continue;
+          ctx.beginPath();
+          ctx.arc((x + .5) * cell, (y + .5) * cell, t * max, 0, 6.2832);
+          ctx.fill();
+        }
+      }
+    }
+    function queue() { if (!queued) { queued = true; requestAnimationFrame(draw); } }
+
+    function aim(e) {
+      var r = box.getBoundingClientRect();
+      cv.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      cv.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }
+    box.addEventListener('pointermove', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      aim(e);
+      box.classList.add('is-open');
+    });
+    box.addEventListener('pointerleave', function (e) {
+      if (e.pointerType === 'mouse') box.classList.remove('is-open');
+    });
+    /* no toque não existe hover: cada toque abre ou fecha o furo ali */
+    box.addEventListener('click', function (e) {
+      if (coarse) { aim(e); box.classList.toggle('is-open'); }
+    });
+
+    function start() {
+      box.appendChild(cv);
+      draw();
+      if ('ResizeObserver' in window) new ResizeObserver(queue).observe(box);
+      new MutationObserver(queue).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    }
+    src.onload = start;
+    src.src = box.dataset.halftone || img.src;
+  }
+
+  function ready() { lightbox(); tilt(); progress(); filters(); blob(); menu(); proc(); journey(); halftone(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
   else ready();
 })();
