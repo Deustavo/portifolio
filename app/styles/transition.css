@@ -2,7 +2,8 @@
 /* Os estados são aplicados por transition.js em estilo inline, para funcionar
    igual em todas as páginas. Aqui ficam só o véu e o respeito ao reduced-motion. */
 
-.fade-veil{position:fixed;inset:0;z-index:90;background:var(--bg,#faf7f0);opacity:0;pointer-events:none;
+/* z-index abaixo da .bar (30): o véu cobre só o conteúdo */
+.fade-veil{position:fixed;inset:0;z-index:29;background:var(--bg,#faf7f0);opacity:0;pointer-events:none;
   transition:opacity .45s ease-in}
 html.is-leaving .fade-veil{opacity:.55;pointer-events:auto}
 
@@ -12,4 +13,4 @@ html.is-leaving .fade-veil{opacity:.55;pointer-events:auto}
 
 /* antes da hidratação: os blocos já nascem no estado inicial da entrada
    (classe posta pelo script do <head> em root.tsx), senão a página pisca inteira */
-html.tr-pre :is(.bar, .bento > *, .head, .filters, .wrap > *, .foot){opacity:0;transform:translateY(28px) scale(.985)}
+html.tr-pre :is(.bento > *, .head, .filters, .wrap > *, .foot){opacity:0;transform:translateY(28px) scale(.985)}

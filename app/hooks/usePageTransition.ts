@@ -2,8 +2,9 @@ import { useEffect, useLayoutEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { REDUCE } from "./useMedia";
 
-// porte de transition.js: os blocos caem ao sair e sobem em cascata ao entrar
-const SEL = ".bar, .bento > *, .head, .filters, .wrap > *, .foot";
+// porte de transition.js: os blocos caem ao sair e sobem em cascata ao entrar;
+// a .bar fica de fora e continua visível entre as rotas
+const SEL = ".bento > *, .head, .filters, .wrap > *, .foot";
 const IN_STEP = 55; // atraso entre um bloco e o seguinte, na entrada
 const IN_FROM = "translateY(28px) scale(.985)";
 const IN_EASE = "cubic-bezier(.22,.61,.36,1)";
@@ -43,11 +44,10 @@ function leave(go: () => void) {
   clearTimeout(pending);
   const els = items();
   document.documentElement.classList.add("is-leaving");
-  // de baixo para cima: o rodapé cai primeiro, a barra do topo por último
+  // de baixo para cima: o rodapé cai primeiro
   els.reverse().forEach((el, i) => {
     const d = i * OUT_STEP + "ms";
-    set(el, `opacity .42s ease-in ${d}, transform .52s ${OUT_EASE} ${d}`, "0",
-      el.classList.contains("bar") ? "translateY(-24px)" : OUT_TO, "opacity, transform");
+    set(el, `opacity .42s ease-in ${d}, transform .52s ${OUT_EASE} ${d}`, "0", OUT_TO, "opacity, transform");
   });
   pending = window.setTimeout(go, OUT_TAIL + els.length * OUT_STEP);
 }
