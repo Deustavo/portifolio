@@ -111,6 +111,13 @@ img.cover{cursor:zoom-in}
   animation:hintIn .5s .6s var(--ease) both}
 /* letras derrubadas: o original some, a cópia cai (ver knock em Chinela.tsx) */
 ::highlight(chinela-caiu){color:transparent}
+/* placar de destruição, só enquanto ela está solta */
+.chinela-dano{position:fixed;top:16px;left:50%;translate:-50% 0;white-space:nowrap;z-index:36;display:flex;align-items:center;gap:.6rem;
+  padding:.4rem .4rem .4rem .7rem;font-size:.75rem;font-weight:600;line-height:1.2;
+  background:#ffd23f;color:#111;box-shadow:3px 3px 0 #111;animation:hintIn .5s var(--ease) both}
+.chinela-dano span{font-variant-numeric:tabular-nums}
+.chinela-dano button{padding:.3rem .6rem;font:inherit;background:#111;color:#ffd23f;border:0;cursor:pointer}
+.chinela-dano button:disabled{opacity:.4;cursor:default}
 .chinela-letra{position:fixed;z-index:34;pointer-events:none;white-space:pre}
 /* "Clique em mim": centrado na cabeça dela, some sozinho depois de 3s */
 .chinela__hint--click{left:0;right:0;width:max-content;margin-inline:auto;

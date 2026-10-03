@@ -38,7 +38,19 @@ const caretAt = (px: number, py: number): [Node, number] | null => {
 };
 
 // letras derrubadas: o original some via ::highlight (sem tocar no DOM do React) e uma cópia cai
-const knocked = new WeakMap<Text, { data: string; offs: Set<number> }>();
+let knocked = new WeakMap<Text, { data: string; offs: Set<number> }>();
+// total de letras da página, contado na primeira batida depois de carregar ou restaurar
+let total = 0;
+function restore() {
+  CSS.highlights?.get(FALLEN)?.clear();
+  knocked = new WeakMap();
+  total = 0;
+}
+const wreck = () => {
+  const n = CSS.highlights?.get(FALLEN)?.size ?? 0;
+  total ||= document.body.innerText.replace(/\s/g, "").length;
+  return total ? Math.min(100, Math.round((n * 1000) / total) / 10) : 0;
+};
 function knock(box: { l: number; r: number; t: number; b: number }) {
   if (typeof Highlight === "undefined" || !CSS.highlights) return;
   let hl = CSS.highlights.get(FALLEN);
@@ -48,6 +60,8 @@ function knock(box: { l: number; r: number; t: number; b: number }) {
       const hit = caretAt(box.l + ((box.r - box.l) * (i + 0.5)) / 4, box.t + ((box.b - box.t) * (j + 0.5)) / 4);
       if (!hit || hit[0].nodeType !== Node.TEXT_NODE) continue;
       const t = hit[0] as Text;
+      // o placar não quebra
+      if (t.parentElement?.closest(".chinela-dano")) continue;
       let k = knocked.get(t);
       if (!k || k.data !== t.data) knocked.set(t, (k = { data: t.data, offs: new Set() }));
       for (const off of [hit[1] - 1, hit[1]]) {
@@ -107,6 +121,7 @@ export function Chinela() {
   const { ta } = useLang();
   const [mode, setMode] = useState<Mode>("off");
   const [hint, setHint] = useState(true);
+  const [pct, setPct] = useState(0);
   const page = useLocation().pathname;
   const el = useRef<HTMLDivElement>(null);
   // o loop roda fora do React; os cliques mexem nele por aqui
@@ -126,7 +141,10 @@ export function Chinela() {
   }, []);
 
   // trocou de página: as letras derrubadas da anterior não valem mais
-  useEffect(() => CSS.highlights?.get(FALLEN)?.clear(), [page]);
+  useEffect(() => {
+    restore();
+    setPct(0);
+  }, [page]);
 
   const on = mode !== "off";
   useEffect(() => {
@@ -234,7 +252,7 @@ export function Chinela() {
         }
         if (m === "free") {
           if (now - platsAt > 500) {
-            plats = [...document.querySelectorAll(PLATS)].filter((e) => !e.closest(".chinela, .lb"));
+            plats = [...document.querySelectorAll(PLATS)].filter((e) => !e.closest(".chinela, .chinela-dano, .lb"));
             platsAt = now;
           }
           // pousa no topo mais alto que cruzou os pés dela: ela caindo ou o elemento subindo com a rolagem
@@ -264,6 +282,7 @@ export function Chinela() {
         b.style.pointerEvents = "none";
         const t = innerHeight - y;
         knock({ l: x + W * 0.15, r: x + W * 0.85, t: t - W * 0.8, b: t - 2 });
+        setPct(wreck());
         // de pé em cima também conta como encostar
         for (const e of document.querySelectorAll("[data-chinela-toca]")) {
           const r = e.getBoundingClientRect();
@@ -347,21 +366,31 @@ export function Chinela() {
   if (!on) return null;
   const sprite = <i className="chinela__sprite" aria-hidden="true" style={{ backgroundImage: `url(${SPRITE})` }} />;
   return (
-    <div ref={el} className="chinela" hidden={mode === "away"}>
-      {mode === "free" && hint && <span className="chinela__hint">{ta("cat.controls")}</span>}
-      {mode === "corner" && <span className="chinela__hint chinela__hint--click">{ta("cat.click")}</span>}
-      {mode === "corner" ? (
-        <button type="button" className="chinela__cat" aria-label={ta("cat.meow")} onClick={() => ctl.current.release()}>
-          {sprite}
-        </button>
-      ) : (
-        sprite
-      )}
+    <>
       {mode === "free" && (
-        <button type="button" className="chinela__x" aria-label={ta("cat.dismiss")} onClick={() => ctl.current.close()}>
-          ✕
-        </button>
+        <div className="chinela-dano">
+          <span>{ta("cat.wreck").replace("{n}", pct.toLocaleString(undefined, { maximumFractionDigits: 1 }))}</span>
+          <button type="button" disabled={!pct} onClick={() => (restore(), setPct(0))}>
+            {ta("cat.restore")}
+          </button>
+        </div>
       )}
-    </div>
+      <div ref={el} className="chinela" hidden={mode === "away"}>
+        {mode === "free" && hint && <span className="chinela__hint">{ta("cat.controls")}</span>}
+        {mode === "corner" && <span className="chinela__hint chinela__hint--click">{ta("cat.click")}</span>}
+        {mode === "corner" ? (
+          <button type="button" className="chinela__cat" aria-label={ta("cat.meow")} onClick={() => ctl.current.release()}>
+            {sprite}
+          </button>
+        ) : (
+          sprite
+        )}
+        {mode === "free" && (
+          <button type="button" className="chinela__x" aria-label={ta("cat.dismiss")} onClick={() => ctl.current.close()}>
+            ✕
+          </button>
+        )}
+      </div>
+    </>
   );
 }

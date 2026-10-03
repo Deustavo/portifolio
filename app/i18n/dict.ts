@@ -79,6 +79,8 @@ export const DICT: Record<Lang, Record<string, string>> = {
     "cat.dismiss":    "Dispensar a Chinela",
     "cat.controls":   "WASD ou setas para me mover",
     "cat.click":      "Clique em mim",
+    "cat.wreck":      "{n}% da página destruída",
+    "cat.restore":    "Restaurar",
 
     "work.title":     "Projetos selecionados",
     "work.games":     "Jogos",
@@ -638,6 +640,8 @@ export const DICT: Record<Lang, Record<string, string>> = {
     "cat.dismiss":    "Dismiss Chinela",
     "cat.controls":   "WASD or arrow keys to move me",
     "cat.click":      "Click me",
+    "cat.wreck":      "{n}% of the page destroyed",
+    "cat.restore":    "Restore",
 
     "work.title":     "Selected work",
     "work.games":     "Games",
