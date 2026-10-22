@@ -1,4 +1,4 @@
-// Os 16 cases, na ordem dos cards da home. Textos ficam no dict.ts sob `prefix`:
+// Os 17 cases, na ordem dos cards da home. Textos ficam no dict.ts sob `prefix`:
 // kicker, sub, f1-f3/v1-v3 (f4 é o ano), heroAlt, h1-h3/c1-c3, ga/gb/gc/gd (rótulo da
 // galeria), g1..gN (alt e legenda, numeração contínua entre galerias), l1..lN (links), title.
 // O card da home usa `${card}.tag` e `${card}.metric`.
@@ -68,6 +68,25 @@ export const cases: Case[] = [
     next: "pergunte-ao-polvo",
   },
   {
+    slug: "gastos-com-pluggy",
+    name: "Gastos com Pluggy",
+    prefix: "gcp",
+    card: "p21",
+    fill: "var(--c17)",
+    group: "systems",
+    size: "wide",
+    year: "2026",
+    description: "Projeto pessoal: dashboard que junta sozinho os gastos de todas as minhas contas via Open Finance, só leitura e sem nada anotado à mão. Roda num SQLite na minha máquina.",
+    galleries: [
+      { shots: ["painel.png"] },
+      { cols: 2, shots: ["transacoes.png", "gastos-fixos.png"] },
+      { cols: 2, shots: ["regras.png", "conexoes.png"] },
+    ],
+    links: ["https://github.com/Deustavo/gastos-com-pluggy"],
+    cta: true,
+    next: "greeimage",
+  },
+  {
     slug: "metrics",
     name: "Metrics",
     prefix: "vsm",
@@ -84,7 +103,7 @@ export const cases: Case[] = [
     earlyGallery: true,
     links: ["https://visualstreammetrics.vercel.app/"],
     cta: true,
-    next: "greeimage",
+    next: "gastos-com-pluggy",
   },
   {
     slug: "ricochet-360",
@@ -123,6 +142,7 @@ export const cases: Case[] = [
     card: "p13",
     fill: "var(--c9)",
     group: "systems",
+    size: "wide",
     year: "2026",
     description: "Sistema de gestão de um estúdio de pilates: cadastro de alunos, agenda semanal de aulas e controle financeiro. Produto, design e desenvolvimento em Nuxt 3 com SQLite.",
     galleries: [
@@ -139,6 +159,7 @@ export const cases: Case[] = [
     card: "p7",
     fill: "var(--c6)",
     group: "systems",
+    size: "wide",
     year: "2022",
     description: "Front-end em React de uma plataforma de registro autoral que grava a autoria de cada obra na blockchain e devolve um certificado verificável.",
     galleries: [],
